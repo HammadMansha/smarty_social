@@ -8,7 +8,7 @@ import 'utils/libraries/app_libraries.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlutterError.onError = (FlutterErrorDetails details) {
-    print("====================${details}");
+    print("====================$details");
 
     // Log or handle the error details
 

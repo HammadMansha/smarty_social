@@ -4,7 +4,7 @@ import 'package:smarty_social/view/editing/women_editing/women_editing_post.dart
 import '../utils/libraries/app_libraries.dart';
 
 class AppPages {
-  static var initial = Routes.emailVerificationScreen;
+  static var initial = Routes.splashScreen;
 
   static final routes = [
     //Splash screen

@@ -45,7 +45,7 @@ class ForgotPasswordController extends GetxController{
         CommonToast.showToast(AppStrings.checkEmailForOtp);
         isLoading.value = false;
         Get.toNamed(Routes.emailVerificationScreen,arguments: {"email":email.text});
-        email.clear();
+        //email.clear();
 
       } else if (res.statusCode == 500) {
         CommonToast.showToast(AppStrings.invalidEmailOrUsername);

@@ -1,4 +1,3 @@
-
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 
 class ResetPassword extends StatelessWidget with CommonVariables,ValidateUserEmail {
@@ -105,10 +104,14 @@ class ResetPassword extends StatelessWidget with CommonVariables,ValidateUserEma
               CommonSpaces.spaceVertical100,
               //Verify and proceed
               InkWell(
-                onTap: () {
+                onTap: () async{
                   if (formKey.currentState!.validate()) {
-                    // Get.toNamed(Routes.emailVerificationScreen);
-                    Get.offAndToNamed(Routes.successReset);
+                    if(controller.password.text==controller.confirmPassword.text) {
+                      controller.resetPassword();
+                    }
+                    else{
+                      CommonToast.showToast( AppStrings.passwordNotMatch);
+                    }
                   }
                 },
                 child: SizedBox(

@@ -5,8 +5,12 @@ import 'dart:math';
 import '../../../../utils/libraries/app_libraries.dart';
 import 'package:http/http.dart'as http;
 
+import '../forgot_password_controller.dart';
+
 class EmailVerificationController extends GetxController{
   TextEditingController pin=TextEditingController();
+  ForgotPasswordController forgotPasswordController = Get.find<ForgotPasswordController>();
+
    final formKey = GlobalKey<FormState>();
   RxBool isEmpty = true.obs;
   RxBool isLoading=false.obs;
@@ -31,7 +35,7 @@ class EmailVerificationController extends GetxController{
 
       var body = jsonEncode(
           {
-            "user_name":"Hammadmansha136@gmail.com",
+            "user_name":Get.arguments["email"],
             "otp": pin.text
           }
       );
@@ -50,10 +54,17 @@ class EmailVerificationController extends GetxController{
       if (res.statusCode == 200) {
         CommonToast.showToast(AppStrings.otpVerified);
         isLoading.value = false;
+        String temp=pin.text;
+        pin=TextEditingController(text: temp);
         update();
+        Get.to(()=> ResetPassword(),arguments:{
+          "email":Get.arguments["email"],
+        });
       } else if (res.statusCode == 401) {
         CommonToast.showToast(AppStrings.invalidOtpVerified);
         isLoading.value = false;
+        String temp=pin.text;
+        pin=TextEditingController(text: temp);
         update();
       }
       else if (res.statusCode == 404) {

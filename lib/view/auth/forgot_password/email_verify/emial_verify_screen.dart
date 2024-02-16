@@ -79,8 +79,7 @@ class EmailVerify extends StatelessWidget
                               )
                             ],
                             onCompleted: (v)async {
-                              //await controller.verifyOtp();
-                            },
+                              await controller.verifyOtp();},
                             onChanged: (value) {
                               controller.isEmpty.value = false;
                               controller.update();
@@ -94,7 +93,9 @@ class EmailVerify extends StatelessWidget
                       ),
                       //Resend button
                       InkWell(
-                        onTap: () {},
+                        onTap: () async{
+                          await controller.forgotPasswordController.forgotPassword();
+                        },
                         child: SizedBox(
                           height: 30,
                           width: Get.width / 2,

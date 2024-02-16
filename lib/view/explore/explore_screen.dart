@@ -45,12 +45,18 @@ class ExploreScreen extends StatelessWidget {
                             ),
 
                             //user name and time
-                            const Column(
+                            Column(
                               children: [
-                                Text("Ana_Solam"),
-                                Text("yesterday"),
+                                Text(
+                                  "Ana_Solam",
+                                  style: CommonTextStyle.font14weightNormal342f,
+                                ).marginOnly(left: 15),
+                                Text(
+                                  "Yesterday",
+                                  style: CommonTextStyle.font12weightNormal342f,
+                                ),
                               ],
-                            ).marginSymmetric(horizontal: 15),
+                            ),
                             const Spacer(),
 
                             //Follow button
@@ -82,40 +88,69 @@ class ExploreScreen extends StatelessWidget {
                               SizedBox(
                                 child: Row(
                                   children: [
-                                    Image.asset(AppAssets.like,),
+                                    SizedBox(
+                                        child: Image.asset(
+                                      AppAssets.like,
+                                      height: 20,
+                                      width: 20,
+                                    )),
                                     const SizedBox(
                                       width: 5,
                                     ),
-                                    const Text("234"),
+                                    Text(
+                                      "236",
+                                      style: CommonTextStyle
+                                          .font12weightNormal342f,
+                                    ),
                                   ],
                                 ),
                               ),
                               SizedBox(
                                 child: Row(
                                   children: [
-                                    Image.asset(AppAssets.comment),
+                                    Image.asset(
+                                      AppAssets.comment,
+                                      height: 20,
+                                      width: 20,
+                                    ),
                                     const SizedBox(
                                       width: 5,
                                     ),
-                                    const Text("133"),
+                                    Text(
+                                      "133",
+                                      style: CommonTextStyle
+                                          .font12weightNormal342f,
+                                    ),
                                   ],
                                 ),
                               ),
                               SizedBox(
                                 child: Row(
                                   children: [
-                                    Image.asset(AppAssets.view),
+                                    Image.asset(
+                                      AppAssets.view,
+                                      height: 20,
+                                      width: 20,
+                                    ),
                                     const SizedBox(
                                       width: 5,
                                     ),
-                                    const Text("1145"),
+                                    Text(
+                                      "1145",
+                                      style: CommonTextStyle
+                                          .font12weightNormal342f,
+                                    ),
                                   ],
                                 ),
                               ),
                               SizedBox(
                                 child: Row(
                                   children: [
-                                    Image.asset(AppAssets.share),
+                                    Image.asset(
+                                      AppAssets.share,
+                                      height: 20,
+                                      width: 20,
+                                    ),
                                     const SizedBox(
                                       width: 5,
                                     ),

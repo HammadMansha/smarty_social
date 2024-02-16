@@ -64,7 +64,7 @@ class WomenEditingPostScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Image.file(
                       _.createPostController.image as File,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ), // Replace 'assets/image.jpg' with your image path
                   ),
                 ),

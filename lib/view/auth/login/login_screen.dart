@@ -71,33 +71,34 @@ class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail
                       ),
 
                       Obx(
-                        () => CommonTextField(
+                            () => CommonTextField(
                           controller: loginController.password,
                           bordercolor: AppColors.colorC1c1,
                           disableBorderColor: AppColors.colorC1c1,
                           textColor: AppColors.blackColor,
-                          isTextHidden: loginController.secureText.value,
+                          isTextHidden: secureText.value,
                           togglePassword: true,
                           inputFormatters: [
-                            FilteringTextInputFormatter.deny(
-                                RegExp(r"\s\b|\b\s"))
+                            FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))
                           ],
-                          toggleIcon: loginController.secureText.value == true
+                          toggleIcon: secureText.value == true
                               ? Icons.visibility_off_outlined
                               : Icons.remove_red_eye_outlined,
                           toggleFunction: () {
-                            loginController.secureText.value =
-                                loginController.secureText.value;
+                            secureText.value = !secureText.value;
                             loginController.update();
                           },
                           validator: (value) {
                             if (value.toString().isEmpty) {
                               return 'This filed is required';
+                            } else if (isPasswordEmpty(value.toString()) != null) {
+                              return isPasswordEmpty(value.toString());
                             }
                             return null;
                           },
                         ),
                       ),
+
 
                       CommonSpaces.spaceVertical10,
                       //Remember me

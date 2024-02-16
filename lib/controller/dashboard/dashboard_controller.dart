@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:collection';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
+import 'package:http/http.dart' as http;
 
 class DashboardScreenController extends GetxController
     with CommonVariables, InitializeLocalStorage {
@@ -45,6 +48,56 @@ class DashboardScreenController extends GetxController
       // ),
     ];
   }
+
+
+  Future<void> logoutUser() async {
+    try {
+
+      Uri url = Uri.parse(ApiData.logout);
+      if (kDebugMode) {
+        print("logout password user request------------${storage.read("userEmail")}");
+      }
+      var headers = <String, String>{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      };
+
+      var body = jsonEncode(
+          {
+            "username_or_email":storage.read("userEmail"),
+          }
+      );
+
+      var res = await http
+          .post(
+        url,
+        headers: headers,
+        body: body,
+      )
+          .timeout(const Duration(seconds: 15));
+
+      print("response of forgot call==============${res.statusCode}");
+      print("response of forgot call==============${res.body}");
+      storage.erase();
+      Get.offAll(const SplashScreen());
+    } on TimeoutException catch (e) {
+      // Handle timeout exception
+      CommonToast.showToast(AppStrings.unableToConnect);
+
+      update();
+      print("Request timed out: $e");
+    } on http.ClientException catch (e) {
+      CommonToast.showToast(AppStrings.connectionNotStable);
+      // Handle client-side exceptions (e.g., internet connection issues)
+      print("Client-side error occurred: $e");
+    } catch (e) {
+      print("Error occurred during request: $e");
+
+    }
+  }
+
+
+
 
   @override
   void onInit() {

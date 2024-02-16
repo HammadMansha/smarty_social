@@ -12,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
         return WillPopScope(
           onWillPop: () async {
             if (_.navigationQueue.isEmpty) {
-              return showWillPopMessage(context);
+              return showWillPopMessage(context,_);
             }
             _.navigationQueue.removeLast();
             int position =
@@ -29,7 +29,7 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  showWillPopMessage(context) {
+  showWillPopMessage(context,DashboardScreenController _) {
     return showDialog<void>(
       context: context,
       barrierDismissible: true, // user must tap button!
@@ -39,7 +39,7 @@ class DashboardScreen extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           title: const Text(
-            'Exit App?',
+            'Logout?',
             textScaleFactor: 1.0,
             style: TextStyle(
               fontSize: 18,
@@ -56,7 +56,7 @@ class DashboardScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Are you sure you want to exit App?',
+                  'Are you sure you want to logout App?',
                   textScaleFactor: 1.0,
                   style: TextStyle(
                       fontSize: 13,
@@ -96,17 +96,13 @@ class DashboardScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () async {
-                        if (Platform.isAndroid) {
-                          exit(0);
-                        } else {
-                          exit(0);
-                        }
+                       await _.logoutUser();
                       },
                       minWidth: Get.width / 3.4,
                       height: 40,
                       color: AppColors.buttonColor,
                       child: const Text(
-                        "Exit",
+                        "Logout",
                         textScaleFactor: 1.0,
                         style: TextStyle(color: AppColors.white, fontSize: 16),
                       ),

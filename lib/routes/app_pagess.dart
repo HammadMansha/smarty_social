@@ -1,10 +1,9 @@
-
 import 'package:smarty_social/view/editing/women_editing/women_editing_post.dart';
 
 import '../utils/libraries/app_libraries.dart';
 
 class AppPages {
-  static var initial = Routes.emailVerificationScreen;
+  static var initial = Routes.createPostScreen;
 
   static final routes = [
     //Splash screen
@@ -55,7 +54,6 @@ class AppPages {
       page: () => const DashboardScreen(),
     ),
 
-
     //create post screen
     GetPage(
       name: Routes.createPostScreen,
@@ -68,17 +66,10 @@ class AppPages {
       page: () => const MenEditingPostScreen(),
     ),
 
-
-
-
-
-
     //Women cloth editing
     GetPage(
       name: Routes.womenEditPostScreen,
       page: () => const WomenEditingPostScreen(),
     ),
-
-
   ];
 }

@@ -5,9 +5,9 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
-        extendBody:true,
-        body:bodyData(context),
+    return Scaffold(
+      extendBody: true,
+      body: bodyData(context),
     );
   }
 
@@ -19,7 +19,6 @@ class SplashScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
           // SvgPicture.asset(
           //   'assets/images/svgtest.svg',
           //   semanticsLabel: 'My SVG Image',
@@ -27,27 +26,36 @@ class SplashScreen extends StatelessWidget {
           //   // width: 70,
           // ),
 
-
           Align(
             alignment: Alignment.center,
             child: Image.asset(AppAssets.splashScreen),
           ),
-          CommonSpaces.spaceVertical110,
+          CommonSpaces.spaceVertical10,
+          const Text(
+            'Smarty Social',
+            style: TextStyle(
+                fontFamily: 'BirdsOfParadise',
+                color: Colors.black,
+                fontSize: 32,
+                fontWeight: FontWeight.w400),
+          ),
+          CommonSpaces.spaceVertical100,
 
-          InkWell(
-            onTap: () {},
-            child: SizedBox(
-              height: 30,
-              width: Get.width / 2,
-              child: Image.asset(AppAssets.newJourney),
+          const Text(
+            AppStrings.newJourney,
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+              color: AppColors.color342F2F,
+              fontFamily: 'Nexa',
             ),
           ),
+
           CommonSpaces.spaceVertical50,
 
           InkWell(
             onTap: () {
               Get.toNamed(Routes.signUpScreen);
-
             },
             child: SizedBox(
               height: 50,
@@ -71,7 +79,6 @@ class SplashScreen extends StatelessWidget {
           //     ),
           //   ],
           // ),
-
           //Sign up
           InkWell(
             onTap: () {
@@ -84,19 +91,21 @@ class SplashScreen extends StatelessWidget {
             ),
           ),
 
-CommonSpaces.spaceVertical10,
+          CommonSpaces.spaceVertical10,
 //Skip
           InkWell(
-            onTap: () {
-              Get.off(()=>const CreatePostScreen());
-            },
-            child: SizedBox(
-              height: 18,
-              width: Get.width / 2,
-              child: Image.asset(AppAssets.skip),
-            ),
-          ),
-
+              onTap: () {
+                Get.off(() => const CreatePostScreen());
+              },
+              child: const Text(
+                'Skip',
+                style: TextStyle(
+                  fontFamily: 'Nexa',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xff969696),
+                ),
+              )),
 
           const SizedBox(
             height: 50,
@@ -105,6 +114,4 @@ CommonSpaces.spaceVertical10,
       ),
     );
   }
-
-
 }

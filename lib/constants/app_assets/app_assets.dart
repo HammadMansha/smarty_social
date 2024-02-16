@@ -79,31 +79,25 @@ class AppAssets {
   static const String download = "$imageDir/download.png";
 
   //Women editing
-  static const String womenOutfit="$imageDir/women_outfit.png";
-  static const String womenOutfitTrans="$imageDir/w_outfit_trans.png";
-  static const String womenStyle="$imageDir/women_style.png";
-  static const String womenFitViz="$imageDir/women_fitviz.png";
-  static const String weedingOutfit="$imageDir/weeding_outfit.png";
-  static const String skirts="$imageDir/skirts.png";
-  static const String sarrees="$imageDir/sarrees.png";
-  static const String womenSuits="$imageDir/women_suits.png";
+  static const String womenOutfit = "$imageDir/women_outfit.png";
+  static const String womenOutfitTrans = "$imageDir/w_outfit_trans.png";
+  static const String womenStyle = "$imageDir/women_style.png";
+  static const String womenFitViz = "$imageDir/women_fitviz.png";
+  static const String weedingOutfit = "$imageDir/weeding_outfit.png";
+  static const String skirts = "$imageDir/skirts.png";
+  static const String sarrees = "$imageDir/sarrees.png";
+  static const String womenSuits = "$imageDir/women_suits.png";
 
   //Women color nav selection
-  static const String womenStyleColor="$imageDir/w_style_color.png";
-  static const String womenFitvizColor="$imageDir/w_fitviz_color.png";
-  static const String pinkAccessories="$imageDir/access_pink.png";
-  static const String pinkFilter="$imageDir/filter_pink.png";
+  static const String womenStyleColor = "$imageDir/w_style_color.png";
+  static const String womenFitvizColor = "$imageDir/w_fitviz_color.png";
+  static const String pinkAccessories = "$imageDir/access_pink.png";
+  static const String pinkFilter = "$imageDir/filter_pink.png";
 
 //men color style
-  static const String menStyleColor="$imageDir/m_style_color.png";
-  static const String menFitvizColor="$imageDir/men_fitviz_color.png";
-  static const String blueAccessories="$imageDir/access_blue.png";
-  static const String blueFilter="$imageDir/filter_blue.png";
-  static const String menTransOutfit="$imageDir/trans_men_out.png";
-
-
-
-
-
-
+  static const String menStyleColor = "$imageDir/m_style_color.png";
+  static const String menFitvizColor = "$imageDir/men_fitviz_color.png";
+  static const String blueAccessories = "$imageDir/access_blue.png";
+  static const String blueFilter = "$imageDir/filter_blue.png";
+  static const String menTransOutfit = "$imageDir/trans_men_out.png";
 }

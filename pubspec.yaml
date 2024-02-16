@@ -49,6 +49,7 @@ dependencies:
   http: ^1.2.0
   flutter_svg: ^2.0.5
   fluttertoast: ^8.2.4
+  camera: ^0.10.5+9
 
 dev_dependencies:
   flutter_test:
@@ -106,6 +107,11 @@ flutter:
          - asset: assets/fonts/Nexa Bold.otf
          - asset: assets/fonts/Nexa Light.otf
          - asset: assets/fonts/Nexa Regular.otf
+     - family: BirdsOfParadise
+       fonts:
+         - asset: assets/fonts/BirdsOfParadise.ttf
+
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

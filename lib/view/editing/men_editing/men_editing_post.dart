@@ -150,6 +150,7 @@ class MenEditingPostScreen extends StatelessWidget {
                             onTap: () async {
                               _.selectedNav = "outfits";
                               _.update();
+
                               await styleBottomSheet(context, _);
                             },
                             child: Image.asset(_.selectedNav == "outfits"

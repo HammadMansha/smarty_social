@@ -18,12 +18,19 @@ class CreatePostScreen extends StatelessWidget {
         width: Get.width,
         child: Column(
           children: [
+            const SizedBox(
+              height: 8,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  width: Get.width / 2,
-                  child: Image.asset(AppAssets.smartySocial),
+                const Text(
+                  'Smarty Social',
+                  style: TextStyle(
+                      fontFamily: 'BirdsOfParadise',
+                      color: Colors.black,
+                      fontSize: 32,
+                      fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
                   height: 25,

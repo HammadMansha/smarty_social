@@ -33,6 +33,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     debugPrint('MyApp build method called');
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,

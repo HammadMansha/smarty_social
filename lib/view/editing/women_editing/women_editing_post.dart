@@ -8,20 +8,20 @@ class WomenEditingPostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WomenEditingController womenEditingController=Get.put(WomenEditingController());
+    WomenEditingController womenEditingController =
+        Get.put(WomenEditingController());
     return CommonScaffold(
-      body: bodyData(context,womenEditingController),
+      body: bodyData(context, womenEditingController),
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Obx(() {
-            return Text(
-              womenEditingController.framingDone.value == false
-                  ? "Framing"
-                  : "Clothing",
-              style: CommonTextStyle.font16weight400BlackNexRegular,
-            );
-          }
-        ),
+          return Text(
+            womenEditingController.framingDone.value == false
+                ? "Framing"
+                : "Clothing",
+            style: CommonTextStyle.font16weight400BlackNexRegular,
+          );
+        }),
         leading: GestureDetector(
           onTap: () {
             Get.back();
@@ -35,7 +35,7 @@ class WomenEditingPostScreen extends StatelessWidget {
         actions: [
           InkWell(
             onTap: () {
-              womenEditingController.framingDone.value=true;
+              womenEditingController.framingDone.value = true;
             },
             child: SizedBox(
               height: 70,
@@ -48,154 +48,153 @@ class WomenEditingPostScreen extends StatelessWidget {
     );
   }
 
-  bodyData(BuildContext context,WomenEditingController womenEditingController) {
-    return GetBuilder<WomenEditingController>(
-        builder: (_) {
-          return SizedBox(
-            height: Get.height,
-            width: Get.width,
-            child: Column(
-              children: [
-                Expanded(
-                  child: Transform(
-                    transform: Matrix4.identity()
-                      ..rotateZ(_.rotationAngle * (3.1415926535897932 / 180))
-                      ..scale(_.mirror ? -1.0 : 1.0, 1.0),
-                    alignment: Alignment.center,
-                    child: Image.file(
-                      _.createPostController.image as File,
-                      fit: BoxFit.cover,
-                    ), // Replace 'assets/image.jpg' with your image path
-                  ),
-                ),
-              Obx((){
-               return womenEditingController.framingDone.value==false?
-                Container(
-                  height: 100,
-                  width: Get.width,
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  bodyData(
+      BuildContext context, WomenEditingController womenEditingController) {
+    return GetBuilder<WomenEditingController>(builder: (_) {
+      return SizedBox(
+        height: Get.height,
+        width: Get.width,
+        child: Column(
+          children: [
+            Expanded(
+              child: Transform(
+                transform: Matrix4.identity()
+                  ..rotateZ(_.rotationAngle * (3.1415926535897932 / 180))
+                  ..scale(_.mirror ? -1.0 : 1.0, 1.0),
+                alignment: Alignment.center,
+                child: Image.file(
+                  _.createPostController.image as File,
+                  fit: BoxFit.scaleDown,
+                ), // Replace 'assets/image.jpg' with your image path
+              ),
+            ),
+            Obx(() {
+              return womenEditingController.framingDone.value == false
+                  ? Container(
+                      height: 100,
+                      width: Get.width,
+                      color: Colors.white,
+                      child: Column(
                         children: [
-                          InkWell(
-                            onTap: () {
-                              _.rotateImage();
-                            },
-                            child: SizedBox(
-                              height: 22,
-                              width: 22,
-                              child: Image.asset(AppAssets.rotate),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () async {
-                              _.createPostController.image = await _.cropImage(
-                                imageFile: _.createPostController.image,
-                              );
-                              print(
-                                  "====================file===========${_.createPostController.image}");
-                              _.update();
-                            },
-                            child: Column(
-                              children: [
-                                const Icon(
-                                  Icons.crop_square,
-                                  color: Colors.black,
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  _.rotateImage();
+                                },
+                                child: SizedBox(
+                                  height: 22,
+                                  width: 22,
+                                  child: Image.asset(AppAssets.rotate),
                                 ),
-                                Text("Crop",
-                                    style: CommonTextStyle
-                                        .font16weight400BlackNexRegular),
-                              ],
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              _.toggleMirror();
-                              print(
-                                  "Value of X mirror =============${_.mirror}");
-                            },
-                            child: SizedBox(
-                              height: 23,
-                              width: 23,
-                              child: Image.asset(AppAssets.mirror),
-                            ),
+                              ),
+                              InkWell(
+                                onTap: () async {
+                                  _.createPostController.image =
+                                      await _.cropImage(
+                                    imageFile: _.createPostController.image,
+                                  );
+                                  print(
+                                      "====================file===========${_.createPostController.image}");
+                                  _.update();
+                                },
+                                child: Column(
+                                  children: [
+                                    const Icon(
+                                      Icons.crop_square,
+                                      color: Colors.black,
+                                    ),
+                                    Text("Crop",
+                                        style: CommonTextStyle
+                                            .font16weight400BlackNexRegular),
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  _.toggleMirror();
+                                  print(
+                                      "Value of X mirror =============${_.mirror}");
+                                },
+                                child: SizedBox(
+                                  height: 23,
+                                  width: 23,
+                                  child: Image.asset(AppAssets.mirror),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                    ],
-                  ).marginOnly(left: 25, right: 25, top: 35),
-                ):
-               Container(
-                 height: 100,
-                 width: Get.width,
-                 color: Colors.white,
-                 child: Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                   children: [
-                     GestureDetector(
-                       onTap: () async {
-                         _.selectedNav = "outfit";
-                         _.update();
-                         await styleBottomSheet(context, _);
-                       },
-                       child: Image.asset(_.selectedNav == "outfit"
-                           ? AppAssets.womenOutfit
-                           : AppAssets.womenOutfitTrans),
-                     ),
-                     GestureDetector(
-                       onTap: () {
-                         _.selectedNav = "style";
-                         _.update();
-                       },
-                       child: Image.asset(_.selectedNav == "style"
-                           ? AppAssets.womenStyleColor
-                           : AppAssets.womenStyle),
-                     ),
-                     GestureDetector(
-                       onTap: () {
-                         _.selectedNav = "fitviz";
-                         _.update();
-                       },
-                       child: Image.asset(_.selectedNav == "fitviz"
-                           ? AppAssets.womenFitvizColor
-                           : AppAssets.womenFitViz),
-                     ),
-                     GestureDetector(
-                       onTap: () {
-                         _.selectedNav = "accessories";
-                         _.update();
-                       },
-                       child: Image.asset(_.selectedNav == "accessories"
-                           ? AppAssets.pinkAccessories
-                           : AppAssets.accessories),
-                     ),
-                     GestureDetector(
-                       onTap: () {
-                         _.selectedNav = "filter";
-                         _.update();
-                       },
-                       child: Image.asset(_.selectedNav == "filter"
-                           ? AppAssets.pinkFilter
-                           : AppAssets.filter),
-                     ),
-                   ],
-                 ).marginOnly(left: 25, right: 25, top: 35),
-               );
-
-              }),
-
-
-              ],
-            ),
-          );
-        });
+                      ).marginOnly(left: 25, right: 25, top: 35),
+                    )
+                  : Container(
+                      height: 100,
+                      width: Get.width,
+                      color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              _.selectedNav = "outfit";
+                              _.update();
+                              await styleBottomSheet(context, _);
+                            },
+                            child: Image.asset(_.selectedNav == "outfit"
+                                ? AppAssets.womenOutfit
+                                : AppAssets.womenOutfitTrans),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              _.selectedNav = "style";
+                              _.update();
+                            },
+                            child: Image.asset(_.selectedNav == "style"
+                                ? AppAssets.womenStyleColor
+                                : AppAssets.womenStyle),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              _.selectedNav = "fitviz";
+                              _.update();
+                            },
+                            child: Image.asset(_.selectedNav == "fitviz"
+                                ? AppAssets.womenFitvizColor
+                                : AppAssets.womenFitViz),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              _.selectedNav = "accessories";
+                              _.update();
+                            },
+                            child: Image.asset(_.selectedNav == "accessories"
+                                ? AppAssets.pinkAccessories
+                                : AppAssets.accessories),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              _.selectedNav = "filter";
+                              _.update();
+                            },
+                            child: Image.asset(_.selectedNav == "filter"
+                                ? AppAssets.pinkFilter
+                                : AppAssets.filter),
+                          ),
+                        ],
+                      ).marginOnly(left: 25, right: 25, top: 35),
+                    );
+            }),
+          ],
+        ),
+      );
+    });
   }
 
   //Outfit sheet
-  Future<void> styleBottomSheet(BuildContext context, WomenEditingController _) async {
+  Future<void> styleBottomSheet(
+      BuildContext context, WomenEditingController _) async {
     Get.bottomSheet(
       backgroundColor: Colors.blue,
       isScrollControlled: true,
@@ -366,7 +365,8 @@ class WomenEditingPostScreen extends StatelessWidget {
   }
 
   //styling assets sheet
-  Future<void> editingSheet(BuildContext context, WomenEditingController _) async {
+  Future<void> editingSheet(
+      BuildContext context, WomenEditingController _) async {
     Get.bottomSheet(
       backgroundColor: Colors.white,
       isScrollControlled: true,
@@ -401,10 +401,10 @@ class WomenEditingPostScreen extends StatelessWidget {
                               child: Text(
                                 _.womenAssetType[index],
                                 style:
-                                _.selectedAsset == _.womenAssetType[index]
-                                    ? CommonTextStyle.font16weightBold3166
-                                    : CommonTextStyle
-                                    .font16weight400BlackNexRegular,
+                                    _.selectedAsset == _.womenAssetType[index]
+                                        ? CommonTextStyle.font16weightBold3166
+                                        : CommonTextStyle
+                                            .font16weight400BlackNexRegular,
                               ),
                             ).marginSymmetric(horizontal: 10),
                           );
@@ -418,12 +418,12 @@ class WomenEditingPostScreen extends StatelessWidget {
                 child: _.selectedAsset == "Suits"
                     ? suitsAssets(context, _)
                     : _.selectedAsset == "Weeding Outfits"
-                    ? weedingOutfitAssets(context, _)
-                    : _.selectedAsset == "Skirts"
-                    ? skirt(context, _)
-                    : _.selectedAsset == "Sarrees"
-                    ? sarrees(context, _)
-                    : const SizedBox(),
+                        ? weedingOutfitAssets(context, _)
+                        : _.selectedAsset == "Skirts"
+                            ? skirt(context, _)
+                            : _.selectedAsset == "Sarrees"
+                                ? sarrees(context, _)
+                                : const SizedBox(),
               ),
             ],
           ).marginSymmetric(horizontal: 10),
@@ -579,7 +579,4 @@ class WomenEditingPostScreen extends StatelessWidget {
           }),
     );
   }
-
-
-
 }

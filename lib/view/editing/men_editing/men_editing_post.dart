@@ -67,7 +67,7 @@ class MenEditingPostScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Image.file(
                   _.createPostController.image as File,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.scaleDown,
                 ), // Replace 'assets/image.jpg' with your image path
               ),
             ),
@@ -152,7 +152,9 @@ class MenEditingPostScreen extends StatelessWidget {
                               _.update();
                               await styleBottomSheet(context, _);
                             },
-                            child: Image.asset(_.selectedNav=="outfits"?AppAssets.outfit:AppAssets.menTransOutfit),
+                            child: Image.asset(_.selectedNav == "outfits"
+                                ? AppAssets.outfit
+                                : AppAssets.menTransOutfit),
                           ),
                           GestureDetector(
                             onTap: () async {

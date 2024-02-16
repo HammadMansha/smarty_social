@@ -7,7 +7,7 @@ class CreatePostController extends GetxController {
 
   File? image;
   final picker = ImagePicker();
-  RxString genderSelect="".obs;
+  RxString genderSelect = "".obs;
 
   @override
   void onInit() async {
@@ -18,21 +18,19 @@ class CreatePostController extends GetxController {
 
   // Image Picker function to get image from gallery
   Future getImageFromGallery() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
 
     if (pickedFile != null) {
-      image = File(pickedFile.path);// Assigning a File object to _image
+      image = File(
+        pickedFile.path,
+      ); // Assigning a File object to _image
 
-      if(genderSelect.value=="women") {
+      if (genderSelect.value == "women") {
         Get.toNamed(Routes.womenEditPostScreen);
-      }
-      else{
-
+      } else {
         Get.toNamed(Routes.menEditPostScreen);
-
-
-
-
       }
     }
   }
@@ -62,6 +60,4 @@ class CreatePostController extends GetxController {
     }
     update();
   }
-
-
 }

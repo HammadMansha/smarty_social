@@ -97,12 +97,13 @@ class CreatePostScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () async {},
                                     child: SizedBox(
                                       width: 80,
                                       height: 80,
-                                      child:
-                                          Image.asset(AppAssets.selectCamera),
+                                      child: Image.asset(
+                                        AppAssets.selectCamera,
+                                      ),
                                     ),
                                   ),
                                   InkWell(

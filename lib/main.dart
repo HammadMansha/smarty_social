@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:get_storage/get_storage.dart';
 import 'package:smarty_social/routes/app_pagess.dart';
 import 'package:smarty_social/services/auth_service/auth_services.dart';
@@ -8,12 +6,11 @@ import 'utils/libraries/app_libraries.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await initServices();
+  await initServices();
   FlutterError.onError = (FlutterErrorDetails details) {
     print("====================$details");
 
     // Log or handle the error details
-
   };
 
   runApp(const MyApp());
@@ -21,7 +18,6 @@ Future<void> main() async {
 
 Future<void> initServices() async {
   await GetStorage.init();
-
 
   // final storage=GetStorage();
   // storage.remove("isAppOpen");

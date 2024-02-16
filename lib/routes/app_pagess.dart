@@ -1,10 +1,11 @@
 
 import 'package:smarty_social/view/editing/women_editing/women_editing_post.dart';
 
+import '../middlewears/auth/auth_middlewear.dart';
 import '../utils/libraries/app_libraries.dart';
 
 class AppPages {
-  static var initial = Routes.splashScreen;
+  static var initial = Routes.dashboardScreen;
 
   static final routes = [
     //Splash screen
@@ -53,6 +54,9 @@ class AppPages {
     GetPage(
       name: Routes.dashboardScreen,
       page: () => const DashboardScreen(),
+      middlewares: [
+        AuthMiddleware(),
+      ],
     ),
 
 

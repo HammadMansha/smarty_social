@@ -2,20 +2,18 @@ import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 
-
-
-class DashboardScreenController extends GetxController with CommonVariables,InitializeLocalStorage {
+class DashboardScreenController extends GetxController
+    with CommonVariables, InitializeLocalStorage {
   ListQueue<int> navigationQueue = ListQueue();
   int currentIndex = 0;
   // late Map<Permission, PermissionStatus> statuses;
   late PersistentTabController controller;
 
-
   List<Widget> buildScreens() {
     return [
       const ExploreScreen(),
       const CreatePostScreen(),
-      const ProfileScreen(),
+      //const ProfileScreen(),
     ];
   }
 
@@ -35,33 +33,30 @@ class DashboardScreenController extends GetxController with CommonVariables,Init
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
         contentPadding: 7.0,
-
       ),
 
-      PersistentBottomNavBarItem(
-        icon: Image.asset(AppAssets.profileNav),
-        title: ("Profile"),
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-        contentPadding: 7.0,
-
-      ),
+      // PersistentBottomNavBarItem(
+      //   icon: Image.asset(AppAssets.profileNav),
+      //   title: ("Profile"),
+      //   activeColorPrimary: CupertinoColors.activeBlue,
+      //   inactiveColorPrimary: CupertinoColors.systemGrey,
+      //   contentPadding: 7.0,
+      //
+      // ),
     ];
   }
-
-
 
   @override
   void onInit() {
     //requestPermissions();
     controller = PersistentTabController(initialIndex: 0);
 
-
     // TODO: implement onInit
     super.onInit();
   }
+
   @override
-  void onReady() async{
+  void onReady() async {
     // TODO: implement onReady
 
     super.onReady();
@@ -108,7 +103,4 @@ class DashboardScreenController extends GetxController with CommonVariables,Init
     }
     update();
   }
-
-
-
 }

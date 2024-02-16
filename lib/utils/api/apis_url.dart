@@ -14,4 +14,7 @@ class ApiData {
   //reset password
   static const String resetPassword = "$baseUrl/set_password";
 
+  //reset password
+  static const String logout = "$baseUrl/set_password";
+
 }

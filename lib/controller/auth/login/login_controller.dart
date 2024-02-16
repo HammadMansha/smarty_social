@@ -37,7 +37,7 @@ class LoginController extends GetxController with InitializeLocalStorage {
             headers: headers,
             body: body,
           )
-          .timeout(const Duration(seconds: 10));
+          .timeout(const Duration(seconds: 20));
 
       print("response of login call==============${res.statusCode}");
       print("response of login call==============${res.body}");

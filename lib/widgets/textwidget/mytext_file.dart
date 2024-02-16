@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyText extends StatelessWidget {
+class CommonTextStyle extends StatelessWidget {
   final String text;
   final double? fontSize;
   final TextStyle? style;
@@ -13,7 +13,7 @@ class MyText extends StatelessWidget {
   final TextDecoration? decoration;
   final TextOverflow? overflow;
 
-  const MyText(
+  const CommonTextStyle(
     this.text, {
     this.upperCase = false,
     this.fontSize,

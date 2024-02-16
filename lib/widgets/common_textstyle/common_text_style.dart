@@ -7,7 +7,11 @@ class CommonTextStyle {
       color: Colors.white,
       letterSpacing: 0.4,
       fontSize: 16,
-      fontWeight: FontWeight.w700);
+      fontWeight: FontWeight.w700,
+      fontFamily: 'Nexa'
+
+
+  );
 
 
   static TextStyle font14weight4009595NexRegular = const TextStyle(
@@ -15,7 +19,7 @@ class CommonTextStyle {
       letterSpacing: 0.4,
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      fontFamily: 'Nexa Regular'
+      fontFamily: 'Nexa'
   );
 
 
@@ -25,7 +29,7 @@ class CommonTextStyle {
       letterSpacing: 0.4,
       fontSize: 16,
       fontWeight: FontWeight.w400,
-     fontFamily: 'Nexa Regular'
+     fontFamily: 'Nexa'
   );
 
   static TextStyle font16weight400WhiteNexRegular = const TextStyle(
@@ -33,7 +37,7 @@ class CommonTextStyle {
       letterSpacing: 0.4,
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      fontFamily: 'Nexa Regular'
+      fontFamily: 'Nexa'
   );
 
 
@@ -42,7 +46,7 @@ class CommonTextStyle {
       letterSpacing: 0.4,
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      fontFamily: 'Nexa Regular'
+      fontFamily: 'Nexa'
   );
 
   static TextStyle font16weight4009696NexRegular = const TextStyle(
@@ -50,7 +54,7 @@ class CommonTextStyle {
       letterSpacing: 0.4,
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      fontFamily: 'Nexa Regular'
+      fontFamily: 'Nexa'
 
   );
 
@@ -59,10 +63,30 @@ class CommonTextStyle {
       letterSpacing: 0.4,
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      fontFamily: 'Nexa Regular'
+      fontFamily: 'Nexa'
 
   );
 
+
+  static TextStyle font12weightNormal342f = const TextStyle(
+      color: AppColors.color342F2F,
+      letterSpacing: 0.4,
+      fontSize: 12,
+      fontWeight: FontWeight.normal,
+      fontFamily: 'Nexa'
+
+  );
+
+
+
+  static TextStyle font14weightNormal342f = const TextStyle(
+      color: AppColors.color342F2F,
+      letterSpacing: 0.4,
+      fontSize: 14,
+      fontWeight: FontWeight.normal,
+      fontFamily: 'Nexa'
+
+  );
 
 
   static TextStyle font32weight4009696NexBold = const TextStyle(
@@ -70,7 +94,7 @@ class CommonTextStyle {
       letterSpacing: 0.4,
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      fontFamily: 'Nexa Regular'
+      fontFamily: 'Nexa'
 
   );
 
@@ -80,7 +104,18 @@ class CommonTextStyle {
       letterSpacing: 0.4,
       fontSize: 16,
       fontWeight: FontWeight.bold,
+      fontFamily: 'Nexa'
+
+
+
+
+
   );
+
+
+
+
+
 
 
 

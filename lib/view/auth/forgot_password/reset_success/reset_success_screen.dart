@@ -1,5 +1,3 @@
-
-
 import '../../../../utils/libraries/app_libraries.dart';
 
 class ResetPasswordSuccess extends StatelessWidget {
@@ -21,29 +19,22 @@ class ResetPasswordSuccess extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            
-             Center(
-               child: SizedBox(
-                 width: Get.width/1.5,
+            Center(
+              child: SizedBox(
+                width: Get.width / 1.5,
                 child: Image.asset(AppAssets.successReset),
-                           ),
-             ),
-
+              ),
+            ),
             CommonSpaces.spaceVertical20,
-
             InkWell(
-              onTap: (){
-                Get.offAll(()=>LoginScreen());
+              onTap: () {
+                Get.offAll(() => LoginScreen());
               },
               child: SizedBox(
-                width: Get.width/1.5,
+                width: Get.width / 1.5,
                 child: Image.asset(AppAssets.loginBtn),
               ),
             ),
-      
-      
-      
-      
           ],
         ),
       ),

@@ -1,7 +1,7 @@
 import '../../../utils/libraries/app_libraries.dart';
 
 // ignore: must_be_immutable
-class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail {
+class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail,InitializeLocalStorage {
   LoginScreen({super.key});
 
   @override
@@ -105,9 +105,10 @@ class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail
                         children: [
                           Obx(
                             () => GestureDetector(
-                              onTap: () {
+                              onTap: () async{
                                 if (loginController.rememberMe.value == false) {
                                   loginController.rememberMe.value = true;
+
                                 } else {
                                   loginController.rememberMe.value = false;
                                 }

@@ -11,8 +11,9 @@ class AppStrings {
   static const String checkEmailForOtp = "Check your email for OTP";
   static const String invalidEmailOrUsername = "Invalid email or username";
   static const String otpVerified = "OTP verified";
-  static const String invalidOtpVerified = "Invalid OTP";
+  static const String invalidOtpVerified = "Invalid or expired OTP";
   static const String noRecordFound = "User not Found";
+  static const String passwordChangeSuccess = "Password reset successfully";
 
   //Splash screen strings
   static const String newJourney = "A New Journey to Fashion World!";

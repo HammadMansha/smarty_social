@@ -11,5 +11,10 @@ class ApiData {
   static const String forgotPassword = "$baseUrl/forgot_password";
   //verify OTP user
   static const String verifyOtp = "$baseUrl/otp_verification";
+  //reset password
+  static const String resetPassword = "$baseUrl/set_password";
+
+  //reset password
+  static const String logout = "$baseUrl/set_password";
 
 }

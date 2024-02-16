@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import '../../../utils/libraries/app_libraries.dart';
@@ -47,11 +46,19 @@ class LoginController extends GetxController with InitializeLocalStorage {
         var data=json.decode(res.body);
         storage.write("userId", data["User_id"]);
         storage.write("token", data["Session_token"]);
+        storage.write("userEmail", email.text);
+
+        if(rememberMe.value==true){
+          await storage.write("isAppOpen", 'true');
+        }
+
+
+
         CommonToast.showToast(AppStrings.loginSuccess);
         isLoading.value = false;
         
         
-        Get.offAll(()=>const CreatePostScreen());
+        Get.offAll(()=>const DashboardScreen());
 
         update();
       } else if (res.statusCode == 401) {

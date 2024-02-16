@@ -1,5 +1,6 @@
 import 'package:smarty_social/view/editing/women_editing/women_editing_post.dart';
 
+import '../middlewears/auth/auth_middlewear.dart';
 import '../utils/libraries/app_libraries.dart';
 
 class AppPages {
@@ -52,6 +53,9 @@ class AppPages {
     GetPage(
       name: Routes.dashboardScreen,
       page: () => const DashboardScreen(),
+      middlewares: [
+        AuthMiddleware(),
+      ],
     ),
 
     //create post screen

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class CreatePostController extends GetxController {
   late bool arePermissionsGranted;
@@ -59,5 +60,29 @@ class CreatePostController extends GetxController {
       update();
     }
     update();
+  }
+
+  Future<void> openCamera() async {
+    print('hello g///////////');
+    final picker = ImagePicker();
+    final XFile? pickedImage = await picker.pickImage(
+      source: ImageSource.camera,
+    );
+    if (pickedImage != null) {
+      // Save the image to the gallery
+      final result = await ImageGallerySaver.saveFile(pickedImage.path);
+
+      // Check if the image was saved successfully
+      if (result['isSuccess']) {
+        // Do something with the image
+        print('Image captured and saved to gallery: ${pickedImage.path}');
+      } else {
+        // Handle error
+        print('Failed to save image: ${result['errorMessage']}');
+      }
+    } else {
+      // No image captured
+      print('No image captured');
+    }
   }
 }

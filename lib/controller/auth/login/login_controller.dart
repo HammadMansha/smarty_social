@@ -24,12 +24,10 @@ class LoginController extends GetxController with InitializeLocalStorage {
         'Accept': 'application/json',
       };
 
-      var body = jsonEncode(
-          {
-            "user_name":email.text,
-            "Password":password.text,
-          }
-      );
+      var body = jsonEncode({
+        "user_name": email.text,
+        "Password": password.text,
+      });
 
       var res = await http
           .post(
@@ -43,22 +41,19 @@ class LoginController extends GetxController with InitializeLocalStorage {
       print("response of login call==============${res.body}");
 
       if (res.statusCode == 200) {
-        var data=json.decode(res.body);
+        var data = json.decode(res.body);
         storage.write("userId", data["User_id"]);
         storage.write("token", data["Session_token"]);
         storage.write("userEmail", email.text);
 
-        if(rememberMe.value==true){
+        if (rememberMe.value == true) {
           await storage.write("isAppOpen", 'true');
         }
 
-
-
         CommonToast.showToast(AppStrings.loginSuccess);
         isLoading.value = false;
-        
-        
-        Get.offAll(()=>const DashboardScreen());
+
+        Get.offAll(() => const DashboardScreen());
 
         update();
       } else if (res.statusCode == 401) {
@@ -66,8 +61,7 @@ class LoginController extends GetxController with InitializeLocalStorage {
 
         isLoading.value = false;
         update();
-      }
-      else{
+      } else {
         CommonToast.showToast(AppStrings.somethingWentWrong);
         isLoading.value = false;
         update();

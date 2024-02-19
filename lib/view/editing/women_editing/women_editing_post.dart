@@ -174,9 +174,10 @@ class WomenEditingPostScreen extends StatelessWidget {
                                 : AppAssets.accessories),
                           ),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               _.selectedNav = "filter";
                               _.update();
+                              await filtersSheet(context, _);
                             },
                             child: Image.asset(_.selectedNav == "filter"
                                 ? AppAssets.pinkFilter
@@ -201,7 +202,7 @@ class WomenEditingPostScreen extends StatelessWidget {
       StatefulBuilder(
         builder: (context, setState) {
           return Container(
-            height: Get.height / 1.9,
+            height: Get.height / 1.8,
             width: Get.width,
             decoration: const BoxDecoration(
               color: Colors.white,
@@ -578,5 +579,48 @@ class WomenEditingPostScreen extends StatelessWidget {
             );
           }),
     );
+  }
+
+  Future<void> filtersSheet(
+      BuildContext context, WomenEditingController _) async {
+    Get.bottomSheet(
+        backgroundColor: Colors.blue,
+        isScrollControlled: true,
+        persistent: true, StatefulBuilder(builder: (context, setState) {
+      return Container(
+        height: Get.height / 4,
+        width: Get.width,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(25),
+            topLeft: Radius.circular(25),
+          ),
+        ),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                const Text(
+                  'Hello',
+                  style: TextStyle(color: Colors.black),
+                ).marginOnly(right: 10),
+                Container(
+                  margin: EdgeInsets.only(right: index != 9 ? 16.0 : 0.0),
+                  height: 76,
+                  width: 62,
+                  decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  // Adjust the height as needed
+                ).marginOnly(left: 10),
+              ],
+            );
+          },
+        ).marginOnly(top: 30),
+      );
+    }));
   }
 }

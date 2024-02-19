@@ -51,6 +51,7 @@ dependencies:
   fluttertoast: ^8.2.4
   camera: ^0.10.5+9
   image_gallery_saver: ^2.0.3
+  photofilters: any
 
 dev_dependencies:
   flutter_test:

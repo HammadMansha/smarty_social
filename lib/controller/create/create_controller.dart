@@ -70,16 +70,26 @@ class CreatePostController extends GetxController {
     );
     if (pickedImage != null) {
       // Save the image to the gallery
-      final result = await ImageGallerySaver.saveFile(pickedImage.path);
+     // final result = await ImageGallerySaver.saveFile(pickedImage.path);
+
+      image = File(
+        pickedImage.path,
+      ); // Assigning a File object to _image
+
+      if (genderSelect.value == "women") {
+        Get.toNamed(Routes.womenEditPostScreen);
+      } else {
+        Get.toNamed(Routes.menEditPostScreen);
+      }
 
       // Check if the image was saved successfully
-      if (result['isSuccess']) {
-        // Do something with the image
-        print('Image captured and saved to gallery: ${pickedImage.path}');
-      } else {
-        // Handle error
-        print('Failed to save image: ${result['errorMessage']}');
-      }
+      // if (result['isSuccess']) {
+      //   // Do something with the image
+      //   print('Image captured and saved to gallery: ${pickedImage.path}');
+      // } else {
+      //   // Handle error
+      //   print('Failed to save image: ${result['errorMessage']}');
+      // }
     } else {
       // No image captured
       print('No image captured');

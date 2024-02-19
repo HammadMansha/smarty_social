@@ -4,7 +4,7 @@ import '../middlewears/auth/auth_middlewear.dart';
 import '../utils/libraries/app_libraries.dart';
 
 class AppPages {
-  static var initial = Routes.dashboardScreen;
+  static var initial = Routes.createPostScreen;
 
   static final routes = [
     //Splash screen

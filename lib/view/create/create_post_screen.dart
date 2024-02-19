@@ -108,7 +108,9 @@ class CreatePostScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        controller.openCamera();
+                                      },
                                       child: SizedBox(
                                         width: 80,
                                         height: 80,

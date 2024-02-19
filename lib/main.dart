@@ -1,10 +1,10 @@
-import 'package:get_storage/get_storage.dart';
 import 'package:smarty_social/routes/app_pagess.dart';
 import 'package:smarty_social/services/auth_service/auth_services.dart';
-
 import 'utils/libraries/app_libraries.dart';
 
 Future<void> main() async {
+  await GetStorage.init();
+
   WidgetsFlutterBinding.ensureInitialized();
   await initServices();
   FlutterError.onError = (FlutterErrorDetails details) {

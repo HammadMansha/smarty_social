@@ -13,6 +13,26 @@ class AppAssets {
   static const String alreadyAcc = "$imageDir/already_acc.png";
   static const String newJourney = "$imageDir/new_journey.png";
   static const String skip = "$imageDir/skip.png";
+  static const String iconKing = "$imageDir/iconKing.png";
+
+  static const String profiledemo = "$imageDir/profiledemo.png";
+  static const String profiledemo1 = "$imageDir/profiledemo1.png";
+  static const String profiledemo2 = "$imageDir/img.png";
+  static const String addstory = "$imageDir/addstory.png";
+  static const String cameraImage = "$imageDir/img_1.png";
+
+  static const String editProfile1 = "$imageDir/editProfile.png";
+  static const String threeLines = "$imageDir/threeLines.png";
+
+  // drawer assets
+  static const String kingIcon2 = "$imageDir/kingicon2.png";
+  static const String howtouse = "$imageDir/howtouse.png";
+  static const String privacyIcon = "$imageDir/privacyIcon.png";
+  static const String shareIcon = "$imageDir/shareIcon.png";
+  static const String languagesIcon = "$imageDir/img_2.png";
+  static const String rateUs = "$imageDir/img_3.png";
+  static const String moreApps = "$imageDir/img_4.png";
+  static const String privacyPolicy = "$imageDir/img_5.png";
 
   //Forgot Password assets
   static const String forgotPassword = "$imageDir/forgot_password.png";

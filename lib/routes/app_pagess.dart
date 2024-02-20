@@ -2,9 +2,10 @@ import 'package:smarty_social/view/editing/women_editing/women_editing_post.dart
 
 import '../middlewears/auth/auth_middlewear.dart';
 import '../utils/libraries/app_libraries.dart';
+import '../view/edit_profile/edit_profile_screen.dart';
 
 class AppPages {
-  static var initial = Routes.dashboardScreen;
+  static var initial = Routes.profileScreen;
 
   static final routes = [
     //Splash screen
@@ -64,6 +65,13 @@ class AppPages {
       page: () => const CreatePostScreen(),
     ),
 
+    //profile page screen
+
+    GetPage(
+      name: Routes.profileScreen,
+      page: () => const ProfileScreen(),
+    ),
+
     //Edit post screen
     GetPage(
       name: Routes.menEditPostScreen,
@@ -74,6 +82,13 @@ class AppPages {
     GetPage(
       name: Routes.womenEditPostScreen,
       page: () => const WomenEditingPostScreen(),
+    ),
+
+    //Edit profile screen
+
+    GetPage(
+      name: Routes.editProfileScreen,
+      page: () => const EditProfileScreen(),
     ),
   ];
 }

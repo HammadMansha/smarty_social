@@ -14,5 +14,6 @@ class Routes {
   static const womenEditPostScreen = '/womenEditPostScreen';
   static const womenClothEditing = '/womenClothEditing';
 
-
+  static const profileScreen = '/profileScreen';
+  static const editProfileScreen = '/editProfileScreen';
 }

@@ -42,9 +42,15 @@ class SignUpController extends GetxController {
       print("response of register call==============${res.body}");
 
       if (res.statusCode == 200) {
-        CommonToast.showToast(AppStrings.registrationSuccess);
+        signUpDialog();
+        Future.delayed(const Duration(seconds: 2), () {
+          Get.back();
+          Get.back(); // Dismiss the dialog
+        });
+        // Get.back();
+
+        // CommonToast.showToast(AppStrings.registrationSuccess);
         isLoading.value = false;
-        Get.back();
 
         update();
       } else if (res.statusCode == 400) {
@@ -82,12 +88,33 @@ class SignUpController extends GetxController {
               BorderRadius.circular(10), // Adjust the border radius as needed
         ),
         contentPadding: EdgeInsets.zero,
-        content: Container(
-          height: 150,
-          width: Get.width / 1.6,
-          child:
-              Image.asset(AppAssets.signUpdialog).marginOnly(left: 5, right: 5),
-        ),
+        content: SizedBox(
+            height: Get.height / 4.8,
+            width: Get.width / 1.6,
+            child: Column(
+              children: [
+                CommonSpaces.spaceVertical10,
+                Text(
+                  'Signup',
+                  style: CommonTextStyle.EditProfileFont,
+                ),
+                CommonSpaces.spaceVertical10,
+                Image.asset(
+                  AppAssets.signUpdialog,
+                  height: 45,
+                ),
+                CommonSpaces.spaceVertical20,
+                Text(
+                  'Congratulations!',
+                  style: CommonTextStyle.EditProfileFont,
+                ),
+                CommonSpaces.spaceVertical10,
+                Text(
+                  'Account has been created successfully',
+                  style: CommonTextStyle.font12weightNormal342f,
+                ),
+              ],
+            )),
       ),
     );
   }

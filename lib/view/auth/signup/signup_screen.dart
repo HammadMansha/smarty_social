@@ -1,5 +1,4 @@
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
-import 'package:smarty_social/widgets/common_toast/common_toast.dart';
 
 // ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget
@@ -32,14 +31,20 @@ class SignUpScreen extends StatelessWidget
                             children: [
                               const SizedBox(height: 30),
                               Center(
-                                child: Container(
-                                  height: 70,
-                                  width: 70,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image: AssetImage(AppAssets.profilePic),
-                                        fit: BoxFit.contain),
+                                child: InkWell(
+                                  onTap: () {
+                                    // controller.signUpDialog();
+                                  },
+                                  child: Container(
+                                    height: 70,
+                                    width: 70,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage(AppAssets.profilePic),
+                                          fit: BoxFit.contain),
+                                    ),
                                   ),
                                 ),
                               ),

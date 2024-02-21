@@ -153,19 +153,17 @@ class LoginScreen extends StatelessWidget
                       //Login button
                       CommonSpaces.spaceVertical50,
 
-                      InkWell(
-                          onTap: () async {
-                            if (formKey.currentState!.validate()) {
-                              await loginController.loginUser();
-                            }
-                          },
-                          child: CommonButton(
-                            width: Get.width / 1,
-                            text: 'Login',
-                            textStyle: CommonTextStyle.signupColor,
-                            onPressed: () {},
-                            fillColor: Colors.red,
-                          )),
+                      CommonButton(
+                        width: Get.width / 1,
+                        text: 'Login',
+                        textStyle: CommonTextStyle.signupColor,
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            await loginController.loginUser();
+                          }
+                        },
+                        fillColor: Colors.red,
+                      ),
 
                       Align(
                         alignment: Alignment.bottomRight,

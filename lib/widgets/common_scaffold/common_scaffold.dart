@@ -1,5 +1,4 @@
 import 'package:flutter/gestures.dart';
-
 import '../../utils/libraries/app_libraries.dart';
 
 class CommonScaffold extends StatelessWidget {
@@ -32,7 +31,6 @@ class CommonScaffold extends StatelessWidget {
   bool isAppbarShow;
   void Function()? backIconOnTap;
 
-
   CommonScaffold(
       {super.key,
       this.body,
@@ -59,50 +57,57 @@ class CommonScaffold extends StatelessWidget {
       this.primary = true,
       this.isAppbarShow = false,
       this.resizeToAvoidBottomInset,
-        this.backIconOnTap,
+      this.backIconOnTap,
       this.restorationId});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: isAppbarShow == true
-          ? AppBar(
-              leading: GestureDetector(
-                onTap:(){
-                  Get.back();
-                },
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: AppColors.blackColor,
-                  size: 20,
+    final mqData = MediaQuery.of(context);
+    final mqDataNew = mqData.copyWith(
+        textScaleFactor:
+            mqData.textScaleFactor > 1.0 ? 1.0 : mqData.textScaleFactor);
+    return MediaQuery(
+      data: mqDataNew,
+      child: Scaffold(
+        appBar: isAppbarShow == true
+            ? AppBar(
+                leading: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: AppColors.blackColor,
+                    size: 20,
+                  ),
                 ),
-              ),
-            )
-          : appBar,
-      extendBodyBehindAppBar: extendBodyBehindAppBar,
-      backgroundColor: backgroundColor,
-      body: body,
-      key: key,
-      bottomNavigationBar: bottomNavigationBar,
-      bottomSheet: bottomSheet,
-      drawer: drawer,
-      drawerDragStartBehavior: drawerDragStartBehavior,
-      drawerEdgeDragWidth: drawerEdgeDragWidth,
-      drawerEnableOpenDragGesture: drawerEnableOpenDragGesture,
-      drawerScrimColor: drawerScrimColor,
-      endDrawer: endDrawer,
-      endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture,
-      extendBody: extendBody,
-      floatingActionButton: floatingActionButton,
-      floatingActionButtonAnimator: floatingActionButtonAnimator,
-      floatingActionButtonLocation: floatingActionButtonLocation,
-      onDrawerChanged: onDrawerChanged,
-      onEndDrawerChanged: onEndDrawerChanged,
-      persistentFooterAlignment: persistentFooterAlignment,
-      persistentFooterButtons: persistentFooterButtons,
-      primary: primary,
-      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-      restorationId: restorationId,
+              )
+            : appBar,
+        extendBodyBehindAppBar: extendBodyBehindAppBar,
+        backgroundColor: backgroundColor,
+        body: body,
+        key: key,
+        bottomNavigationBar: bottomNavigationBar,
+        bottomSheet: bottomSheet,
+        drawer: drawer,
+        drawerDragStartBehavior: drawerDragStartBehavior,
+        drawerEdgeDragWidth: drawerEdgeDragWidth,
+        drawerEnableOpenDragGesture: drawerEnableOpenDragGesture,
+        drawerScrimColor: drawerScrimColor,
+        endDrawer: endDrawer,
+        endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture,
+        extendBody: extendBody,
+        floatingActionButton: floatingActionButton,
+        floatingActionButtonAnimator: floatingActionButtonAnimator,
+        floatingActionButtonLocation: floatingActionButtonLocation,
+        onDrawerChanged: onDrawerChanged,
+        onEndDrawerChanged: onEndDrawerChanged,
+        persistentFooterAlignment: persistentFooterAlignment,
+        persistentFooterButtons: persistentFooterButtons,
+        primary: primary,
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+        restorationId: restorationId,
+      ),
     );
   }
 }

@@ -16,6 +16,7 @@ class ForgotPassword extends StatelessWidget
   bodyData() {
     ForgotPasswordController controller = Get.put(ForgotPasswordController());
     return Obx(() {
+      debugPrint("---------------------------------");
         return SizedBox(
           height: Get.height,
           width: Get.width,

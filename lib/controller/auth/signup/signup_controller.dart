@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../widgets/common_toast/common_toast.dart';
 
-class SignUpController extends GetxController {
+class SignUpController extends GetxController  with InitializeLocalStorage{
   TextEditingController username = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -36,16 +36,21 @@ class SignUpController extends GetxController {
         url,
         headers: headers,
         body: body,
-      ).timeout(const Duration(seconds: 20));
+      ).timeout(const Duration(seconds: 30));
 
       print("response of register call==============${res.statusCode}");
       print("response of register call==============${res.body}");
 
 
       if(res.statusCode==200){
-        CommonToast.showToast( AppStrings.registrationSuccess);
+       var data=json.decode(res.body);
+        storage.write("userId", data["User_id"]);
+        storage.write("token", data["Session_token"]);
+        storage.write("username",data["User_name"]);
+        storage.write("userEmail",data["Email"]);
+       storage.write("isAppOpen", 'true');
         isLoading.value = false;
-        Get.back();
+        Get.offAndToNamed(Routes.dashboardScreen);
 
         update();
 

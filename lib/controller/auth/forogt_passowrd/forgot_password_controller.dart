@@ -11,6 +11,8 @@ class ForgotPasswordController extends GetxController{
   RxBool isLoading=false.obs;
 
 
+
+
   Future<void> forgotPassword() async {
     try {
       isLoading.value = true;

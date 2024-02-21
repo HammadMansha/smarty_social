@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:smarty_social/controller/editing/women_editing/women_editing_controller.dart';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 
@@ -12,6 +11,31 @@ class WomenEditingPostScreen extends StatelessWidget {
         Get.put(WomenEditingController());
     return CommonScaffold(
       body: bodyData(context, womenEditingController),
+      bottomNavigationBar:  BottomNavigationBar(
+        // Define your bottom navigation bar items
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notifications',
+          ),
+        ],
+        currentIndex: 0,
+        onTap: (index) {
+          // Handle bottom navigation bar item tap
+        },
+      ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Obx(() {
@@ -68,124 +92,124 @@ class WomenEditingPostScreen extends StatelessWidget {
                 ), // Replace 'assets/image.jpg' with your image path
               ),
             ),
-            Obx(() {
-              return womenEditingController.framingDone.value == false
-                  ? Container(
-                      height: 100,
-                      width: Get.width,
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  _.rotateImage();
-                                },
-                                child: SizedBox(
-                                  height: 22,
-                                  width: 22,
-                                  child: Image.asset(AppAssets.rotate),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () async {
-                                  _.createPostController.image =
-                                      await _.cropImage(
-                                    imageFile: _.createPostController.image,
-                                  );
-                                  print(
-                                      "====================file===========${_.createPostController.image}");
-                                  _.update();
-                                },
-                                child: Column(
-                                  children: [
-                                    const Icon(
-                                      Icons.crop_square,
-                                      color: Colors.black,
-                                    ),
-                                    Text("Crop",
-                                        style: CommonTextStyle
-                                            .font16weight400BlackNexRegular),
-                                  ],
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  _.toggleMirror();
-                                  print(
-                                      "Value of X mirror =============${_.mirror}");
-                                },
-                                child: SizedBox(
-                                  height: 23,
-                                  width: 23,
-                                  child: Image.asset(AppAssets.mirror),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ).marginOnly(left: 25, right: 25, top: 35),
-                    )
-                  : Container(
-                      height: 100,
-                      width: Get.width,
-                      color: Colors.white,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              _.selectedNav = "outfit";
-                              _.update();
-                              await styleBottomSheet(context, _);
-                            },
-                            child: Image.asset(_.selectedNav == "outfit"
-                                ? AppAssets.womenOutfit
-                                : AppAssets.womenOutfitTrans),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              _.selectedNav = "style";
-                              _.update();
-                            },
-                            child: Image.asset(_.selectedNav == "style"
-                                ? AppAssets.womenStyleColor
-                                : AppAssets.womenStyle),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              _.selectedNav = "fitviz";
-                              _.update();
-                            },
-                            child: Image.asset(_.selectedNav == "fitviz"
-                                ? AppAssets.womenFitvizColor
-                                : AppAssets.womenFitViz),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              _.selectedNav = "accessories";
-                              _.update();
-                            },
-                            child: Image.asset(_.selectedNav == "accessories"
-                                ? AppAssets.pinkAccessories
-                                : AppAssets.accessories),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              _.selectedNav = "filter";
-                              _.update();
-                            },
-                            child: Image.asset(_.selectedNav == "filter"
-                                ? AppAssets.pinkFilter
-                                : AppAssets.filter),
-                          ),
-                        ],
-                      ).marginOnly(left: 25, right: 25, top: 35),
-                    );
-            }),
+            // Obx(() {
+            //   return womenEditingController.framingDone.value == false
+            //       ? Container(
+            //           height: 100,
+            //           width: Get.width,
+            //           color: Colors.white,
+            //           child: Column(
+            //             children: [
+            //               Row(
+            //                 crossAxisAlignment: CrossAxisAlignment.start,
+            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                 children: [
+            //                   InkWell(
+            //                     onTap: () {
+            //                       _.rotateImage();
+            //                     },
+            //                     child: SizedBox(
+            //                       height: 22,
+            //                       width: 22,
+            //                       child: Image.asset(AppAssets.rotate),
+            //                     ),
+            //                   ),
+            //                   InkWell(
+            //                     onTap: () async {
+            //                       _.createPostController.image =
+            //                           await _.cropImage(
+            //                         imageFile: _.createPostController.image,
+            //                       );
+            //                       print(
+            //                           "====================file===========${_.createPostController.image}");
+            //                       _.update();
+            //                     },
+            //                     child: Column(
+            //                       children: [
+            //                         const Icon(
+            //                           Icons.crop_square,
+            //                           color: Colors.black,
+            //                         ),
+            //                         Text("Crop",
+            //                             style: CommonTextStyle
+            //                                 .font16weight400BlackNexRegular),
+            //                       ],
+            //                     ),
+            //                   ),
+            //                   InkWell(
+            //                     onTap: () {
+            //                       _.toggleMirror();
+            //                       print(
+            //                           "Value of X mirror =============${_.mirror}");
+            //                     },
+            //                     child: SizedBox(
+            //                       height: 23,
+            //                       width: 23,
+            //                       child: Image.asset(AppAssets.mirror),
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //             ],
+            //           ).marginOnly(left: 25, right: 25, top: 35),
+            //         )
+            //       : Container(
+            //           height: 100,
+            //           width: Get.width,
+            //           color: Colors.white,
+            //           child: Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: [
+            //               GestureDetector(
+            //                 onTap: () async {
+            //                   _.selectedNav = "outfit";
+            //                   _.update();
+            //                   await styleBottomSheet(context, _);
+            //                 },
+            //                 child: Image.asset(_.selectedNav == "outfit"
+            //                     ? AppAssets.womenOutfit
+            //                     : AppAssets.womenOutfitTrans),
+            //               ),
+            //               GestureDetector(
+            //                 onTap: () {
+            //                   _.selectedNav = "style";
+            //                   _.update();
+            //                 },
+            //                 child: Image.asset(_.selectedNav == "style"
+            //                     ? AppAssets.womenStyleColor
+            //                     : AppAssets.womenStyle),
+            //               ),
+            //               GestureDetector(
+            //                 onTap: () {
+            //                   _.selectedNav = "fitviz";
+            //                   _.update();
+            //                 },
+            //                 child: Image.asset(_.selectedNav == "fitviz"
+            //                     ? AppAssets.womenFitvizColor
+            //                     : AppAssets.womenFitViz),
+            //               ),
+            //               GestureDetector(
+            //                 onTap: () {
+            //                   _.selectedNav = "accessories";
+            //                   _.update();
+            //                 },
+            //                 child: Image.asset(_.selectedNav == "accessories"
+            //                     ? AppAssets.pinkAccessories
+            //                     : AppAssets.accessories),
+            //               ),
+            //               GestureDetector(
+            //                 onTap: () {
+            //                   _.selectedNav = "filter";
+            //                   _.update();
+            //                 },
+            //                 child: Image.asset(_.selectedNav == "filter"
+            //                     ? AppAssets.pinkFilter
+            //                     : AppAssets.filter),
+            //               ),
+            //             ],
+            //           ).marginOnly(left: 25, right: 25, top: 35),
+            //         );
+            // }),
           ],
         ),
       );
@@ -193,8 +217,7 @@ class WomenEditingPostScreen extends StatelessWidget {
   }
 
   //Outfit sheet
-  Future<void> styleBottomSheet(
-      BuildContext context, WomenEditingController _) async {
+  Future<void> styleBottomSheet(BuildContext context, WomenEditingController _) async {
     Get.bottomSheet(
       backgroundColor: Colors.blue,
       isScrollControlled: true,
@@ -358,15 +381,14 @@ class WomenEditingPostScreen extends StatelessWidget {
                 CommonSpaces.spaceVertical10,
               ],
             ).marginSymmetric(horizontal: 10),
-          );
+          ).marginOnly(bottom: 100);
         },
       ),
     );
   }
 
-  //styling assets sheet
-  Future<void> editingSheet(
-      BuildContext context, WomenEditingController _) async {
+  //styling assets sheet open on click
+  Future<void> editingSheet(BuildContext context, WomenEditingController _) async {
     Get.bottomSheet(
       backgroundColor: Colors.white,
       isScrollControlled: true,

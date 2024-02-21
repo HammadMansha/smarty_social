@@ -1,31 +1,16 @@
 import 'package:smarty_social/routes/app_pagess.dart';
 import 'package:smarty_social/services/auth_service/auth_services.dart';
-import 'utils/libraries/app_libraries.dart';
+import '../../utils/libraries/app_libraries.dart';
 
 Future<void> main() async {
-  await GetStorage.init();
-
-  WidgetsFlutterBinding.ensureInitialized();
-  await initServices();
-  FlutterError.onError = (FlutterErrorDetails details) {
-    print("====================$details");
-
-    // Log or handle the error details
-  };
-
+   WidgetsFlutterBinding.ensureInitialized();
+   await GetStorage.init();
+   AuthService authService=Get.put(AuthService());
+   await authService.init();
   runApp(const MyApp());
 }
 
-Future<void> initServices() async {
-  await GetStorage.init();
 
-  // final storage=GetStorage();
-  // storage.remove("isAppOpen");
-  // bio
-  AuthService auth = AuthService();
-  await Get.putAsync(() => auth.init());
-  // await Get.putAsync(() => bio.init());
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -36,10 +21,12 @@ class MyApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+
     debugPrint('MyApp build method called');
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: true,
         colorScheme: const ColorScheme.dark(
             background: Colors.white, onBackground: Colors.white),
         primarySwatch: Colors.blue,
@@ -47,8 +34,12 @@ class MyApp extends StatelessWidget {
       ),
       defaultTransition: Get.defaultTransition,
       initialRoute: AppPages.initial,
-      getPages: AppPages.routes,
+      getPages: AppPages.routes
       //home: MyHomePage(),
     );
   }
+
 }
+
+
+

@@ -9,6 +9,7 @@ class AuthMiddleware extends GetMiddleware {
   AuthService authService = Get.find<AuthService>();
   @override
   RouteSettings? redirect(String? route) {
+    print("I am in auth middlewear==================");
     return authService.loggedInUser
         ? null
         :  const RouteSettings(name: Routes.splashScreen);

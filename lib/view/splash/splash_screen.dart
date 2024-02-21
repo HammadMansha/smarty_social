@@ -5,26 +5,25 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('Splash build method called');
+
     return Scaffold(
       extendBody: true,
       body: bodyData(context),
+
     );
   }
 
   bodyData(BuildContext context) {
-    return Container(
+    debugPrint('Splash build method called 2');
+
+    return SizedBox(
       height: Get.height,
       width: Get.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // SvgPicture.asset(
-          //   'assets/images/svgtest.svg',
-          //   semanticsLabel: 'My SVG Image',
-          //   // height: 100,
-          //   // width: 70,
-          // ),
 
           Align(
             alignment: Alignment.center,
@@ -80,6 +79,7 @@ class SplashScreen extends StatelessWidget {
           //   ],
           // ),
           //Sign up
+
           InkWell(
             onTap: () {
               Get.toNamed(Routes.loginScreen);
@@ -95,7 +95,7 @@ class SplashScreen extends StatelessWidget {
 //Skip
           InkWell(
               onTap: () {
-                Get.off(() => const CreatePostScreen());
+                Get.off(() => const DashboardScreen());
               },
               child: const Text(
                 'Skip',

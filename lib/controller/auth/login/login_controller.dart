@@ -44,7 +44,8 @@ class LoginController extends GetxController with InitializeLocalStorage {
         var data = json.decode(res.body);
         storage.write("userId", data["User_id"]);
         storage.write("token", data["Session_token"]);
-        storage.write("userEmail", email.text);
+        storage.write("userEmail",data["Email"]);
+        storage.write("username",data["Username"]);
 
         if (rememberMe.value == true) {
           await storage.write("isAppOpen", 'true');

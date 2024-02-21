@@ -1,14 +1,12 @@
-
 import 'dart:async';
 import 'dart:convert';
 
 import '../../../../utils/libraries/app_libraries.dart';
 import 'package:http/http.dart' as http;
 
-class ResetPasswordController extends GetxController{
-
-  TextEditingController password=TextEditingController();
-  TextEditingController confirmPassword=TextEditingController();
+class ResetPasswordController extends GetxController {
+  TextEditingController password = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
 
   RxBool isLoading = false.obs;
 
@@ -18,7 +16,6 @@ class ResetPasswordController extends GetxController{
     update();
 
     try {
-
       Uri url = Uri.parse(ApiData.resetPassword);
       if (kDebugMode) {
         print("reset password request------------$url");
@@ -28,20 +25,20 @@ class ResetPasswordController extends GetxController{
         'Accept': 'application/json',
       };
 
-      var body = jsonEncode(
-          {
-            "user_name": Get.arguments["email"].toString(),
-            "Password": password.text,
-          }
-      );
+      var body = jsonEncode({
+        "user_name": Get.arguments["email"].toString(),
+        "Password": password.text,
+      });
 
       print("body-----------------$body");
 
-      var res = await http.post(
-        url,
-        headers: headers,
-        body: body,
-      ).timeout(const Duration(seconds: 20));
+      var res = await http
+          .post(
+            url,
+            headers: headers,
+            body: body,
+          )
+          .timeout(const Duration(seconds: 20));
 
       print("response of verify code==============${res.statusCode}");
       print("response of verify code==============${res.body}");
@@ -49,7 +46,7 @@ class ResetPasswordController extends GetxController{
       if (res.statusCode == 200) {
         CommonToast.showToast(AppStrings.passwordChangeSuccess);
         isLoading.value = false;
-        Get.to(()=> const ResetPasswordSuccess());
+        Get.to(() => const ResetPasswordSuccess());
       }
     } on TimeoutException catch (e) {
       // Handle timeout exception
@@ -69,8 +66,4 @@ class ResetPasswordController extends GetxController{
       update();
     }
   }
-
-
-
-
 }

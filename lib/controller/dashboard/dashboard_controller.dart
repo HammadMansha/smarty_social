@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import 'package:http/http.dart' as http;
 
+import '../../services/auth_service/auth_services.dart';
+
 class DashboardScreenController extends GetxController
     with CommonVariables, InitializeLocalStorage {
   ListQueue<int> navigationQueue = ListQueue();
@@ -49,31 +51,44 @@ class DashboardScreenController extends GetxController
     ];
   }
 
+  @override
+  void onInit() async {
+    //requestPermissions();
+    controller = PersistentTabController(initialIndex: 0);
+
+    // TODO: implement onInit
+    super.onInit();
+  }
+
+  @override
+  void onReady() async {
+    // TODO: implement onReady
+
+    super.onReady();
+  }
 
   Future<void> logoutUser() async {
     try {
-
       Uri url = Uri.parse(ApiData.logout);
       if (kDebugMode) {
-        print("logout password user request------------${storage.read("userEmail")}");
+        print(
+            "logout password user request------------${storage.read("userEmail")}");
       }
       var headers = <String, String>{
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       };
 
-      var body = jsonEncode(
-          {
-            "username_or_email":storage.read("userEmail"),
-          }
-      );
+      var body = jsonEncode({
+        "username_or_email": storage.read("userEmail"),
+      });
 
       var res = await http
           .post(
-        url,
-        headers: headers,
-        body: body,
-      )
+            url,
+            headers: headers,
+            body: body,
+          )
           .timeout(const Duration(seconds: 15));
 
       print("response of forgot call==============${res.statusCode}");
@@ -92,28 +107,16 @@ class DashboardScreenController extends GetxController
       print("Client-side error occurred: $e");
     } catch (e) {
       print("Error occurred during request: $e");
-
     }
   }
 
-
-
-
-  @override
-  void onInit() {
-    //requestPermissions();
-    controller = PersistentTabController(initialIndex: 0);
-
-    // TODO: implement onInit
-    super.onInit();
-  }
-
-  @override
-  void onReady() async {
-    // TODO: implement onReady
-
-    super.onReady();
-  }
+  // Future<void> initServices() async {
+  //   await GetStorage.init();
+  //   print("dashboard==============================");
+  //
+  //   AuthService authService = Get.put(AuthService());
+  //   await authService.init();
+  // }
 
   //-----------------All permissions request---------------
   // void requestPermissions() async {

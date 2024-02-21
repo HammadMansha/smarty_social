@@ -32,35 +32,34 @@ class CommonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          end: Alignment.centerRight,
-          colors: <Color>[Color(0xff7ec6fe), Color(0xffe634ba)],
-        ),
-        borderRadius: BorderRadius.circular(35),
-      ),
-      //color: CommonColor.loginAndSendCodeButtonColor,
-      width: width,
-      height: height,
-      child: MaterialButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(35.0),
-          side: BorderSide(
-            color: borderColor ?? Colors.transparent,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 50, vertical: 10), // Adjust padding to fit your design
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF808BFF),
+              Color(0xffC135F6), // Start color of the gradient
+              Color(0xFFF431A7), // End color of the gradient
+            ],
           ),
+          borderRadius: BorderRadius.circular(
+              30), // Adjust border radius to fit your design
         ),
-
-        onPressed: onPressed,
-        // minWidth: Get.width / 3,
-        // height: 42,
-        // color: Color.fromRGBO(72, 190, 235, 1),
-        color: Colors.transparent,
-        child: Text(
-          text,
-          textScaleFactor: 1.0,
-          style: textStyle,
-          maxLines: 2,
+        child: Center(
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontFamily: 'Nexa',
+              color: Colors.white,
+              fontSize: 16, // Adjust font size to fit your design
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ),
       ),
     );

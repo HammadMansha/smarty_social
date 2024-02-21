@@ -1,7 +1,8 @@
 import '../../../utils/libraries/app_libraries.dart';
 
 // ignore: must_be_immutable
-class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail,InitializeLocalStorage {
+class LoginScreen extends StatelessWidget
+    with CommonVariables, ValidateUserEmail, InitializeLocalStorage {
   LoginScreen({super.key});
 
   @override
@@ -52,7 +53,6 @@ class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail
                         bordercolor: AppColors.colorC1c1,
                         disableBorderColor: AppColors.colorC1c1,
                         textColor: AppColors.blackColor,
-
                         validator: (value) {
                           if (value.toString().isEmpty) {
                             return 'This filed is required';
@@ -71,7 +71,7 @@ class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail
                       ),
 
                       Obx(
-                            () => CommonTextField(
+                        () => CommonTextField(
                           controller: loginController.password,
                           bordercolor: AppColors.colorC1c1,
                           disableBorderColor: AppColors.colorC1c1,
@@ -79,7 +79,8 @@ class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail
                           isTextHidden: secureText.value,
                           togglePassword: true,
                           inputFormatters: [
-                            FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))
+                            FilteringTextInputFormatter.deny(
+                                RegExp(r"\s\b|\b\s"))
                           ],
                           toggleIcon: secureText.value == true
                               ? Icons.visibility_off_outlined
@@ -91,7 +92,8 @@ class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail
                           validator: (value) {
                             if (value.toString().isEmpty) {
                               return 'This filed is required';
-                            } else if (isPasswordEmpty(value.toString()) != null) {
+                            } else if (isPasswordEmpty(value.toString()) !=
+                                null) {
                               return isPasswordEmpty(value.toString());
                             }
                             return null;
@@ -99,17 +101,15 @@ class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail
                         ),
                       ),
 
-
                       CommonSpaces.spaceVertical10,
                       //Remember me
                       Row(
                         children: [
                           Obx(
                             () => GestureDetector(
-                              onTap: () async{
+                              onTap: () async {
                                 if (loginController.rememberMe.value == false) {
                                   loginController.rememberMe.value = true;
-
                                 } else {
                                   loginController.rememberMe.value = false;
                                 }
@@ -154,17 +154,17 @@ class LoginScreen extends StatelessWidget with CommonVariables,ValidateUserEmail
                       CommonSpaces.spaceVertical50,
 
                       InkWell(
-                        onTap: () async{
-                          if (formKey.currentState!.validate()) {
-                            await loginController.loginUser();
-                          }
-                        },
-                        child: SizedBox(
-                          height: 50,
-                          width: Get.width,
-                          child: Image.asset(AppAssets.loginBtn),
-                        ),
-                      ),
+                          onTap: () async {
+                            if (formKey.currentState!.validate()) {
+                              await loginController.loginUser();
+                            }
+                          },
+                          child: CommonButton(
+                            text: 'Login',
+                            textStyle: CommonTextStyle.signupColor,
+                            onPressed: () {},
+                            fillColor: Colors.red,
+                          )),
 
                       Align(
                         alignment: Alignment.bottomRight,

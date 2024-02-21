@@ -11,7 +11,7 @@ class WomenEditingPostScreen extends StatelessWidget {
         Get.put(WomenEditingController());
     return CommonScaffold(
       body: bodyData(context, womenEditingController),
-      bottomNavigationBar:  BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         // Define your bottom navigation bar items
         items: const [
           BottomNavigationBarItem(
@@ -92,124 +92,125 @@ class WomenEditingPostScreen extends StatelessWidget {
                 ), // Replace 'assets/image.jpg' with your image path
               ),
             ),
-            // Obx(() {
-            //   return womenEditingController.framingDone.value == false
-            //       ? Container(
-            //           height: 100,
-            //           width: Get.width,
-            //           color: Colors.white,
-            //           child: Column(
-            //             children: [
-            //               Row(
-            //                 crossAxisAlignment: CrossAxisAlignment.start,
-            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                 children: [
-            //                   InkWell(
-            //                     onTap: () {
-            //                       _.rotateImage();
-            //                     },
-            //                     child: SizedBox(
-            //                       height: 22,
-            //                       width: 22,
-            //                       child: Image.asset(AppAssets.rotate),
-            //                     ),
-            //                   ),
-            //                   InkWell(
-            //                     onTap: () async {
-            //                       _.createPostController.image =
-            //                           await _.cropImage(
-            //                         imageFile: _.createPostController.image,
-            //                       );
-            //                       print(
-            //                           "====================file===========${_.createPostController.image}");
-            //                       _.update();
-            //                     },
-            //                     child: Column(
-            //                       children: [
-            //                         const Icon(
-            //                           Icons.crop_square,
-            //                           color: Colors.black,
-            //                         ),
-            //                         Text("Crop",
-            //                             style: CommonTextStyle
-            //                                 .font16weight400BlackNexRegular),
-            //                       ],
-            //                     ),
-            //                   ),
-            //                   InkWell(
-            //                     onTap: () {
-            //                       _.toggleMirror();
-            //                       print(
-            //                           "Value of X mirror =============${_.mirror}");
-            //                     },
-            //                     child: SizedBox(
-            //                       height: 23,
-            //                       width: 23,
-            //                       child: Image.asset(AppAssets.mirror),
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //             ],
-            //           ).marginOnly(left: 25, right: 25, top: 35),
-            //         )
-            //       : Container(
-            //           height: 100,
-            //           width: Get.width,
-            //           color: Colors.white,
-            //           child: Row(
-            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //             children: [
-            //               GestureDetector(
-            //                 onTap: () async {
-            //                   _.selectedNav = "outfit";
-            //                   _.update();
-            //                   await styleBottomSheet(context, _);
-            //                 },
-            //                 child: Image.asset(_.selectedNav == "outfit"
-            //                     ? AppAssets.womenOutfit
-            //                     : AppAssets.womenOutfitTrans),
-            //               ),
-            //               GestureDetector(
-            //                 onTap: () {
-            //                   _.selectedNav = "style";
-            //                   _.update();
-            //                 },
-            //                 child: Image.asset(_.selectedNav == "style"
-            //                     ? AppAssets.womenStyleColor
-            //                     : AppAssets.womenStyle),
-            //               ),
-            //               GestureDetector(
-            //                 onTap: () {
-            //                   _.selectedNav = "fitviz";
-            //                   _.update();
-            //                 },
-            //                 child: Image.asset(_.selectedNav == "fitviz"
-            //                     ? AppAssets.womenFitvizColor
-            //                     : AppAssets.womenFitViz),
-            //               ),
-            //               GestureDetector(
-            //                 onTap: () {
-            //                   _.selectedNav = "accessories";
-            //                   _.update();
-            //                 },
-            //                 child: Image.asset(_.selectedNav == "accessories"
-            //                     ? AppAssets.pinkAccessories
-            //                     : AppAssets.accessories),
-            //               ),
-            //               GestureDetector(
-            //                 onTap: () {
-            //                   _.selectedNav = "filter";
-            //                   _.update();
-            //                 },
-            //                 child: Image.asset(_.selectedNav == "filter"
-            //                     ? AppAssets.pinkFilter
-            //                     : AppAssets.filter),
-            //               ),
-            //             ],
-            //           ).marginOnly(left: 25, right: 25, top: 35),
-            //         );
-            // }),
+            Obx(() {
+              return womenEditingController.framingDone.value == false
+                  ? Container(
+                      height: 100,
+                      width: Get.width,
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  _.rotateImage();
+                                },
+                                child: SizedBox(
+                                  height: 22,
+                                  width: 22,
+                                  child: Image.asset(AppAssets.rotate),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () async {
+                                  _.createPostController.image =
+                                      await _.cropImage(
+                                    imageFile: _.createPostController.image,
+                                  );
+                                  print(
+                                      "====================file===========${_.createPostController.image}");
+                                  _.update();
+                                },
+                                child: Column(
+                                  children: [
+                                    const Icon(
+                                      Icons.crop_square,
+                                      color: Colors.black,
+                                    ),
+                                    Text("Crop",
+                                        style: CommonTextStyle
+                                            .font16weight400BlackNexRegular),
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  _.toggleMirror();
+                                  print(
+                                      "Value of X mirror =============${_.mirror}");
+                                },
+                                child: SizedBox(
+                                  height: 23,
+                                  width: 23,
+                                  child: Image.asset(AppAssets.mirror),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ).marginOnly(left: 25, right: 25, top: 35),
+                    )
+                  : Container(
+                      height: 100,
+                      width: Get.width,
+                      color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              _.selectedNav = "outfit";
+                              _.update();
+                              await styleBottomSheet(context, _);
+                            },
+                            child: Image.asset(_.selectedNav == "outfit"
+                                ? AppAssets.womenOutfit
+                                : AppAssets.womenOutfitTrans),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              _.selectedNav = "style";
+                              _.update();
+                            },
+                            child: Image.asset(_.selectedNav == "style"
+                                ? AppAssets.womenStyleColor
+                                : AppAssets.womenStyle),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              _.selectedNav = "fitviz";
+                              _.update();
+                            },
+                            child: Image.asset(_.selectedNav == "fitviz"
+                                ? AppAssets.womenFitvizColor
+                                : AppAssets.womenFitViz),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              _.selectedNav = "accessories";
+                              _.update();
+                            },
+                            child: Image.asset(_.selectedNav == "accessories"
+                                ? AppAssets.pinkAccessories
+                                : AppAssets.accessories),
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              _.selectedNav = "filter";
+                              _.update();
+                              await filtersSheet(context, _);
+                            },
+                            child: Image.asset(_.selectedNav == "filter"
+                                ? AppAssets.pinkFilter
+                                : AppAssets.filter),
+                          ),
+                        ],
+                      ).marginOnly(left: 25, right: 25, top: 35),
+                    );
+            }),
           ],
         ),
       );
@@ -217,14 +218,15 @@ class WomenEditingPostScreen extends StatelessWidget {
   }
 
   //Outfit sheet
-  Future<void> styleBottomSheet(BuildContext context, WomenEditingController _) async {
+  Future<void> styleBottomSheet(
+      BuildContext context, WomenEditingController _) async {
     Get.bottomSheet(
       backgroundColor: Colors.blue,
       isScrollControlled: true,
       StatefulBuilder(
         builder: (context, setState) {
           return Container(
-            height: Get.height / 1.9,
+            height: Get.height / 1.8,
             width: Get.width,
             decoration: const BoxDecoration(
               color: Colors.white,
@@ -388,7 +390,8 @@ class WomenEditingPostScreen extends StatelessWidget {
   }
 
   //styling assets sheet open on click
-  Future<void> editingSheet(BuildContext context, WomenEditingController _) async {
+  Future<void> editingSheet(
+      BuildContext context, WomenEditingController _) async {
     Get.bottomSheet(
       backgroundColor: Colors.white,
       isScrollControlled: true,
@@ -600,5 +603,48 @@ class WomenEditingPostScreen extends StatelessWidget {
             );
           }),
     );
+  }
+
+  Future<void> filtersSheet(
+      BuildContext context, WomenEditingController _) async {
+    Get.bottomSheet(
+        backgroundColor: Colors.blue,
+        isScrollControlled: true,
+        persistent: true, StatefulBuilder(builder: (context, setState) {
+      return Container(
+        height: Get.height / 4,
+        width: Get.width,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(25),
+            topLeft: Radius.circular(25),
+          ),
+        ),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                const Text(
+                  'Hello',
+                  style: TextStyle(color: Colors.black),
+                ).marginOnly(right: 10),
+                Container(
+                  margin: EdgeInsets.only(right: index != 9 ? 16.0 : 0.0),
+                  height: 76,
+                  width: 62,
+                  decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  // Adjust the height as needed
+                ).marginOnly(left: 10),
+              ],
+            );
+          },
+        ).marginOnly(top: 30),
+      );
+    }));
   }
 }

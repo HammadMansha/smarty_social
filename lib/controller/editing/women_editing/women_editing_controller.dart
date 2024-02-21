@@ -8,14 +8,26 @@ class WomenEditingController extends GetxController {
   CreatePostController createPostController = Get.find<CreatePostController>();
 
   File? croppedImagePath;
-  RxBool framingDone=false.obs;
+  RxBool framingDone = false.obs;
 
-  String selectedNav="";
+  String selectedNav = "";
 
-  List<String> womenAssetType =["Suits","Weeding Outfits","Skirts","Sarrees"];
-  String selectedAsset="Suits";
+  List<String> womenAssetType = [
+    "Suits",
+    "Weeding Outfits",
+    "Skirts",
+    "Sarrees"
+  ];
+  String selectedAsset = "Suits";
 
+  /////////// Bottom Navigation Bar
+  int selectedIndex = 0;
+  void onItemTapped(int index) {
+    selectedIndex = index;
+    update();
+  }
 
+  final formKey = GlobalKey<FormState>();
 
   @override
   void onInit() {

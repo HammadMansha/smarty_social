@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import 'dart:math' as math;
-import 'package:image_cropper/image_cropper.dart';
 
 class MenEditingPostScreen extends StatelessWidget {
   const MenEditingPostScreen({super.key});

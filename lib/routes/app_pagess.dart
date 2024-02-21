@@ -5,7 +5,7 @@ import '../utils/libraries/app_libraries.dart';
 import '../view/edit_profile/edit_profile_screen.dart';
 
 class AppPages {
-  static var initial = Routes.profileScreen;
+  static var initial = Routes.splashScreen;
 
   static final routes = [
     //Splash screen

@@ -107,4 +107,11 @@ class CommonTextStyle {
       fontSize: 18,
       fontWeight: FontWeight.bold,
       fontFamily: 'Nexa');
+
+  static TextStyle signupColor = const TextStyle(
+      color: Colors.white,
+      letterSpacing: 0.4,
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Nexa');
 }

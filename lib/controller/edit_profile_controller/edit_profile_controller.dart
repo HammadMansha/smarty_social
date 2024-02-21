@@ -1,4 +1,4 @@
-import '../utils/libraries/app_libraries.dart';
+import '../../utils/libraries/app_libraries.dart';
 
 class EditProfileController extends GetxController {
   TextEditingController name = TextEditingController();

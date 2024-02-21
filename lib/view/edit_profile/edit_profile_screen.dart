@@ -1,6 +1,6 @@
 import 'package:smarty_social/widgets/common_button/done_button.dart';
 import 'dart:io';
-import '../../controller/edit_profile_controller.dart';
+import '../../controller/edit_profile_controller/edit_profile_controller.dart';
 import '../../utils/libraries/app_libraries.dart';
 
 class EditProfileScreen extends StatelessWidget {

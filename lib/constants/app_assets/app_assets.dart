@@ -24,6 +24,8 @@ class AppAssets {
   static const String editProfile1 = "$imageDir/editProfile.png";
   static const String threeLines = "$imageDir/threeLines.png";
 
+  static const String signUpdialog = "$imageDir/img_6.png";
+
   // drawer assets
   static const String kingIcon2 = "$imageDir/kingicon2.png";
   static const String howtouse = "$imageDir/howtouse.png";

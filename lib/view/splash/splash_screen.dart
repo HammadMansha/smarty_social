@@ -53,15 +53,14 @@ class SplashScreen extends StatelessWidget {
 
           CommonSpaces.spaceVertical50,
 
-          InkWell(
-            onTap: () {
+          CommonButton(
+            width: Get.width / 2,
+            fillColor: Colors.red,
+            text: 'Signup',
+            textStyle: CommonTextStyle.signupColor,
+            onPressed: () {
               Get.toNamed(Routes.signUpScreen);
             },
-            child: SizedBox(
-              height: 50,
-              width: Get.width / 2.25,
-              child: Image.asset(AppAssets.signupSplash),
-            ),
           ),
 
           CommonSpaces.spaceVertical10,

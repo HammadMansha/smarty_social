@@ -73,4 +73,22 @@ class SignUpController extends GetxController {
       update();
     }
   }
+
+  void signUpDialog() {
+    Get.dialog(
+      AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(10), // Adjust the border radius as needed
+        ),
+        contentPadding: EdgeInsets.zero,
+        content: Container(
+          height: 150,
+          width: Get.width / 1.6,
+          child:
+              Image.asset(AppAssets.signUpdialog).marginOnly(left: 5, right: 5),
+        ),
+      ),
+    );
+  }
 }

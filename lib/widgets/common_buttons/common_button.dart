@@ -21,7 +21,7 @@ class CommonButton extends StatelessWidget {
     required this.fillColor,
     this.isIconShow = false,
     this.width = 125,
-    this.height = 45,
+    this.height = 50,
     this.borderColor = Colors.transparent,
     this.buttonIcon = const Icon(
       Icons.camera_alt_outlined,
@@ -35,8 +35,11 @@ class CommonButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
+        height: height,
+        width: width,
+
         padding: const EdgeInsets.symmetric(
-            horizontal: 50, vertical: 10), // Adjust padding to fit your design
+            horizontal: 50, vertical: 12), // Adjust padding to fit your design
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             begin: Alignment.topLeft,

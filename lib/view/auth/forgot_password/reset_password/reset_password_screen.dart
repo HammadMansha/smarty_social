@@ -1,7 +1,8 @@
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 
-class ResetPassword extends StatelessWidget with CommonVariables,ValidateUserEmail {
-   ResetPassword({super.key});
+class ResetPassword extends StatelessWidget
+    with CommonVariables, ValidateUserEmail {
+  ResetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +13,7 @@ class ResetPassword extends StatelessWidget with CommonVariables,ValidateUserEma
   }
 
   bodyData(BuildContext context) {
-    ResetPasswordController controller =
-    Get.put(ResetPasswordController());
+    ResetPasswordController controller = Get.put(ResetPasswordController());
     return SizedBox(
       height: Get.height,
       width: Get.width,
@@ -23,7 +23,7 @@ class ResetPassword extends StatelessWidget with CommonVariables,ValidateUserEma
           child: Column(
             children: [
               SizedBox(
-                width: Get.width/1.6,
+                width: Get.width / 1.6,
                 child: Image.asset(AppAssets.resetPassword),
               ),
               CommonSpaces.spaceVertical40,
@@ -35,7 +35,7 @@ class ResetPassword extends StatelessWidget with CommonVariables,ValidateUserEma
                 ),
               ),
               Obx(
-                    () => CommonTextField(
+                () => CommonTextField(
                   controller: controller.password,
                   bordercolor: AppColors.colorC1c1,
                   disableBorderColor: AppColors.colorC1c1,
@@ -71,7 +71,7 @@ class ResetPassword extends StatelessWidget with CommonVariables,ValidateUserEma
                 ),
               ),
               Obx(
-                    () => CommonTextField(
+                () => CommonTextField(
                   controller: controller.confirmPassword,
                   bordercolor: AppColors.colorC1c1,
                   disableBorderColor: AppColors.colorC1c1,
@@ -99,26 +99,23 @@ class ResetPassword extends StatelessWidget with CommonVariables,ValidateUserEma
                 ),
               ),
 
-
-
               CommonSpaces.spaceVertical100,
               //Verify and proceed
-              InkWell(
-                onTap: () async{
+              CommonButton(
+                width: Get.width / 1,
+                text: 'Continue',
+                fillColor: Colors.red,
+                onPressed: () async {
                   if (formKey.currentState!.validate()) {
-                    if(controller.password.text==controller.confirmPassword.text) {
+                    if (controller.password.text ==
+                        controller.confirmPassword.text) {
                       controller.resetPassword();
-                    }
-                    else{
-                      CommonToast.showToast( AppStrings.passwordNotMatch);
+                    } else {
+                      CommonToast.showToast(AppStrings.passwordNotMatch);
                     }
                   }
                 },
-                child: SizedBox(
-                  height: 50,
-                  width: Get.width,
-                  child: Image.asset(AppAssets.continueBtn),
-                ),
+                textStyle: CommonTextStyle.signupColor,
               ),
             ],
           ).marginSymmetric(horizontal: 40),
@@ -126,5 +123,4 @@ class ResetPassword extends StatelessWidget with CommonVariables,ValidateUserEma
       ),
     );
   }
-
 }

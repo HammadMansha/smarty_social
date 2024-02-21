@@ -160,6 +160,7 @@ class LoginScreen extends StatelessWidget
                             }
                           },
                           child: CommonButton(
+                            width: Get.width / 1,
                             text: 'Login',
                             textStyle: CommonTextStyle.signupColor,
                             onPressed: () {},

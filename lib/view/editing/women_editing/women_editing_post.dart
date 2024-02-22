@@ -7,35 +7,9 @@ class WomenEditingPostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WomenEditingController womenEditingController =
-        Get.put(WomenEditingController());
+    WomenEditingController womenEditingController = Get.put(WomenEditingController());
     return CommonScaffold(
       body: bodyData(context, womenEditingController),
-      bottomNavigationBar: BottomNavigationBar(
-        // Define your bottom navigation bar items
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
-          ),
-        ],
-        currentIndex: 0,
-        onTap: (index) {
-          // Handle bottom navigation bar item tap
-        },
-      ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Obx(() {
@@ -60,6 +34,7 @@ class WomenEditingPostScreen extends StatelessWidget {
           InkWell(
             onTap: () {
               womenEditingController.framingDone.value = true;
+              womenEditingController.uploadImageToDb();
             },
             child: SizedBox(
               height: 70,
@@ -78,7 +53,7 @@ class WomenEditingPostScreen extends StatelessWidget {
       return SizedBox(
         height: Get.height,
         width: Get.width,
-        child: Column(
+        child: _.isLoading.value==true?const Center(child: AppLoader(),):  Column(
           children: [
             Expanded(
               child: Transform(
@@ -383,7 +358,7 @@ class WomenEditingPostScreen extends StatelessWidget {
                 CommonSpaces.spaceVertical10,
               ],
             ).marginSymmetric(horizontal: 10),
-          ).marginOnly(bottom: 100);
+          );
         },
       ),
     );

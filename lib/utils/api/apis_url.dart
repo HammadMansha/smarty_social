@@ -17,4 +17,13 @@ class ApiData {
   //reset password
   static const String logout = "$baseUrl/logout";
 
+//upload images
+  static const String uploadImageForFeed = "$baseUrl/upload";
+
+  //get posts
+  static const String getFeedPost = "$baseUrl/posts";
+
+
+
+
 }

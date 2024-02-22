@@ -1,8 +1,8 @@
 import 'dart:io';
 import '../../utils/libraries/app_libraries.dart';
 
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+class DashboardScreen extends StatelessWidget  with InitializeLocalStorage{
+   DashboardScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +11,15 @@ class DashboardScreen extends StatelessWidget {
       builder: (_) {
         return WillPopScope(
           onWillPop: () async {
-            if (_.navigationQueue.isEmpty) {
+            if (_.navigationQueue.isEmpty && storage.hasData("token")) {
               return showWillPopMessage(context,_);
             }
+            else{
+              SystemNavigator.pop();
+            }
+
             _.navigationQueue.removeLast();
-            int position =
-                _.navigationQueue.isEmpty ? 0 : _.navigationQueue.last;
+            int position = _.navigationQueue.isEmpty ? 0 : _.navigationQueue.last;
             _.currentIndex = position;
             _.update();
             return false;

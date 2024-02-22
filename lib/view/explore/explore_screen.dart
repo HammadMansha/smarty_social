@@ -88,12 +88,10 @@ class ExploreScreen extends StatelessWidget {
                               SizedBox(
                                 child: Row(
                                   children: [
-                                    SizedBox(
-                                        child: Image.asset(
-                                      AppAssets.like,
-                                      height: 20,
-                                      width: 20,
-                                    )),
+                                    const SizedBox(
+                                        child: Icon(Icons.favorite,size: 24,color: AppColors.blackColor,)
+
+                                    ),
                                     const SizedBox(
                                       width: 5,
                                     ),

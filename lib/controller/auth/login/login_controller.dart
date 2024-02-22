@@ -54,7 +54,7 @@ class LoginController extends GetxController with InitializeLocalStorage {
         CommonToast.showToast(AppStrings.loginSuccess);
         isLoading.value = false;
 
-        Get.offAll(() => const DashboardScreen());
+        Get.offAll(() =>  DashboardScreen());
 
         update();
       } else if (res.statusCode == 401) {

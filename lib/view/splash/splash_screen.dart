@@ -95,7 +95,7 @@ class SplashScreen extends StatelessWidget {
 //Skip
           InkWell(
               onTap: () {
-                Get.off(() => const DashboardScreen());
+                Get.off(() =>  DashboardScreen());
               },
               child: const Text(
                 'Skip',
@@ -105,7 +105,7 @@ class SplashScreen extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   color: Color(0xff969696),
                 ),
-              )),
+              ),),
 
           const SizedBox(
             height: 50,

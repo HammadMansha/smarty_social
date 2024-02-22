@@ -53,7 +53,7 @@ class AppPages {
     //Reset Password screen
     GetPage(
       name: Routes.dashboardScreen,
-      page: () => const DashboardScreen(),
+      page: () =>  DashboardScreen(),
       middlewares: [
         AuthMiddleware(),
       ],

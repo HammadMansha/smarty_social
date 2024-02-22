@@ -122,4 +122,5 @@ class AppAssets {
   static const String blueAccessories = "$imageDir/access_blue.png";
   static const String blueFilter = "$imageDir/filter_blue.png";
   static const String menTransOutfit = "$imageDir/trans_men_out.png";
+  static const String unlikeButton = "$imageDir/unlike.png";
 }

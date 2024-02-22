@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import 'package:http/http.dart' as http;
-
 import '../../models/posts_model/posts_model.dart';
 
 class ExploreController extends GetxController {

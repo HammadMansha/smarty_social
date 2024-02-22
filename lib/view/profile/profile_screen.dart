@@ -332,7 +332,7 @@ class ProfileScreen extends StatelessWidget {
 
             //const SizedBox(height: 30,),
           ],
-        ),
+        ).marginOnly(top: 20),
       ),
     );
   }

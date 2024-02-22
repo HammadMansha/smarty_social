@@ -200,7 +200,7 @@ class ExploreScreen extends StatelessWidget {
                                         errorWidget: (c, e, r) => Image.asset(
                                             AppAssets.placeHolderNoImage,
                                             fit: BoxFit.scaleDown),
-                                        fit: BoxFit.fill,
+                                        fit: BoxFit.contain,
                                       ),
 
 

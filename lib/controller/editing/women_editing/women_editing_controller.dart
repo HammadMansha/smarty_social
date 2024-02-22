@@ -36,6 +36,7 @@ class WomenEditingController extends GetxController {
   }
 
   Future<File?> cropImage({required File? imageFile}) async {
+    print('heeeeeeeelooo');
     CroppedFile? croppedImage = await ImageCropper().cropImage(
       aspectRatioPresets: [
         CropAspectRatioPreset.original,
@@ -46,11 +47,15 @@ class WomenEditingController extends GetxController {
       ],
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Crop',
-          toolbarColor: Colors.blue,
-          toolbarWidgetColor: Colors.white,
+          showCropGrid: false,
+          cropFrameColor: Colors.white,
+          backgroundColor: Colors.white70,
+          toolbarTitle: 'Framing',
+          toolbarColor: Colors.white,
+          toolbarWidgetColor: Colors.black,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,
+          activeControlsWidgetColor: Colors.black,
         ),
       ],
       sourcePath: createPostController.image!.path,

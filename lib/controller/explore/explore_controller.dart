@@ -8,13 +8,18 @@ import '../../models/posts_model/posts_model.dart';
 class ExploreController extends GetxController {
   RxBool isLoading = false.obs;
   late Future<List<FeedPostData>?> feedsFuture;
+  RxList<bool> likedList = List.generate(500, (index) => false).obs;
+
+  void likeValue(int index) async {
+    likedList[index] = !likedList[index];
+    update();
+  }
 
   @override
   void onInit() async {
     feedsFuture = getFeeds();
     super.onInit();
   }
-
 
   Future<List<FeedPostData>?> getFeeds() async {
     try {

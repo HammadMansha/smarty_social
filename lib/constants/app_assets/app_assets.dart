@@ -126,6 +126,5 @@ class AppAssets {
 
   //Place holder images
   static const String placeHolderNoImage = "$imageDir/no_image.png";
-  static const String placeHolderNoDp = "$imageDir/no_dp.png";
-
+  static const String noImage = "$imageDir/no_dp1.png";
 }

@@ -22,9 +22,14 @@ class ResetPassword extends StatelessWidget
           key: formKey,
           child: Column(
             children: [
-              SizedBox(
-                width: Get.width / 1.6,
-                child: Image.asset(AppAssets.resetPassword),
+              InkWell(
+                onTap: () {
+                  controller.resetDialog();
+                },
+                child: SizedBox(
+                  width: Get.width / 1.6,
+                  child: Image.asset(AppAssets.resetPassword),
+                ),
               ),
               CommonSpaces.spaceVertical40,
               Align(

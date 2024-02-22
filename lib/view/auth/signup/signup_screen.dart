@@ -33,7 +33,7 @@ class SignUpScreen extends StatelessWidget
                               Center(
                                 child: InkWell(
                                   onTap: () {
-                                    // controller.signUpDialog();
+                                    controller.signUpDialog();
                                   },
                                   child: Container(
                                     height: 70,

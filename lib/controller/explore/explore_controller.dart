@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:intl/intl.dart'; // Import the intl package for date formatting
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,6 +10,16 @@ class ExploreController extends GetxController {
   RxBool isLoading = false.obs;
   late Future<List<FeedPostData>?> feedsFuture;
   RxList<bool> likedList = List.generate(500, (index) => false).obs;
+
+  String formattedDate(String timestamp) {
+    // Parse the timestamp string into a DateTime object
+    DateTime dateTime = DateTime.parse(timestamp);
+
+    // Format the DateTime object to display only the date
+    String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
+
+    return formattedDate;
+  }
 
   void likeValue(int index) async {
     likedList[index] = !likedList[index];

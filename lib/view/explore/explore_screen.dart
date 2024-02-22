@@ -20,7 +20,9 @@ class ExploreScreen extends StatelessWidget {
         height: Get.height,
         width: Get.width,
         child: RefreshIndicator(
-          onRefresh: () async {},
+          onRefresh: () async {
+            exploreController.feedsFuture = exploreController.getFeeds();
+          },
           child: Column(
             children: [
               const SizedBox(
@@ -37,7 +39,7 @@ class ExploreScreen extends StatelessWidget {
                         child: Image.asset(
                           AppAssets.threeLines,
                           width: 18,
-                          height: 16,
+                          height: 14,
                         ).marginOnly(left: 15),
                       );
                     },
@@ -47,7 +49,7 @@ class ExploreScreen extends StatelessWidget {
                     style: TextStyle(
                         fontFamily: 'BirdsOfParadise',
                         color: Colors.black,
-                        fontSize: 30,
+                        fontSize: 32,
                         fontWeight: FontWeight.w400),
                   ).marginOnly(left: 12, top: 5),
                   const Spacer(),
@@ -159,7 +161,7 @@ class ExploreScreen extends StatelessWidget {
                                       //user dp
                                       const CircleAvatar(
                                         backgroundImage:
-                                            AssetImage(AppAssets.noImage),
+                                            AssetImage(AppAssets.userDp),
                                         radius: 30,
                                       ),
 
@@ -170,12 +172,14 @@ class ExploreScreen extends StatelessWidget {
                                             feed.username!,
                                             style: CommonTextStyle
                                                 .font14weightNormal342f,
-                                          ).marginOnly(left: 15),
+                                          ).marginOnly(right: 30),
                                           Text(
-                                            feed.timestamp,
+                                            exploreController.formattedDate(
+                                              feed.timestamp,
+                                            ),
                                             style: CommonTextStyle
                                                 .font12weightNormal342f,
-                                          ),
+                                          ).marginOnly(left: 5),
                                         ],
                                       ),
                                       const Spacer(),
@@ -200,6 +204,7 @@ class ExploreScreen extends StatelessWidget {
                                         //     duration: const Duration(milliseconds: 500), // Duration for the animation
                                         //   ),
                                         // );
+
                                         exploreController.likeValue(index);
                                         print('double tap done');
                                       },
@@ -213,7 +218,7 @@ class ExploreScreen extends StatelessWidget {
                                           errorWidget: (c, e, r) => Image.asset(
                                               AppAssets.placeHolderNoImage,
                                               fit: BoxFit.scaleDown),
-                                          fit: BoxFit.fill,
+                                          fit: BoxFit.contain,
                                         ),
                                       ),
                                     ),

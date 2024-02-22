@@ -18,6 +18,7 @@ class DashboardScreenController extends GetxController
     return [
       const ExploreScreen(),
       const CreatePostScreen(),
+      const ProfileScreen(),
       //const ProfileScreen(),
     ];
   }
@@ -40,14 +41,14 @@ class DashboardScreenController extends GetxController
         contentPadding: 7.0,
       ),
 
-      // PersistentBottomNavBarItem(
-      //   icon: Image.asset(AppAssets.profileNav),
-      //   title: ("Profile"),
-      //   activeColorPrimary: CupertinoColors.activeBlue,
-      //   inactiveColorPrimary: CupertinoColors.systemGrey,
-      //   contentPadding: 7.0,
-      //
-      // ),
+      PersistentBottomNavBarItem(
+        icon: Image.asset(AppAssets.profileNav),
+        title: ("Profile"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+        contentPadding: 7.0,
+
+      ),
     ];
   }
 

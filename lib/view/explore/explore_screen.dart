@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:smarty_social/controller/explore/explore_controller.dart';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import 'package:smarty_social/widgets/common_textstyle/common_text_style.dart';
+
+import '../../models/posts_model/posts_model.dart';
 
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({super.key});
@@ -15,6 +18,7 @@ class ExploreScreen extends StatelessWidget {
   }
 
   bodyData(BuildContext context) {
+    ExploreController exploreController=Get.put( ExploreController());
     return SafeArea(
       child: SizedBox(
         height: Get.height,
@@ -122,153 +126,335 @@ class ExploreScreen extends StatelessWidget {
               height: 15,
             ),
 
+
+
             Expanded(
-              child: ListView.separated(
-                itemCount: 3,
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(
-                  height: 10,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: Get.height / 2,
-                    width: Get.width,
-                    color: AppColors.colorF7F7,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            //user dp
-                            const CircleAvatar(
-                              backgroundImage: AssetImage(AppAssets.userDp),
-                              radius: 30,
-                            ),
-
-                            //user name and time
-                            Column(
-                              children: [
-                                Text(
-                                  "Ana_Solam",
-                                  style: CommonTextStyle.font14weightNormal342f,
-                                ).marginOnly(left: 15),
-                                Text(
-                                  "Yesterday",
-                                  style: CommonTextStyle.font12weightNormal342f,
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-
-                            //Follow button
-                            SizedBox(
-                              height: 30,
-                              child: Image.asset(AppAssets.followBtn),
-                            ),
-                          ],
-                        ).marginSymmetric(horizontal: 20, vertical: 20),
-
-                        //post image
-                        Expanded(
-                          child: SizedBox(
-                            width: Get.width,
-                            child: Image.asset(
-                              AppAssets.exploreImg,
-                              fit: BoxFit.fill,
-                            ),
+              child: FutureBuilder<List<FeedPostData>?>(
+                future: exploreController.feedsFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: AppLoader(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Error if ui: ${snapshot.error}'),
+                    );
+                  } else {
+                    final List<FeedPostData>? feeds = snapshot.data;
+                    if (feeds != null && feeds.isNotEmpty) {
+                      return ListView.separated(
+                          itemCount: feeds.length,
+                          reverse: false,
+                          separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ),
+                          itemBuilder: (BuildContext context, int index) {
+                            final feed = feeds[index];
+                            return Container(
+                              height: Get.height / 2,
+                              width: Get.width,
+                              color: AppColors.colorF7F7,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      //user dp
+                                      const CircleAvatar(
+                                        backgroundImage: AssetImage(AppAssets.userDp),
+                                        radius: 30,
+                                      ),
 
-                        //Like button
-                        SizedBox(
-                          height: 50,
-                          width: Get.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                child: Row(
-                                  children: [
-                                    const SizedBox(
-                                        child: Icon(Icons.favorite,size: 24,color: AppColors.blackColor,)
+                                      //user name and time
+                                      Column(
+                                        children: [
+                                          Text(feed.username!,
+                                            style: CommonTextStyle.font14weightNormal342f,
+                                          ).marginOnly(left: 15),
+                                          Text(
+                                            feed.timestamp,
+                                            style: CommonTextStyle.font12weightNormal342f,
+                                          ),
+                                        ],
+                                      ),
+                                      const Spacer(),
+
+                                      //Follow button
+                                      SizedBox(
+                                        height: 30,
+                                        child: Image.asset(AppAssets.followBtn),
+                                      ),
+                                    ],
+                                  ).marginSymmetric(horizontal: 20, vertical: 20),
+
+                                  //post image
+                                  Expanded(
+                                    child: SizedBox(
+                                      width: Get.width,
+                                      child: CachedNetworkImage(
+                                        imageUrl: feed.picUrl,
+                                        placeholder: (c, e) => Image.asset(
+                                            AppAssets.placeHolderNoImage,
+                                            fit: BoxFit.scaleDown),
+                                        errorWidget: (c, e, r) => Image.asset(
+                                            AppAssets.placeHolderNoImage,
+                                            fit: BoxFit.scaleDown),
+                                        fit: BoxFit.fill,
+                                      ),
+
 
                                     ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "236",
-                                      style: CommonTextStyle
-                                          .font12weightNormal342f,
-                                    ),
-                                  ],
-                                ),
+                                  ),
+
+                                  //Like button
+                                  SizedBox(
+                                    height: 50,
+                                    width: Get.width,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(
+                                                  child: Icon(Icons.favorite,size: 24,color: AppColors.blackColor,)
+
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                "236",
+                                                style: CommonTextStyle
+                                                    .font12weightNormal342f,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                AppAssets.comment,
+                                                height: 20,
+                                                width: 20,
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                "133",
+                                                style: CommonTextStyle
+                                                    .font12weightNormal342f,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                AppAssets.view,
+                                                height: 20,
+                                                width: 20,
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                "1145",
+                                                style: CommonTextStyle
+                                                    .font12weightNormal342f,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                AppAssets.share,
+                                                height: 20,
+                                                width: 20,
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              const Text("23"),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ).marginSymmetric(horizontal: 20),
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                child: Row(
-                                  children: [
-                                    Image.asset(
-                                      AppAssets.comment,
-                                      height: 20,
-                                      width: 20,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "133",
-                                      style: CommonTextStyle
-                                          .font12weightNormal342f,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                child: Row(
-                                  children: [
-                                    Image.asset(
-                                      AppAssets.view,
-                                      height: 20,
-                                      width: 20,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "1145",
-                                      style: CommonTextStyle
-                                          .font12weightNormal342f,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                child: Row(
-                                  children: [
-                                    Image.asset(
-                                      AppAssets.share,
-                                      height: 20,
-                                      width: 20,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    const Text("23"),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ).marginSymmetric(horizontal: 20),
-                        ),
-                      ],
-                    ),
-                  );
+                            );
+                          },
+                        );
+                    } else {
+                      return  Center(
+                        child: Text('No data available',style: CommonTextStyle.font16weight400BlackNexRegular,),
+                      );
+                    }
+                  }
                 },
               ),
             ),
+
+
+
+            // Expanded(
+            //   child: ListView.separated(
+            //     itemCount: 3,
+            //     separatorBuilder: (BuildContext context, int index) =>
+            //         const SizedBox(
+            //       height: 10,
+            //     ),
+            //     itemBuilder: (BuildContext context, int index) {
+            //       return Container(
+            //         height: Get.height / 2,
+            //         width: Get.width,
+            //         color: AppColors.colorF7F7,
+            //         child: Column(
+            //           children: [
+            //             Row(
+            //               children: [
+            //                 //user dp
+            //                 const CircleAvatar(
+            //                   backgroundImage: AssetImage(AppAssets.userDp),
+            //                   radius: 30,
+            //                 ),
+            //
+            //                 //user name and time
+            //                 Column(
+            //                   children: [
+            //                     Text(
+            //                       "Ana_Solam",
+            //                       style: CommonTextStyle.font14weightNormal342f,
+            //                     ).marginOnly(left: 15),
+            //                     Text(
+            //                       "Yesterday",
+            //                       style: CommonTextStyle.font12weightNormal342f,
+            //                     ),
+            //                   ],
+            //                 ),
+            //                 const Spacer(),
+            //
+            //                 //Follow button
+            //                 SizedBox(
+            //                   height: 30,
+            //                   child: Image.asset(AppAssets.followBtn),
+            //                 ),
+            //               ],
+            //             ).marginSymmetric(horizontal: 20, vertical: 20),
+            //
+            //             //post image
+            //             Expanded(
+            //               child: SizedBox(
+            //                 width: Get.width,
+            //                 child: Image.asset(
+            //                   AppAssets.exploreImg,
+            //                   fit: BoxFit.fill,
+            //                 ),
+            //               ),
+            //             ),
+            //
+            //             //Like button
+            //             SizedBox(
+            //               height: 50,
+            //               width: Get.width,
+            //               child: Row(
+            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                 children: [
+            //                   SizedBox(
+            //                     child: Row(
+            //                       children: [
+            //                         const SizedBox(
+            //                             child: Icon(Icons.favorite,size: 24,color: AppColors.blackColor,)
+            //
+            //                         ),
+            //                         const SizedBox(
+            //                           width: 5,
+            //                         ),
+            //                         Text(
+            //                           "236",
+            //                           style: CommonTextStyle
+            //                               .font12weightNormal342f,
+            //                         ),
+            //                       ],
+            //                     ),
+            //                   ),
+            //                   SizedBox(
+            //                     child: Row(
+            //                       children: [
+            //                         Image.asset(
+            //                           AppAssets.comment,
+            //                           height: 20,
+            //                           width: 20,
+            //                         ),
+            //                         const SizedBox(
+            //                           width: 5,
+            //                         ),
+            //                         Text(
+            //                           "133",
+            //                           style: CommonTextStyle
+            //                               .font12weightNormal342f,
+            //                         ),
+            //                       ],
+            //                     ),
+            //                   ),
+            //                   SizedBox(
+            //                     child: Row(
+            //                       children: [
+            //                         Image.asset(
+            //                           AppAssets.view,
+            //                           height: 20,
+            //                           width: 20,
+            //                         ),
+            //                         const SizedBox(
+            //                           width: 5,
+            //                         ),
+            //                         Text(
+            //                           "1145",
+            //                           style: CommonTextStyle
+            //                               .font12weightNormal342f,
+            //                         ),
+            //                       ],
+            //                     ),
+            //                   ),
+            //                   SizedBox(
+            //                     child: Row(
+            //                       children: [
+            //                         Image.asset(
+            //                           AppAssets.share,
+            //                           height: 20,
+            //                           width: 20,
+            //                         ),
+            //                         const SizedBox(
+            //                           width: 5,
+            //                         ),
+            //                         const Text("23"),
+            //                       ],
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ).marginSymmetric(horizontal: 20),
+            //             ),
+            //           ],
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ),
             //const SizedBox(height: 30,),
           ],
         ),
       ),
     );
   }
+
+
+
 }

@@ -47,6 +47,7 @@ export 'package:flutter_svg/flutter_svg.dart';
 export 'package:fluttertoast/fluttertoast.dart';
 
 export 'package:smarty_social/widgets/common_toast/common_toast.dart';
+export 'package:cached_network_image/cached_network_image.dart';
 
 
 

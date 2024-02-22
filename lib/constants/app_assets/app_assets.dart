@@ -123,4 +123,9 @@ class AppAssets {
   static const String blueFilter = "$imageDir/filter_blue.png";
   static const String menTransOutfit = "$imageDir/trans_men_out.png";
   static const String unlikeButton = "$imageDir/unlike.png";
+
+  //Place holder images
+  static const String placeHolderNoImage = "$imageDir/no_image.png";
+  static const String placeHolderNoDp = "$imageDir/no_dp.png";
+
 }

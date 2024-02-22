@@ -6,13 +6,19 @@ class MenEditingController extends GetxController {
   bool mirror = false;
   late double aspectRatio; // Variable to store the aspect ratio for cropping
   CreatePostController createPostController = Get.find<CreatePostController>();
-  RxBool framingDone=false.obs;
+  RxBool framingDone = false.obs;
 
   File? croppedImagePath;
 
-  List<String> assetType =["Blazers","Suits","Dress Shirt","Sweat Shirt","Traditional"];
-  String selectedAsset="Blazers";
-String selectedNav="";
+  List<String> assetType = [
+    "Blazers",
+    "Suits",
+    "Dress Shirt",
+    "Sweat Shirt",
+    "Traditional"
+  ];
+  String selectedAsset = "Blazers";
+  String selectedNav = "";
 
   @override
   void onInit() {
@@ -28,14 +34,19 @@ String selectedNav="";
         CropAspectRatioPreset.ratio3x2,
         CropAspectRatioPreset.ratio4x3,
         CropAspectRatioPreset.ratio16x9,
+        CropAspectRatioPreset.ratio7x5
       ],
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Crop',
-          toolbarColor: Colors.blue,
-          toolbarWidgetColor: Colors.white,
+          showCropGrid: false,
+          cropFrameColor: Colors.white,
+          backgroundColor: Colors.white,
+          toolbarTitle: 'Framing',
+          toolbarColor: Colors.white,
+          toolbarWidgetColor: Colors.black,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,
+          activeControlsWidgetColor: Colors.black,
         ),
       ],
       sourcePath: createPostController.image!.path,

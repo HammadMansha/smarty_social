@@ -44,14 +44,16 @@ class SignUpController extends GetxController with InitializeLocalStorage {
       print("response of register call==============${res.body}");
 
       if (res.statusCode == 200) {
-        var data = json.decode(res.body);
-        storage.write("userId", data["User_id"]);
-        storage.write("token", data["Session_token"]);
-        storage.write("username", data["User_name"]);
-        storage.write("userEmail", data["Email"]);
-        storage.write("isAppOpen", 'true');
+        signUpDialog();
+        Future.delayed(const Duration(seconds: 2), () {
+          Get.offAndToNamed(Routes.dashboardScreen);
+
+          // Dismiss the dialog
+        });
+        // Get.back();
+
+        // CommonToast.showToast(AppStrings.registrationSuccess);
         isLoading.value = false;
-        Get.offAndToNamed(Routes.dashboardScreen);
 
         update();
       } else if (res.statusCode == 400) {
@@ -79,5 +81,44 @@ class SignUpController extends GetxController with InitializeLocalStorage {
       isLoading.value = false;
       update();
     }
+  }
+
+  void signUpDialog() {
+    Get.dialog(
+      AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(10), // Adjust the border radius as needed
+        ),
+        contentPadding: EdgeInsets.zero,
+        content: SizedBox(
+            height: Get.height / 4.8,
+            width: Get.width / 1.6,
+            child: Column(
+              children: [
+                CommonSpaces.spaceVertical10,
+                Text(
+                  'Signup',
+                  style: CommonTextStyle.EditProfileFont,
+                ),
+                CommonSpaces.spaceVertical10,
+                Image.asset(
+                  AppAssets.signUpdialog,
+                  height: 45,
+                ),
+                CommonSpaces.spaceVertical20,
+                Text(
+                  'Congratulations!',
+                  style: CommonTextStyle.EditProfileFont,
+                ),
+                CommonSpaces.spaceVertical10,
+                Text(
+                  'Account has been created successfully',
+                  style: CommonTextStyle.font12weightNormal342f,
+                ),
+              ],
+            )),
+      ),
+    );
   }
 }

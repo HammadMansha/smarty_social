@@ -44,9 +44,10 @@ class ResetPasswordController extends GetxController {
       print("response of verify code==============${res.body}");
 
       if (res.statusCode == 200) {
-        CommonToast.showToast(AppStrings.passwordChangeSuccess);
+        resetDialog();
+        // CommonToast.showToast(AppStrings.passwordChangeSuccess);
         isLoading.value = false;
-        Get.to(() => const ResetPasswordSuccess());
+        resetDialog();
       }
     } on TimeoutException catch (e) {
       // Handle timeout exception
@@ -65,5 +66,57 @@ class ResetPasswordController extends GetxController {
       isLoading.value = false;
       update();
     }
+  }
+
+  void resetDialog() {
+    Get.dialog(
+      AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(10), // Adjust the border radius as needed
+        ),
+        contentPadding: EdgeInsets.zero,
+        content: SizedBox(
+            height: Get.height / 3,
+            width: Get.width / 1.6,
+            child: Column(
+              children: [
+                CommonSpaces.spaceVertical10,
+                Text(
+                  'Password Reset',
+                  style: CommonTextStyle.EditProfileFont,
+                ),
+                CommonSpaces.spaceVertical10,
+                Image.asset(
+                  AppAssets.signUpdialog,
+                  height: 45,
+                ),
+                CommonSpaces.spaceVertical20,
+                Text(
+                  'Congratulations!',
+                  style: CommonTextStyle.EditProfileFont,
+                ),
+                CommonSpaces.spaceVertical10,
+                Text(
+                  'Your password has been changed',
+                  style: CommonTextStyle.font12weightNormal342f,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CommonButton(
+                    height: 45,
+                    width: Get.width / 2,
+                    text: 'Login',
+                    textStyle: CommonTextStyle.signupColor,
+                    onPressed: () {
+                      Get.offAll(() => LoginScreen());
+                    },
+                    fillColor: Colors.red)
+              ],
+            )),
+      ),
+      barrierDismissible: false,
+    );
   }
 }

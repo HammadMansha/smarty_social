@@ -2,10 +2,11 @@ import 'package:smarty_social/view/editing/women_editing/women_editing_post.dart
 
 import '../middlewears/auth/auth_middlewear.dart';
 import '../utils/libraries/app_libraries.dart';
+import '../view/blank_screen.dart';
 import '../view/edit_profile/edit_profile_screen.dart';
 
 class AppPages {
-  static var initial = Routes.dashboardScreen;
+  static var initial = Routes.blankScreen;
 
   static final routes = [
     //Splash screen
@@ -13,7 +14,10 @@ class AppPages {
       name: Routes.splashScreen,
       page: () => const SplashScreen(),
     ),
-
+    GetPage(
+      name: Routes.blankScreen,
+      page: () => const BlankScreen(),
+    ),
     //Login screen
     GetPage(
       name: Routes.loginScreen,
@@ -53,7 +57,7 @@ class AppPages {
     //Reset Password screen
     GetPage(
       name: Routes.dashboardScreen,
-      page: () =>  DashboardScreen(),
+      page: () => DashboardScreen(),
       middlewares: [
         AuthMiddleware(),
       ],

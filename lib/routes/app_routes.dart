@@ -16,4 +16,5 @@ class Routes {
 
   static const profileScreen = '/profileScreen';
   static const editProfileScreen = '/editProfileScreen';
+  static const blankScreen = '/blankScreen';
 }

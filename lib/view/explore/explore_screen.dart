@@ -74,11 +74,6 @@ class ExploreScreen extends StatelessWidget {
                       height: 10,
                     ),
 
-                    // SizedBox(
-                    //   height: Get.height / 4,
-                    //   width: Get.width,
-                    //   child: Image.asset(AppAssets.feedUp),
-                    // ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
@@ -166,7 +161,7 @@ class ExploreScreen extends StatelessWidget {
                                             //user dp
                                             const CircleAvatar(
                                               backgroundImage:
-                                                  AssetImage(AppAssets.userDp),
+                                                  AssetImage(AppAssets.noImage),
                                               radius: 30,
                                             ),
 

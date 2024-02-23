@@ -13,6 +13,7 @@ class WomenEditingController extends GetxController
   RxBool framingDone = false.obs;
 
   String selectedNav = "";
+  int tapCount = 0;
 
   List<String> womenAssetType = [
     "Suits",
@@ -71,11 +72,10 @@ class WomenEditingController extends GetxController
           print("Upload API response $responseString");
         }
 
-        Get.offAll(()=>DashboardScreen());
+        Get.offAll(() => DashboardScreen());
         isLoading.value = false;
         update();
-      }
-      else if (response.statusCode == 307) {
+      } else if (response.statusCode == 307) {
         // The server is redirecting, get the redirect URL from the response
         var redirectUrl = response.headers['location'];
         if (redirectUrl != null) {
@@ -84,10 +84,12 @@ class WomenEditingController extends GetxController
               'file', createPostController.image!.path.toString());
 
           // Make a new request to the redirect URL
-          var redirectRequest = http.MultipartRequest('POST', Uri.parse(redirectUrl));
+          var redirectRequest =
+              http.MultipartRequest('POST', Uri.parse(redirectUrl));
           redirectRequest.files.add(redirectImagePath);
           redirectRequest.fields['user_id'] = storage.read("userId").toString();
-          redirectRequest.fields['username'] = storage.read("username").toString();
+          redirectRequest.fields['username'] =
+              storage.read("username").toString();
 
           var redirectResponse = await redirectRequest.send();
           if (redirectResponse.statusCode == 200) {
@@ -97,13 +99,14 @@ class WomenEditingController extends GetxController
             if (kDebugMode) {
               print("Upload API response $responseString");
             }
-            Get.offAll(()=>DashboardScreen());
+            Get.offAll(() => DashboardScreen());
 
             isLoading.value = false;
             update();
           } else {
             // Handle other status codes from the redirect response
-            print("Redirected request failed with status code: ${redirectResponse.statusCode}");
+            print(
+                "Redirected request failed with status code: ${redirectResponse.statusCode}");
             isLoading.value = false;
             update();
             CommonToast.showToast(AppStrings.somethingWentWrong);
@@ -115,12 +118,9 @@ class WomenEditingController extends GetxController
           update();
           CommonToast.showToast(AppStrings.somethingWentWrong);
         }
-      }
-
-
-
-      else{
-        print("========================Status code===============${response.statusCode}");
+      } else {
+        print(
+            "========================Status code===============${response.statusCode}");
         isLoading.value = false;
         update();
         CommonToast.showToast(AppStrings.somethingWentWrong);

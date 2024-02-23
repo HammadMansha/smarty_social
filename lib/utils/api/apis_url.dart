@@ -39,5 +39,9 @@ class ApiData {
 
 
 
+  //get user posts
+  static const String getMyPosts= "$baseUrl/user_posts";
+
+
 
 }

@@ -44,4 +44,9 @@ class ApiData {
 
 
 
+  //get user following list
+  static const String userFollowingList= "$baseUrl/user_following";
+
+
+
 }

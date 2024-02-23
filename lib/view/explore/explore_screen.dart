@@ -150,6 +150,8 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                 ),
                                 itemBuilder: (BuildContext context, int index) {
                                   final feed = feeds[index];
+                                  bool isFollowing = exploreController.following
+                                      .any((user) => user['user_id'] == feed.userId);
                                   return Container(
                                     height: Get.height / 2,
                                     width: Get.width,
@@ -190,25 +192,45 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                             const Spacer(),
 
                                             //Follow button
-                                            feed.userId !=
-                                                    exploreController.myUserId
-                                                ? GestureDetector(
-                                                    onTap: () async {
-
-                                                      if(storage.hasData("isAppOpen")==true) {
-                                                        await exploreController.followUser(feed.userId!);
-                                                      }
-                                                      else{
-                                                        CommonToast.showToast("Login first");
-                                                      }
-                                                    },
-                                                    child: SizedBox(
-                                                      height: 30,
-                                                      child: Image.asset(
-                                                          AppAssets.followBtn),
+                                            if (!isFollowing && feed.userId!=exploreController.myUserId) // Show follow button only if not following
+                                              GestureDetector(
+                                                onTap: () async {
+                                                  if (storage.hasData("isAppOpen") == true) {
+                                                    await exploreController.followUser(feed.userId!);
+                                                  } else {
+                                                    CommonToast.showToast("Login first");
+                                                  }
+                                                },
+                                                child:Container(
+                                                  height: 29,
+                                                  width: Get.width / 5,
+                                                  decoration: BoxDecoration(
+                                                    color: const Color(0xff808BFF),
+                                                    // Add your decoration properties here
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        16),
+                                                  ),
+                                                  child: const Padding(
+                                                    padding: EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Follow',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            letterSpacing: 0.4,
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                            FontWeight.w700,
+                                                            fontFamily: 'Nexa'),
+                                                      ),
                                                     ),
-                                                  )
-                                                : const SizedBox(),
+                                                  ),
+                                                ),
+                                              )
+
                                           ],
                                         ).marginSymmetric(
                                             horizontal: 20, vertical: 20),

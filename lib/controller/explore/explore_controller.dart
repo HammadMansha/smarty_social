@@ -11,6 +11,7 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   late Future<List<FeedPostData>?> feedsFuture;
   RxList<bool> likedList = List.generate(500, (index) => false).obs;
   String myUserId = "";
+  RxList following=[].obs;
 
   String formattedDate(String timestamp) {
     DateTime dateTime = DateTime.parse(timestamp);
@@ -30,6 +31,7 @@ class ExploreController extends GetxController with InitializeLocalStorage {
     feedsFuture = getFeeds();
     if(storage.hasData("userId")==true) {
       myUserId = storage.read("userId");
+      await getUserFollowing(myUserId);
     }
     super.onInit();
   }
@@ -267,4 +269,47 @@ class ExploreController extends GetxController with InitializeLocalStorage {
       update();
     }
   }
+
+
+
+  Future<void> getUserFollowing(String userId) async {
+    try {
+      isLoading.value = true;
+
+      Uri url = Uri.parse("${ApiData.userFollowingList}/$userId");
+      if (kDebugMode) {
+        print("Get user following request------------$url");
+      }
+      var res = await http.get(url).timeout(const Duration(seconds: 30));
+
+      if (res.statusCode == 200) {
+        var data = json.decode(res.body);
+        following.addAll(data);
+        print("============following=================$following");
+
+        isLoading.value = false;
+
+      } else {
+        CommonToast.showToast(AppStrings.somethingWentWrong);
+        isLoading.value = false;
+      }
+    } on TimeoutException catch (e) {
+      CommonToast.showToast(AppStrings.unableToConnect);
+      isLoading.value = false;
+
+      print("Request timed out: $e");
+    } on http.ClientException catch (e) {
+      CommonToast.showToast(AppStrings.connectionNotStable);
+      isLoading.value = false;
+
+      print("Client-side error occurred: $e");
+    } catch (e) {
+      isLoading.value = false;
+
+      print("Error occurred during request: $e");
+    }
+    return null;
+  }
+
+
 }

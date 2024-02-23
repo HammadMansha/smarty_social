@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
+
 import '../../utils/libraries/app_libraries.dart';
 
-class DashboardScreen extends StatelessWidget  with InitializeLocalStorage{
-   DashboardScreen({Key? key}) : super(key: key);
+class DashboardScreen extends StatelessWidget with InitializeLocalStorage {
+  DashboardScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +14,14 @@ class DashboardScreen extends StatelessWidget  with InitializeLocalStorage{
         return WillPopScope(
           onWillPop: () async {
             if (_.navigationQueue.isEmpty && storage.hasData("token")) {
-              return showWillPopMessage(context,_);
-            }
-            else{
+              return showWillPopMessage(context, _);
+            } else {
               SystemNavigator.pop();
             }
 
             _.navigationQueue.removeLast();
-            int position = _.navigationQueue.isEmpty ? 0 : _.navigationQueue.last;
+            int position =
+                _.navigationQueue.isEmpty ? 0 : _.navigationQueue.last;
             _.currentIndex = position;
             _.update();
             return false;
@@ -32,25 +34,18 @@ class DashboardScreen extends StatelessWidget  with InitializeLocalStorage{
     );
   }
 
-  showWillPopMessage(context,DashboardScreenController _) {
+  showWillPopMessage(context, DashboardScreenController _) {
     return showDialog<void>(
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: AppColors.colorA5A5,
+          backgroundColor: AppColors.white,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          title: const Text(
-            'Logout?',
-            textScaleFactor: 1.0,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
-              letterSpacing: 0.4,
-              fontFamily: 'Roboto',
-            ),
+          title: Center(
+            child: Text('Logout?',
+                textScaleFactor: 1.0, style: CommonTextStyle.EditProfileFont),
           ),
           content: SizedBox(
             height: 100.0,
@@ -64,9 +59,9 @@ class DashboardScreen extends StatelessWidget  with InitializeLocalStorage{
                   style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w300,
-                      color: Colors.white,
+                      color: Colors.black,
                       letterSpacing: 0.4,
-                      fontFamily: 'Roboto'),
+                      fontFamily: 'Nexa'),
                 ),
                 const Spacer(),
                 Row(
@@ -85,29 +80,38 @@ class DashboardScreen extends StatelessWidget  with InitializeLocalStorage{
                         "Cancel",
                         textScaleFactor: 1.0,
                         style: TextStyle(
-                            color: AppColors.buttonColor, fontSize: 16),
+                            color: AppColors.blackColor, fontSize: 16),
                       ),
                     ),
                     const SizedBox(
                       width: 8.0,
                     ),
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(9.0),
-                        side: const BorderSide(
-                          color: AppColors.buttonColor,
-                        ),
-                      ),
-                      onPressed: () async {
-                       await _.logoutUser();
-                      },
-                      minWidth: Get.width / 3.4,
+                    Container(
+                      width: Get.width / 3.4,
                       height: 40,
-                      color: AppColors.buttonColor,
-                      child: const Text(
-                        "Logout",
-                        textScaleFactor: 1.0,
-                        style: TextStyle(color: AppColors.white, fontSize: 16),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color(0xFF808BFF),
+                            Color(0xffC135F6), // Start color of the gradient
+                            Color(0xFFF431A7), // End color of the gradient
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(
+                            30), // Adjust border radius to fit your design
+                      ),
+                      child: MaterialButton(
+                        onPressed: () async {
+                          await _.logoutUser();
+                        },
+                        child: const Text(
+                          "Logout",
+                          textScaleFactor: 1.0,
+                          style:
+                              TextStyle(color: AppColors.white, fontSize: 16),
+                        ),
                       ),
                     ),
                   ],

@@ -8,9 +8,9 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProfileScreenController _ = Get.put(ProfileScreenController());
-    return Scaffold(
-      drawer: SafeArea(
-        child: Drawer(
+    return SafeArea(
+      child: Scaffold(
+        drawer: Drawer(
           width: Get.width / 1.4,
           backgroundColor: AppColors.white,
           child: ListView(
@@ -167,8 +167,8 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
         ),
+        body: bodyData(context, _),
       ),
-      body: bodyData(context, _),
     );
   }
 
@@ -179,6 +179,9 @@ class ProfileScreen extends StatelessWidget {
         width: Get.width,
         child: Column(
           children: [
+            const SizedBox(
+              height: 30,
+            ),
             Row(
               children: [
                 Builder(

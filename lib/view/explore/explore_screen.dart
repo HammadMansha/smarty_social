@@ -230,6 +230,45 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                                   ),
                                                 ),
                                               )
+                                            else if(feed.userId!=exploreController.myUserId)
+                                              GestureDetector(
+                                                onTap: () async {
+                                                  if (storage.hasData("isAppOpen") == true) {
+                                                    await exploreController.unFollowUser(feed.userId!);
+                                                  } else {
+                                                    CommonToast.showToast("Login first");
+                                                  }
+                                                },
+                                                child:Container(
+                                                  height: 29,
+                                                  width: Get.width / 5,
+                                                  decoration: BoxDecoration(
+                                                    color: const Color(0xff808BFF),
+                                                    // Add your decoration properties here
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        16),
+                                                  ),
+                                                  child: const Padding(
+                                                    padding: EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Following',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            letterSpacing: 0.4,
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                            FontWeight.w700,
+                                                            fontFamily: 'Nexa'),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+
 
                                           ],
                                         ).marginSymmetric(

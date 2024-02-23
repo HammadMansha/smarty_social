@@ -128,8 +128,7 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                       child: FutureBuilder<List<FeedPostData>?>(
                         future: exploreController.feedsFuture,
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
                             return const Center(
                               child: AppLoader(),
                             );
@@ -152,6 +151,7 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                   final feed = feeds[index];
                                   bool isFollowing = exploreController.following
                                       .any((user) => user['user_id'] == feed.userId);
+
                                   return Container(
                                     height: Get.height / 2,
                                     width: Get.width,
@@ -235,6 +235,7 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                                 onTap: () async {
                                                   if (storage.hasData("isAppOpen") == true) {
                                                     await exploreController.unFollowUser(feed.userId!);
+
                                                   } else {
                                                     CommonToast.showToast("Login first");
                                                   }
@@ -268,6 +269,9 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                                   ),
                                                 ),
                                               ),
+
+
+
 
 
                                           ],
@@ -418,7 +422,8 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                   );
                                 },
                               );
-                            } else {
+                            }
+                            else {
                               return Center(
                                 child: Text(
                                   'No data available',

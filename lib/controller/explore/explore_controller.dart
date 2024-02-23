@@ -9,9 +9,12 @@ import '../../models/posts_model/posts_model.dart';
 class ExploreController extends GetxController with InitializeLocalStorage {
   RxBool isLoading = false.obs;
   late Future<List<FeedPostData>?> feedsFuture;
+
   RxList<bool> likedList = List.generate(500, (index) => false).obs;
   String myUserId = "";
   RxList following=[].obs;
+  RxBool isFollowing=false.obs;
+  RxBool isFollow=false.obs;
 
   String formattedDate(String timestamp) {
     DateTime dateTime = DateTime.parse(timestamp);
@@ -114,7 +117,8 @@ class ExploreController extends GetxController with InitializeLocalStorage {
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
 
-        CommonToast.showToast(AppStrings.loginSuccess);
+        isFollowing.value = true;
+
         isLoading.value = false;
 
         update();
@@ -129,6 +133,8 @@ class ExploreController extends GetxController with InitializeLocalStorage {
             body: body,
             headers: headers,
           );
+
+          isFollowing.value = true;
 
           isLoading.value = false;
 
@@ -210,7 +216,6 @@ class ExploreController extends GetxController with InitializeLocalStorage {
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
 
-        CommonToast.showToast(AppStrings.loginSuccess);
         isLoading.value = false;
 
         update();
@@ -218,18 +223,24 @@ class ExploreController extends GetxController with InitializeLocalStorage {
         // Extract the redirect URL from the response headers
         var redirectUrl = res.headers['location'];
 
+
         if (redirectUrl != null && redirectUrl.isNotEmpty) {
           // Make another request to the redirect URL
           var redirectRes = await http.post(
             Uri.parse(redirectUrl),
             body: body,
             headers: headers,
+
           );
+
+
+          await getUserFollowing(myUserId);
+
 
           isLoading.value = false;
 
           // Process the response as needed
-          print("Redirected response: ${redirectRes.statusCode}");
+          print("Redirected response unfollow: ${redirectRes.statusCode}");
           print("Redirected response body: ${redirectRes.body}");
         } else {
           isLoading.value = false;
@@ -277,18 +288,13 @@ class ExploreController extends GetxController with InitializeLocalStorage {
       isLoading.value = true;
 
       Uri url = Uri.parse("${ApiData.userFollowingList}/$userId");
-      if (kDebugMode) {
-        print("Get user following request------------$url");
-      }
       var res = await http.get(url).timeout(const Duration(seconds: 30));
 
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
-        following.addAll(data);
-        print("============following=================$following");
+        following.assignAll(data); // Populate the following list
 
         isLoading.value = false;
-
       } else {
         CommonToast.showToast(AppStrings.somethingWentWrong);
         isLoading.value = false;
@@ -296,19 +302,15 @@ class ExploreController extends GetxController with InitializeLocalStorage {
     } on TimeoutException catch (e) {
       CommonToast.showToast(AppStrings.unableToConnect);
       isLoading.value = false;
-
       print("Request timed out: $e");
     } on http.ClientException catch (e) {
       CommonToast.showToast(AppStrings.connectionNotStable);
       isLoading.value = false;
-
       print("Client-side error occurred: $e");
     } catch (e) {
       isLoading.value = false;
-
       print("Error occurred during request: $e");
     }
-    return null;
   }
 
 

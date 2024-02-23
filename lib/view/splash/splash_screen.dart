@@ -21,6 +21,7 @@ class SplashScreen extends StatelessWidget {
   Widget bodyData(BuildContext context, SplashScreenController _) {
     debugPrint('Splash build method called 2');
 
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       // crossAxisAlignment: CrossAxisAlignment.end,

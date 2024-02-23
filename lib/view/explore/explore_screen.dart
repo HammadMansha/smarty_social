@@ -172,12 +172,16 @@ class ExploreScreen extends StatelessWidget {
 
                                             //user name and time
                                             Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   feed.username!,
                                                   style: CommonTextStyle
                                                       .font14weightNormal342f,
-                                                ).marginOnly(right: 30),
+                                                ).marginOnly(left: 8),
                                                 Text(
                                                   exploreController
                                                       .formattedDate(
@@ -185,7 +189,7 @@ class ExploreScreen extends StatelessWidget {
                                                   ),
                                                   style: CommonTextStyle
                                                       .font12weightNormal342f,
-                                                ).marginOnly(left: 5),
+                                                ).marginOnly(left: 8),
                                               ],
                                             ),
                                             const Spacer(),

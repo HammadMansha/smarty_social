@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+import 'package:smarty_social/controller/splash_screen/splash_screen_controller.dart';
+
 import '../../utils/libraries/app_libraries.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -7,110 +10,140 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     debugPrint('Splash build method called');
 
-    return Scaffold(
-      extendBody: true,
-      body: bodyData(context),
-
+    return GetBuilder<SplashScreenController>(
+      init: SplashScreenController(),
+      builder: (_) {
+        return Scaffold(
+          extendBody: true,
+          body: bodyData(context, _),
+        );
+      },
     );
   }
 
-  bodyData(BuildContext context) {
+  bodyData(BuildContext context, SplashScreenController _) {
     debugPrint('Splash build method called 2');
 
-    return SizedBox(
-      height: Get.height,
-      width: Get.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-
-          Align(
-            alignment: Alignment.center,
-            child: Image.asset(AppAssets.splashScreen),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      // crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        const SizedBox(
+          height: 40,
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Image.asset(
+            AppAssets.splashScreen,
+            height: 208,
+            width: 130,
           ),
-          CommonSpaces.spaceVertical10,
-          const Text(
-            'Smarty Social',
-            style: TextStyle(
-                fontFamily: 'BirdsOfParadise',
-                color: Colors.black,
-                fontSize: 32,
-                fontWeight: FontWeight.w400),
-          ),
-          CommonSpaces.spaceVertical100,
+        ),
+        CommonSpaces.spaceVertical10,
 
-          const Text(
-            AppStrings.newJourney,
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 16,
-              color: AppColors.color342F2F,
-              fontFamily: 'Nexa',
+        CommonSpaces.spaceVertical50,
+        const Text(
+          AppStrings.newJourney,
+          style: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+            color: AppColors.color342F2F,
+            fontFamily: 'Nexa',
+          ),
+        ),
+        CommonSpaces.spaceVertical50,
+
+        Container(
+          height: 50, // specify the height
+          width: Get.width / 2,
+
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            color: Color(0xffC135F6),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF808BFF),
+                Color(0xffC135F6), // Start color of the gradient
+                Color(0xFFF431A7), // End color of the gradient
+              ],
             ),
           ),
 
-          CommonSpaces.spaceVertical50,
-
-          CommonButton(
-            width: Get.width / 2,
-            fillColor: Colors.red,
-            text: 'Signup',
-            textStyle: CommonTextStyle.signupColor,
+          child: MaterialButton(
             onPressed: () {
               Get.toNamed(Routes.signUpScreen);
             },
-          ),
 
-          CommonSpaces.spaceVertical10,
-
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Text(
-          //       AppStrings.alreadyHaveAccount,
-          //       style: CommonTextStyle.font16weight400BlackNexRegular,
-          //     ),
-          //     Text(
-          //       AppStrings.login,
-          //       style: CommonTextStyle.font16weight400Da33NexRegular,
-          //     ),
-          //   ],
-          // ),
-          //Sign up
-
-          InkWell(
-            onTap: () {
-              Get.toNamed(Routes.loginScreen);
-            },
-            child: SizedBox(
-              height: 30,
-              width: Get.width / 2,
-              child: Image.asset(AppAssets.alreadyAcc),
+            textColor: Colors.white,
+            child: Text(
+              'Signup',
+              style: CommonTextStyle.signupColor,
             ),
-          ),
 
-          CommonSpaces.spaceVertical10,
-//Skip
-          InkWell(
+            // shape: RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.circular(30), // apply rounded corners
+            //   // apply border
+            // ), // specify the width
+          ),
+        ),
+
+        CommonSpaces.spaceVertical10,
+
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Already have an account ',
+              style: TextStyle(
+                fontFamily: 'Nexa',
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+              ),
+            ),
+            InkWell(
               onTap: () {
-                Get.off(() =>  DashboardScreen());
+                Get.toNamed(Routes.loginScreen);
               },
               child: const Text(
-                'Skip',
+                'Login',
                 style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  decorationColor: Color(0xffDA33CF),
                   fontFamily: 'Nexa',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xff969696),
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                  color: Color(0xffDA33CF),
                 ),
-              ),),
+              ),
+            )
+          ],
+        ),
 
-          const SizedBox(
-            height: 50,
+        CommonSpaces.spaceVertical10,
+//Skip
+        InkWell(
+          onTap: () {
+            Get.off(() => DashboardScreen());
+          },
+          child: const Text(
+            'Skip',
+            style: TextStyle(
+              fontFamily: 'Nexa',
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: Color(0xff969696),
+            ),
           ),
-        ],
-      ),
+        ),
+
+        const SizedBox(
+          height: 50,
+        ),
+      ],
     );
   }
 }

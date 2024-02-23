@@ -210,18 +210,18 @@ class ProfileScreen extends StatelessWidget {
                               fontWeight: FontWeight.w400),
                         ).marginOnly(left: 12, top: 5),
                         const Spacer(),
-                        const Icon(
-                          Icons.notifications,
-                          color: Color(0xff80ABFF),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Image.asset(
-                          AppAssets.iconKing,
-                          width: 25,
-                          height: 22,
-                        ).marginOnly(right: 12),
+                        // const Icon(
+                        //   Icons.notifications,
+                        //   color: Color(0xff80ABFF),
+                        // ),
+                        // const SizedBox(
+                        //   width: 10,
+                        // ),
+                        // Image.asset(
+                        //   AppAssets.iconKing,
+                        //   width: 25,
+                        //   height: 22,
+                        // ).marginOnly(right: 12),
                       ],
                     ),
 
@@ -245,12 +245,12 @@ class ProfileScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Mathew Mills',
+                            Text(_.username,
                                     style: CommonTextStyle.profileName)
                                 .marginOnly(left: 12),
-                            Text('Stressed Blessed Coffee Obsessed',
-                                    style: CommonTextStyle.profileDetails)
-                                .marginOnly(left: 12),
+                            // Text('Stressed Blessed Coffee Obsessed',
+                            //         style: CommonTextStyle.profileDetails)
+                            //     .marginOnly(left: 12),
                             const SizedBox(
                               height: 5,
                             ),

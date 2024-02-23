@@ -12,10 +12,12 @@ class ProfileScreenController extends GetxController with InitializeLocalStorage
   RxInt following=0.obs;
   RxInt posts=0.obs;
   RxList myPosts=[].obs;
+  String username="";
 
   @override
   void onInit() async {
     myUserId = storage.read("userId");
+    username=storage.read("username");
     await getUserFollowers(myUserId);
     await getUserFollowing(myUserId);
     await getMyPosts(myUserId);

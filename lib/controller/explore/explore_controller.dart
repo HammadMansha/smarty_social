@@ -28,7 +28,9 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   @override
   void onInit() async {
     feedsFuture = getFeeds();
-    myUserId = storage.read("userId");
+    if(storage.hasData("userId")) {
+      myUserId = storage.read("userId");
+    }
     super.onInit();
   }
 

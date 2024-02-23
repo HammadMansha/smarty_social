@@ -16,8 +16,14 @@ class ProfileScreenController extends GetxController with InitializeLocalStorage
 
   @override
   void onInit() async {
-    myUserId = storage.read("userId");
-    username=storage.read("username");
+    if(storage.hasData("userId")) {
+      myUserId = storage.read("userId");
+      username=storage.read("username");
+
+
+    }
+
+
     await getUserFollowers(myUserId);
     await getUserFollowing(myUserId);
     await getMyPosts(myUserId);

@@ -23,6 +23,20 @@ class ApiData {
   //get posts
   static const String getFeedPost = "$baseUrl/posts";
 
+  //follow user
+  static const String followUser = "$baseUrl/follow";
+
+
+  //unfollow user
+  static const String unFollowUSer = "$baseUrl/unfollow";
+
+  //get followers
+  static const String getUsersFollow= "$baseUrl/followers";
+
+
+  //get following
+  static const String getUsersFollowing= "$baseUrl/following";
+
 
 
 

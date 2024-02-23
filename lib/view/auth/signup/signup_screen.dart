@@ -48,12 +48,34 @@ class SignUpScreen extends StatelessWidget
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: 70,
-                                width: 100,
-                                child: Image.asset(
-                                  AppAssets.signUp,
-                                  fit: BoxFit.contain,
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                'SIGNUP',
+                                style: TextStyle(
+                                  fontFamily: 'Nexa',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize:
+                                      26, // Adjust the font size as per your requirement
+                                  foreground:
+                                      Paint() // This applies the paint to the text
+                                        ..shader = const LinearGradient(
+                                          // This creates the same gradient as the container
+                                          colors: [
+                                            Color(0xFF808BFF),
+                                            Color(
+                                                0xffC135F6), // Start color of the gradient
+                                            Color(
+                                                0xFFF431A7), // End color of the gradient
+                                          ],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                        ).createShader(const Rect.fromLTWH(
+                                            0,
+                                            0,
+                                            200,
+                                            70)), // This creates the shader for the gradient
                                 ),
                               ),
                               CommonSpaces.spaceVertical10,

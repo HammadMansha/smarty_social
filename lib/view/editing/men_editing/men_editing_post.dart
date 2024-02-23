@@ -36,8 +36,16 @@ class MenEditingPostScreen extends StatelessWidget {
           actions: [
             InkWell(
               onTap: () {
-                menEditingController.framingDone.value = true;
-                // Get.toNamed(Routes.menClothEditing);
+                if (menEditingController.tapCount == 0) {
+                  menEditingController.framingDone.value = true;
+                } else if (menEditingController.tapCount == 1) {
+                  menEditingController.uploadImageToDb();
+                }
+
+                menEditingController.tapCount++;
+                if (menEditingController.tapCount > 1) {
+                  menEditingController.tapCount = 0;
+                }
               },
               child: SizedBox(
                 height: 70,

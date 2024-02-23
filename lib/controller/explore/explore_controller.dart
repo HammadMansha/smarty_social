@@ -13,10 +13,8 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   String myUserId = "";
 
   String formattedDate(String timestamp) {
-    // Parse the timestamp string into a DateTime object
     DateTime dateTime = DateTime.parse(timestamp);
 
-    // Format the DateTime object to display only the date
     String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
 
     return formattedDate;

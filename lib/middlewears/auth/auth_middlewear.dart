@@ -11,6 +11,6 @@ class AuthMiddleware extends GetMiddleware {
     print("I am in auth middlewear==================");
     return authService.loggedInUser
         ? null
-        : const RouteSettings(name: Routes.splashScreen);
+        : const RouteSettings(name: Routes.blankScreen);
   }
 }

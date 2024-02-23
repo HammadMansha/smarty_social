@@ -3,8 +3,8 @@ import 'package:smarty_social/utils/libraries/app_libraries.dart';
 
 import '../../models/posts_model/posts_model.dart';
 
-class ExploreScreen extends StatelessWidget {
-  const ExploreScreen({super.key});
+class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
+   ExploreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -194,9 +194,13 @@ class ExploreScreen extends StatelessWidget {
                                                     exploreController.myUserId
                                                 ? GestureDetector(
                                                     onTap: () async {
-                                                      await exploreController
-                                                          .followUser(
-                                                              feed.userId!);
+
+                                                      if(storage.hasData("isAppOpen")==true) {
+                                                        await exploreController.followUser(feed.userId!);
+                                                      }
+                                                      else{
+                                                        CommonToast.showToast("Login first");
+                                                      }
                                                     },
                                                     child: SizedBox(
                                                       height: 30,

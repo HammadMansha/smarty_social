@@ -2,26 +2,27 @@ import 'dart:async';
 import 'dart:convert';
 
 import '../../utils/libraries/app_libraries.dart';
-import 'package:http/http.dart' as  http;
-class ProfileScreenController extends GetxController with InitializeLocalStorage {
+import 'package:http/http.dart' as http;
+
+class ProfileScreenController extends GetxController
+    with InitializeLocalStorage {
   final GlobalKey<ScaffoldState> scaffoldKey1 = GlobalKey<ScaffoldState>();
 
-  RxBool isLoading=false.obs;
-  String myUserId="";
-  RxInt followers=0.obs;
-  RxInt following=0.obs;
-  RxInt posts=0.obs;
-  RxList myPosts=[].obs;
-  String username="";
+  RxBool isLoading = false.obs;
+  String myUserId = "";
+  RxInt followers = 0.obs;
+  RxInt following = 0.obs;
+  RxInt posts = 0.obs;
+  RxList myPosts = [].obs;
+  String username = "";
 
   @override
   void onInit() async {
-    if(storage.hasData("userId")) {
+    if (storage.hasData("userId")) {
       myUserId = storage.read("userId");
-      username=storage.read("username");
-
-
+      username = storage.read("username");
     }
+
 
 
     await getUserFollowers(myUserId);
@@ -29,10 +30,6 @@ class ProfileScreenController extends GetxController with InitializeLocalStorage
     await getMyPosts(myUserId);
     super.onInit();
   }
-
-
-
-
 
 //user followers
   Future<void> getUserFollowers(String userId) async {
@@ -44,14 +41,12 @@ class ProfileScreenController extends GetxController with InitializeLocalStorage
       }
       var res = await http.get(url).timeout(const Duration(seconds: 30));
 
-
       if (res.statusCode == 200) {
-        var data=json.decode(res.body);
-        followers.value=data["followers_count"];
+        var data = json.decode(res.body);
+        followers.value = data["followers_count"];
         print("===============follower==============$followers");
 
         isLoading.value = false;
-
       } else {
         CommonToast.showToast(AppStrings.somethingWentWrong);
         isLoading.value = false;
@@ -85,11 +80,9 @@ class ProfileScreenController extends GetxController with InitializeLocalStorage
       }
       var res = await http.get(url).timeout(const Duration(seconds: 30));
 
-
-
       if (res.statusCode == 200) {
-        var data=json.decode(res.body);
-        following.value=data["following_count"];
+        var data = json.decode(res.body);
+        following.value = data["following_count"];
         isLoading.value = false;
 
         print("===============follower==============$followers");
@@ -115,7 +108,6 @@ class ProfileScreenController extends GetxController with InitializeLocalStorage
     return null;
   }
 
-
   //user post
   Future<void> getMyPosts(String userId) async {
     try {
@@ -128,7 +120,7 @@ class ProfileScreenController extends GetxController with InitializeLocalStorage
       var res = await http.get(url).timeout(const Duration(seconds: 30));
 
       if (res.statusCode == 200) {
-        var data=json.decode(res.body);
+        var data = json.decode(res.body);
         myPosts.addAll(data);
         isLoading.value = false;
 
@@ -154,8 +146,4 @@ class ProfileScreenController extends GetxController with InitializeLocalStorage
     }
     return;
   }
-
-
-
-
 }

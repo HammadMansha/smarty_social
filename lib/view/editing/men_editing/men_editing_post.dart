@@ -38,8 +38,12 @@ class MenEditingPostScreen extends StatelessWidget {
               onTap: () {
                 if (menEditingController.tapCount == 0) {
                   menEditingController.framingDone.value = true;
-                } else if (menEditingController.tapCount == 1) {
-                  menEditingController.uploadImageToDb();
+                } else if (menEditingController.tapCount == 1 ) {
+                  if(_.storage.hasData("isAppOpen")==true) {
+                    menEditingController.uploadImageToDb();
+                  }else{
+                    CommonToast.showToast("Login first");
+                  }
                 }
 
                 menEditingController.tapCount++;

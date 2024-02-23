@@ -16,8 +16,9 @@ class DashboardScreenController extends GetxController
 
   List<Widget> buildScreens() {
     return [
-      const ExploreScreen(),
+       ExploreScreen(),
       const CreatePostScreen(),
+
       const ProfileScreen(),
       //const ProfileScreen(),
     ];
@@ -47,6 +48,7 @@ class DashboardScreenController extends GetxController
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
         contentPadding: 7.0,
+
 
       ),
     ];

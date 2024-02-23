@@ -37,7 +37,13 @@ class WomenEditingPostScreen extends StatelessWidget {
               if (womenEditingController.tapCount == 0) {
                 womenEditingController.framingDone.value = true;
               } else if (womenEditingController.tapCount == 1) {
-                womenEditingController.uploadImageToDb();
+
+                if(womenEditingController.storage.hasData("isAppOpen")==true) {
+                  womenEditingController.uploadImageToDb();
+                }else{
+                  CommonToast.showToast("Login first");
+                }
+
               }
 
               womenEditingController.tapCount++;

@@ -33,8 +33,7 @@ class SplashScreen extends StatelessWidget {
           alignment: Alignment.center,
           child: InkWell(
             onTap: () {
-              DialogHelper.showCommonDialog(context,
-                  VoidCallback: VoidCallback);
+              saveImageDialog();
             },
             child: Image.asset(
               AppAssets.splashScreen,
@@ -178,4 +177,64 @@ class SplashScreen extends StatelessWidget {
       ],
     );
   }
+}
+
+void saveImageDialog() {
+  Get.dialog(
+    AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(10), // Adjust the border radius as needed
+        ),
+        contentPadding: EdgeInsets.zero,
+        content: Container(
+            height: 150,
+            width: Get.width / 1.6,
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5), // Set shadow color
+                  spreadRadius: 5, // Set spread radius
+                  blurRadius: 7, // Set blur radius
+                  offset: const Offset(0, 3), // Set offset
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      Icons.save_alt_sharp,
+                      color: Colors.black,
+                      size: 50,
+                    ),
+                    Icon(
+                      Icons.upload,
+                      color: Colors.black,
+                      size: 50,
+                    ),
+                  ],
+                ).marginOnly(left: 30, right: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Save',
+                      style: CommonTextStyle.font14weightNormal342f,
+                    ).marginOnly(left: 5),
+                    Text(
+                      'Post',
+                      style: CommonTextStyle.font14weightNormal342f,
+                    )
+                  ],
+                ).marginOnly(left: 30, right: 30),
+              ],
+            ))),
+  );
 }

@@ -23,7 +23,6 @@ class AppAssets {
 
   static const String editProfile1 = "$imageDir/editProfile.png";
   static const String threeLines = "$imageDir/threeLines.png";
-
   static const String signUpdialog = "$imageDir/signup_successfull.png";
 
   // drawer assets
@@ -127,4 +126,7 @@ class AppAssets {
   //Place holder images
   static const String placeHolderNoImage = "$imageDir/no_image.png";
   static const String noImage = "$imageDir/no_dp1.jpg";
+
+  //  alert button
+  static const String alertButton = "$imageDir/alert_button.png";
 }

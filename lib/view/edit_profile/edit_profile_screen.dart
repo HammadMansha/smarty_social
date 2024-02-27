@@ -51,7 +51,7 @@ class EditProfileScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
-            height: 10,
+            height: 30,
           ),
           Center(
             child: Stack(alignment: Alignment.bottomRight, children: [
@@ -70,6 +70,9 @@ class EditProfileScreen extends StatelessWidget {
               InkWell(
                 onTap: () {
                   openGalleryDialog(_);
+                  Future.delayed(const Duration(seconds: 3), () {
+                    Get.back();
+                  });
                 },
                 child: Image.asset(
                   AppAssets.cameraImage,
@@ -88,7 +91,7 @@ class EditProfileScreen extends StatelessWidget {
             controller: _.name,
             disableBorderColor: const Color(0xffC1C1C1),
           ).marginOnly(left: 20, right: 20),
-          CommonSpaces.spaceVertical20,
+          CommonSpaces.spaceVertical30,
           Text(
             'Bio',
             style: CommonTextStyle.EditProfileFont,
@@ -99,16 +102,16 @@ class EditProfileScreen extends StatelessWidget {
             controller: _.bio,
             maxLine: 4,
           ).marginOnly(left: 20, right: 20),
-          CommonSpaces.spaceVertical20,
-          Text(
-            'Gender',
-            style: CommonTextStyle.EditProfileFont,
-          ).marginOnly(left: 22),
-          CommonTextField(
-                  bordercolor: Colors.black,
-                  disableBorderColor: const Color(0xffC1C1C1),
-                  controller: _.gender)
-              .marginOnly(left: 20, right: 20),
+          CommonSpaces.spaceVertical30,
+          // Text(
+          //   'Gender',
+          //   style: CommonTextStyle.EditProfileFont,
+          // ).marginOnly(left: 22),
+          // CommonTextField(
+          //         bordercolor: Colors.black,
+          //         disableBorderColor: const Color(0xffC1C1C1),
+          //         controller: _.gender)
+          //     .marginOnly(left: 20, right: 20),
           CommonSpaces.spaceVertical20,
           Text(
             'Date Of Birth',
@@ -129,53 +132,52 @@ class EditProfileScreen extends StatelessWidget {
   void openGalleryDialog(EditProfileController _) {
     Get.dialog(
       AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(10), // Adjust the border radius as needed
-        ),
-        contentPadding: EdgeInsets.zero,
-        content: Container(
-          height: 150,
-          width: Get.width / 1.6,
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5), // Set shadow color
-                spreadRadius: 5, // Set spread radius
-                blurRadius: 7, // Set blur radius
-                offset: const Offset(0, 3), // Set offset
-              ),
-            ],
+          shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(10), // Adjust the border radius as needed
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                onTap: () {
-                  _.controller.openCamera();
-                },
-                child: SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: Image.asset(AppAssets.selectCamera),
+          contentPadding: EdgeInsets.zero,
+          content: Container(
+            height: 150,
+            width: Get.width / 1.6,
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5), // Set shadow color
+                  spreadRadius: 5, // Set spread radius
+                  blurRadius: 7, // Set blur radius
+                  offset: const Offset(0, 3), // Set offset
                 ),
-              ).marginOnly(left: 20),
-              InkWell(
-                onTap: () async {
-                  await _.controller.getImageFromGallery();
-                },
-                child: SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: Image.asset(AppAssets.selectGallery),
-                ),
-              ).marginOnly(right: 20)
-            ],
-          ),
-        ),
-      ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    _.controller.openCamera();
+                  },
+                  child: SizedBox(
+                    width: 80,
+                    height: 80,
+                    child: Image.asset(AppAssets.selectCamera),
+                  ),
+                ).marginOnly(left: 50),
+                InkWell(
+                  onTap: () async {
+                    await _.controller.getImageFromGallery();
+                  },
+                  child: SizedBox(
+                    width: 80,
+                    height: 80,
+                    child: Image.asset(AppAssets.selectGallery),
+                  ),
+                ).marginOnly(right: 50)
+              ],
+            ),
+          )),
     );
   }
 }

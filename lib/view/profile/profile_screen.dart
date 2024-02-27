@@ -1,18 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
-
 import '../../controller/profile/profile_controller.dart';
+import '../../services/auth_service/auth_services.dart';
 
 class ProfileScreen extends StatelessWidget with InitializeLocalStorage {
   ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = Get.find<AuthService>();
+
     return GetBuilder<ProfileScreenController>(
       init: ProfileScreenController(),
       builder: (_) {
         return SafeArea(
-            child: storage.hasData("isAppOpen") == true
+            child: authService.loggedInUser == true
                 ? Scaffold(
                     drawer: Drawer(
                       width: Get.width / 1.4,

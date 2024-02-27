@@ -4,6 +4,7 @@ class AuthService extends GetxService with InitializeLocalStorage {
   bool loggedInUser = false;
 
   Future<AuthService> init() async {
+    print("calllllllllllllllllllllll auth");
     await checkLogin();
     return this;
   }

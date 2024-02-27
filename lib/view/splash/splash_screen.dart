@@ -1,5 +1,6 @@
 import 'package:smarty_social/controller/splash_screen/splash_screen_controller.dart';
 import '../../utils/libraries/app_libraries.dart';
+import '../../widgets/common_dialogbox.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -21,7 +22,6 @@ class SplashScreen extends StatelessWidget {
   Widget bodyData(BuildContext context, SplashScreenController _) {
     debugPrint('Splash build method called 2');
 
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       // crossAxisAlignment: CrossAxisAlignment.end,
@@ -31,10 +31,16 @@ class SplashScreen extends StatelessWidget {
         ),
         Align(
           alignment: Alignment.center,
-          child: Image.asset(
-            AppAssets.splashScreen,
-            height: Get.height / 4,
-            width: Get.width / 2.5,
+          child: InkWell(
+            onTap: () {
+              DialogHelper.showCommonDialog(context,
+                  VoidCallback: VoidCallback);
+            },
+            child: Image.asset(
+              AppAssets.splashScreen,
+              height: Get.height / 4,
+              width: Get.width / 2.5,
+            ),
           ),
         ),
 

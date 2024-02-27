@@ -45,6 +45,13 @@ class CreatePostScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     controller.genderSelect.value = "women";
+                    openGalleryDialog(controller);
+                    Future.delayed(
+                      const Duration(seconds: 3),
+                      () {
+                        Get.back();
+                      },
+                    );
                   },
                   child: SizedBox(
                     height: 80,
@@ -53,8 +60,15 @@ class CreatePostScreen extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
+                  onTap: () async {
                     controller.genderSelect.value = "men";
+                    openGalleryDialog(controller);
+                    Future.delayed(
+                      const Duration(seconds: 3),
+                      () {
+                        Get.back();
+                      },
+                    );
                   },
                   child: SizedBox(
                     height: 80,
@@ -72,76 +86,61 @@ class CreatePostScreen extends StatelessWidget {
                 ),
               ],
             ).marginOnly(left: 30, right: 30, top: 25, bottom: 10),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  controller.genderSelect.value = "";
-                },
-                child: Container(
-                  width: Get.width,
-                  color: AppColors.colorF7F7,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: Get.height / 7,
-                      ),
-                      Obx(
-                        () => controller.genderSelect.value.isNotEmpty
-                            ? Container(
-                                height: 150,
-                                width: Get.width / 1.6,
-                                decoration: BoxDecoration(
-                                  color: AppColors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey
-                                          .withOpacity(0.5), // Set shadow color
-                                      spreadRadius: 5, // Set spread radius
-                                      blurRadius: 7, // Set blur radius
-                                      offset: const Offset(0, 3), // Set offset
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        controller.openCamera();
-                                      },
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 80,
-                                        child:
-                                            Image.asset(AppAssets.selectCamera),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () async {
-                                        await controller.getImageFromGallery();
-                                      },
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 80,
-                                        child: Image.asset(
-                                            AppAssets.selectGallery),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            : const SizedBox(),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
     );
   }
+}
+
+void openGalleryDialog(CreatePostController _) {
+  Get.dialog(
+    AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(10), // Adjust the border radius as needed
+        ),
+        contentPadding: EdgeInsets.zero,
+        content: Container(
+          height: 150,
+          width: Get.width / 1.6,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5), // Set shadow color
+                spreadRadius: 5, // Set spread radius
+                blurRadius: 7, // Set blur radius
+                offset: const Offset(0, 3), // Set offset
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () {
+                  _.openCamera();
+                },
+                child: SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: Image.asset(AppAssets.selectCamera),
+                ),
+              ).marginOnly(left: 50),
+              InkWell(
+                onTap: () async {
+                  await _.getImageFromGallery();
+                },
+                child: SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: Image.asset(AppAssets.selectGallery),
+                ),
+              ).marginOnly(right: 50)
+            ],
+          ),
+        )),
+  );
 }

@@ -50,10 +50,17 @@ import 'package:smarty_social/utils/libraries/app_libraries.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
-  AuthService authService = Get.put(AuthService());
-  await authService.init();
+  await initServices();
+
   runApp(const MyApp());
+}
+
+Future<void> initServices() async {
+  await GetStorage.init();
+  // bio
+  AuthService auth = AuthService();
+  await Get.putAsync(() => auth.init());
+  // await Get.putAsync(() => bio.init());
 }
 
 class MyApp extends StatelessWidget {

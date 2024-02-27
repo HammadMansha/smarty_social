@@ -70,7 +70,7 @@ class CreatePostController extends GetxController {
     );
     if (pickedImage != null) {
       // Save the image to the gallery
-     // final result = await ImageGallerySaver.saveFile(pickedImage.path);
+      // final result = await ImageGallerySaver.saveFile(pickedImage.path);
 
       image = File(
         pickedImage.path,

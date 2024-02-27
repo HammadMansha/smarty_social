@@ -73,7 +73,7 @@ class AppPages {
 
     GetPage(
       name: Routes.profileScreen,
-      page: () => const ProfileScreen(),
+      page: () => ProfileScreen(),
     ),
 
     //Edit post screen

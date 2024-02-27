@@ -5,6 +5,7 @@ import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/posts_model/posts_model.dart';
+import '../profile/profile_controller.dart';
 
 class ExploreController extends GetxController with InitializeLocalStorage {
   RxBool isLoading = false.obs;
@@ -12,9 +13,11 @@ class ExploreController extends GetxController with InitializeLocalStorage {
 
   RxList<bool> likedList = List.generate(500, (index) => false).obs;
   String myUserId = "";
-  RxList following=[].obs;
-  RxBool isFollowing=false.obs;
-  RxBool isFollow=false.obs;
+  RxList following = [].obs;
+  RxBool isFollowing = false.obs;
+  RxBool isFollow = false.obs;
+  ProfileScreenController profileScreenController =
+      Get.put(ProfileScreenController());
 
   String formattedDate(String timestamp) {
     DateTime dateTime = DateTime.parse(timestamp);
@@ -32,10 +35,13 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   @override
   void onInit() async {
     feedsFuture = getFeeds();
-    if(storage.hasData("userId")==true) {
+    if (storage.hasData("userId") == true) {
       myUserId = storage.read("userId");
+
       await getUserFollowing(myUserId);
+      update();
     }
+
     super.onInit();
   }
 
@@ -116,8 +122,15 @@ class ExploreController extends GetxController with InitializeLocalStorage {
 
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
-
         isFollowing.value = true;
+
+        profileScreenController.followers.value;
+        profileScreenController.update();
+        profileScreenController.following.value;
+        profileScreenController.update();
+        getUserFollowing(myUserId);
+        await pullRefresh();
+        update();
 
         isLoading.value = false;
 
@@ -135,7 +148,6 @@ class ExploreController extends GetxController with InitializeLocalStorage {
           );
 
           isFollowing.value = true;
-
           isLoading.value = false;
 
           // Process the response as needed
@@ -215,6 +227,11 @@ class ExploreController extends GetxController with InitializeLocalStorage {
 
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
+        profileScreenController.followers.value;
+        profileScreenController.update();
+
+        profileScreenController.following.value;
+        profileScreenController.update();
 
         isLoading.value = false;
 
@@ -223,19 +240,15 @@ class ExploreController extends GetxController with InitializeLocalStorage {
         // Extract the redirect URL from the response headers
         var redirectUrl = res.headers['location'];
 
-
         if (redirectUrl != null && redirectUrl.isNotEmpty) {
           // Make another request to the redirect URL
           var redirectRes = await http.post(
             Uri.parse(redirectUrl),
             body: body,
             headers: headers,
-
           );
 
-
           await getUserFollowing(myUserId);
-
 
           isLoading.value = false;
 
@@ -281,8 +294,6 @@ class ExploreController extends GetxController with InitializeLocalStorage {
     }
   }
 
-
-
   Future<void> getUserFollowing(String userId) async {
     try {
       isLoading.value = true;
@@ -292,7 +303,8 @@ class ExploreController extends GetxController with InitializeLocalStorage {
 
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
-        following.assignAll(data); // Populate the following list
+        following.assignAll(data);
+        update(); // Populate the following list
 
         isLoading.value = false;
       } else {
@@ -313,5 +325,11 @@ class ExploreController extends GetxController with InitializeLocalStorage {
     }
   }
 
+  Future<void> pullRefresh() async {
+    print('helllllllllllll0');
 
+    feedsFuture = getFeeds();
+    getUserFollowing(storage.read("userId"));
+    // CommonToast.getToast('Wait, data fetching...');
+  }
 }

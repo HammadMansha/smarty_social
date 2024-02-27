@@ -44,22 +44,19 @@ class SignUpController extends GetxController with InitializeLocalStorage {
       print("response of register call==============${res.body}");
 
       if (res.statusCode == 200) {
-        var data=json.decode(res.body);
+        var data = json.decode(res.body);
         storage.write("userId", data["User_id"]);
         storage.write("token", data["Session_token"]);
-        storage.write("userEmail",data["Email"]);
-        storage.write("username",data["User_name"]);
-        storage.write("isAppOpen", 'true');
-         
-         
-         
-         print("===================username======${storage.read("username")}");
+        storage.write("userEmail", data["Email"]);
+        storage.write("username", data["User_name"]);
+        storage.write("isAppOpen", "true");
 
-
+        print("===================username======${storage.read("username")}");
 
         signUpDialog();
-        Future.delayed(const Duration(seconds: 1), () {
+        Future.delayed(const Duration(seconds: 2), () {
           Get.offAndToNamed(Routes.dashboardScreen);
+          print('isAppOpen>>>>>>>${storage.read('isAppOpen')}');
 
           // Dismiss the dialog
         });

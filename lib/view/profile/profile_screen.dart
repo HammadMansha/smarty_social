@@ -1,174 +1,203 @@
+import 'package:flutter/cupertino.dart';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 
 import '../../controller/profile/profile_controller.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ProfileScreen extends StatelessWidget with InitializeLocalStorage {
+  ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ProfileScreenController _ = Get.put(ProfileScreenController());
-    return SafeArea(
-      child: Scaffold(
-        drawer: Drawer(
-          width: Get.width / 1.4,
-          backgroundColor: AppColors.white,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              CommonSpaces.spaceVertical50,
-              Row(
-                children: [
-                  Image.asset(
-                    AppAssets.kingIcon2,
-                    height: 23,
-                    width: 29,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    'Get Premium',
-                    style: CommonTextStyle.drawerFont,
-                  )
-                ],
-              ).marginOnly(left: 15),
-              CommonSpaces.spaceVertical20,
-              Row(
-                children: [
-                  Image.asset(
-                    AppAssets.howtouse,
-                    height: 23,
-                    width: 29,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    'How to Use',
-                    style: CommonTextStyle.drawerFont,
-                  )
-                ],
-              ).marginOnly(left: 15),
-              CommonSpaces.spaceVertical20,
+    return GetBuilder<ProfileScreenController>(
+      init: ProfileScreenController(),
+      builder: (_) {
+        return SafeArea(
+            child: storage.hasData("isAppOpen") == true
+                ? Scaffold(
+                    drawer: Drawer(
+                      width: Get.width / 1.4,
+                      backgroundColor: AppColors.white,
+                      child: ListView(
+                        padding: EdgeInsets.zero,
+                        children: <Widget>[
+                          CommonSpaces.spaceVertical50,
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppAssets.kingIcon2,
+                                height: 23,
+                                width: 29,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'Get Premium',
+                                style: CommonTextStyle.drawerFont,
+                              )
+                            ],
+                          ).marginOnly(left: 15),
+                          CommonSpaces.spaceVertical20,
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppAssets.howtouse,
+                                height: 23,
+                                width: 29,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'How to Use',
+                                style: CommonTextStyle.drawerFont,
+                              )
+                            ],
+                          ).marginOnly(left: 15),
+                          CommonSpaces.spaceVertical20,
 
-              //////////Account privacy//////////
-              Row(
-                children: [
-                  Image.asset(
-                    AppAssets.privacyIcon,
-                    height: 23,
-                    width: 29,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    'Account Privacy',
-                    style: CommonTextStyle.drawerFont,
-                  )
-                ],
-              ).marginOnly(left: 15),
-              CommonSpaces.spaceVertical20,
-              ////////////Share /////////
-              Row(
-                children: [
-                  Image.asset(
-                    AppAssets.shareIcon,
-                    height: 23,
-                    width: 29,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    'Share',
-                    style: CommonTextStyle.drawerFont,
-                  )
-                ],
-              ).marginOnly(left: 15),
-              CommonSpaces.spaceVertical20,
+                          //////////Account privacy//////////
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppAssets.privacyIcon,
+                                height: 23,
+                                width: 29,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'Account Privacy',
+                                style: CommonTextStyle.drawerFont,
+                              )
+                            ],
+                          ).marginOnly(left: 15),
+                          CommonSpaces.spaceVertical20,
+                          ////////////Share /////////
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppAssets.shareIcon,
+                                height: 23,
+                                width: 29,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'Share',
+                                style: CommonTextStyle.drawerFont,
+                              )
+                            ],
+                          ).marginOnly(left: 15),
+                          CommonSpaces.spaceVertical20,
 
-              ////////////Languages /////////
-              Row(
-                children: [
-                  Image.asset(
-                    AppAssets.languagesIcon,
-                    height: 23,
-                    width: 29,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    'Languages',
-                    style: CommonTextStyle.drawerFont,
-                  )
-                ],
-              ).marginOnly(left: 15),
-              CommonSpaces.spaceVertical20,
+                          ////////////Languages /////////
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppAssets.languagesIcon,
+                                height: 23,
+                                width: 29,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'Languages',
+                                style: CommonTextStyle.drawerFont,
+                              )
+                            ],
+                          ).marginOnly(left: 15),
+                          CommonSpaces.spaceVertical20,
 
-              ////////////rate us /////////
-              Row(
-                children: [
-                  Image.asset(
-                    AppAssets.rateUs,
-                    height: 23,
-                    width: 29,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    'Rate Us',
-                    style: CommonTextStyle.drawerFont,
-                  )
-                ],
-              ).marginOnly(left: 15),
-              CommonSpaces.spaceVertical20,
+                          ////////////rate us /////////
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppAssets.rateUs,
+                                height: 23,
+                                width: 29,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'Rate Us',
+                                style: CommonTextStyle.drawerFont,
+                              )
+                            ],
+                          ).marginOnly(left: 15),
+                          CommonSpaces.spaceVertical20,
 
-              ////////////more  apps/////////
-              Row(
-                children: [
-                  Image.asset(
-                    AppAssets.moreApps,
-                    height: 23,
-                    width: 29,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    'More Apps',
-                    style: CommonTextStyle.drawerFont,
-                  )
-                ],
-              ).marginOnly(left: 15),
-              CommonSpaces.spaceVertical20,
+                          ////////////more  apps/////////
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppAssets.moreApps,
+                                height: 23,
+                                width: 29,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'More Apps',
+                                style: CommonTextStyle.drawerFont,
+                              )
+                            ],
+                          ).marginOnly(left: 15),
+                          CommonSpaces.spaceVertical20,
 
-              ////////////privacy policy/////////
-              Row(
-                children: [
-                  Image.asset(
-                    AppAssets.privacyPolicy,
-                    height: 23,
-                    width: 29,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    'Privacy Policy',
-                    style: CommonTextStyle.drawerFont,
+                          ////////////privacy policy/////////
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppAssets.privacyPolicy,
+                                height: 23,
+                                width: 29,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'Privacy Policy',
+                                style: CommonTextStyle.drawerFont,
+                              )
+                            ],
+                          ).marginOnly(left: 15),
+                          CommonSpaces.spaceVertical20,
+                        ],
+                      ),
+                    ),
+                    body: bodyData(context, _),
                   )
-                ],
-              ).marginOnly(left: 15),
-              CommonSpaces.spaceVertical20,
-            ],
-          ),
-        ),
-        body: bodyData(context, _),
-      ),
+                : Scaffold(
+                    body: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Text(
+                            'Please login first',
+                            style: CommonTextStyle.EditProfileFont,
+                          ),
+                        ),
+                        CommonSpaces.spaceVertical30,
+                        CommonButton(
+                          width: Get.width / 1.5,
+                          text: 'Login',
+                          textStyle: CommonTextStyle.signupColor,
+                          onPressed: () async {
+                            Get.toNamed(Routes.loginScreen);
+                          },
+                          fillColor: Colors.red,
+                        ),
+                      ],
+                    ),
+                  ));
+      },
     );
   }
 
@@ -245,8 +274,7 @@ class ProfileScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(_.username,
-                                    style: CommonTextStyle.profileName)
+                            Text(_.username, style: CommonTextStyle.profileName)
                                 .marginOnly(left: 12),
                             // Text('Stressed Blessed Coffee Obsessed',
                             //         style: CommonTextStyle.profileDetails)

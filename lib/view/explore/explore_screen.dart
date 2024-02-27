@@ -4,7 +4,7 @@ import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import '../../models/posts_model/posts_model.dart';
 
 class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
-   ExploreScreen({super.key});
+  ExploreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
       width: Get.width,
       child: RefreshIndicator(
         onRefresh: () async {
-          exploreController.feedsFuture = exploreController.getFeeds();
+          exploreController.pullRefresh();
         },
         child: Obx(() {
           return exploreController.isLoading.value == true
@@ -128,7 +128,8 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                       child: FutureBuilder<List<FeedPostData>?>(
                         future: exploreController.feedsFuture,
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.waiting) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
                             return const Center(
                               child: AppLoader(),
                             );
@@ -150,7 +151,8 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                 itemBuilder: (BuildContext context, int index) {
                                   final feed = feeds[index];
                                   bool isFollowing = exploreController.following
-                                      .any((user) => user['user_id'] == feed.userId);
+                                      .any((user) =>
+                                          user['user_id'] == feed.userId);
 
                                   return Container(
                                     height: Get.height / 2,
@@ -192,88 +194,98 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                             const Spacer(),
 
                                             //Follow button
-                                            if (!isFollowing && feed.userId!=exploreController.myUserId) // Show follow button only if not following
+                                            if (!isFollowing &&
+                                                feed.userId !=
+                                                    exploreController
+                                                        .myUserId) // Show follow button only if not following
                                               GestureDetector(
                                                 onTap: () async {
-                                                  if (storage.hasData("isAppOpen") == true) {
-                                                    await exploreController.followUser(feed.userId!);
+                                                  if (storage.hasData(
+                                                          "isAppOpen") ==
+                                                      true) {
+                                                    await exploreController
+                                                        .followUser(
+                                                            feed.userId!)
+                                                        .then((value) =>
+                                                            exploreController
+                                                                .pullRefresh());
+                                                    exploreController.update();
                                                   } else {
-                                                    CommonToast.showToast("Login first");
+                                                    CommonToast.showToast(
+                                                        "Login first");
                                                   }
                                                 },
-                                                child:Container(
+                                                child: Container(
                                                   height: 29,
                                                   width: Get.width / 5,
                                                   decoration: BoxDecoration(
-                                                    color: const Color(0xff808BFF),
+                                                    color:
+                                                        const Color(0xff808BFF),
                                                     // Add your decoration properties here
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        16),
+                                                        BorderRadius.circular(
+                                                            16),
                                                   ),
-                                                  child: const Padding(
-                                                    padding: EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 8),
-                                                    child: Center(
-                                                      child: Text(
-                                                        'Follow',
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.4,
-                                                            fontSize: 13,
-                                                            fontWeight:
-                                                            FontWeight.w700,
-                                                            fontFamily: 'Nexa'),
-                                                      ),
-                                                    ),
+                                                  child: Center(
+                                                    child: const Text(
+                                                      'Follow',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          letterSpacing: 0.4,
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontFamily: 'Nexa'),
+                                                    ).marginOnly(top: 3),
                                                   ),
                                                 ),
                                               )
-                                            else if(feed.userId!=exploreController.myUserId)
+                                            else if (feed.userId !=
+                                                exploreController.myUserId)
                                               GestureDetector(
                                                 onTap: () async {
-                                                  if (storage.hasData("isAppOpen") == true) {
-                                                    await exploreController.unFollowUser(feed.userId!);
-
+                                                  if (storage.hasData(
+                                                          "isAppOpen") ==
+                                                      true) {
+                                                    await exploreController
+                                                        .unFollowUser(
+                                                            feed.userId!)
+                                                        .then((value) {
+                                                      exploreController
+                                                          .pullRefresh();
+                                                      exploreController
+                                                          .update();
+                                                    });
                                                   } else {
-                                                    CommonToast.showToast("Login first");
+                                                    CommonToast.showToast(
+                                                        "Login first");
                                                   }
                                                 },
-                                                child:Container(
+                                                child: Container(
                                                   height: 29,
-                                                  width: Get.width / 5,
+                                                  width: Get.width / 4,
                                                   decoration: BoxDecoration(
-                                                    color: const Color(0xff808BFF),
+                                                    color:
+                                                        const Color(0xff808BFF),
                                                     // Add your decoration properties here
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        16),
+                                                        BorderRadius.circular(
+                                                            16),
                                                   ),
-                                                  child: const Padding(
-                                                    padding: EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 8),
-                                                    child: Center(
-                                                      child: Text(
-                                                        'Following',
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.4,
-                                                            fontSize: 13,
-                                                            fontWeight:
-                                                            FontWeight.w700,
-                                                            fontFamily: 'Nexa'),
-                                                      ),
-                                                    ),
+                                                  child: Center(
+                                                    child: const Text(
+                                                      'Following',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          letterSpacing: 0.4,
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontFamily: 'Nexa'),
+                                                    ).marginOnly(top: 3),
                                                   ),
                                                 ),
                                               ),
-
-
-
-
-
                                           ],
                                         ).marginSymmetric(
                                             horizontal: 20, vertical: 20),
@@ -289,9 +301,12 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                               //     duration: const Duration(milliseconds: 500), // Duration for the animation
                                               //   ),
                                               // );
-
-                                              exploreController
-                                                  .likeValue(index);
+                                              storage.hasData("isAppOpen") ==
+                                                      true
+                                                  ? exploreController
+                                                      .likeValue(index)
+                                                  : CommonToast.showToast(
+                                                      'Login first');
                                               print('double tap done');
                                             },
                                             child: SizedBox(
@@ -328,10 +343,16 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                                     SizedBox(
                                                       child: Obx(() {
                                                         return GestureDetector(
-                                                          onTap: () =>
-                                                              exploreController
+                                                          onTap: () => storage
+                                                                      .hasData(
+                                                                          "isAppOpen") ==
+                                                                  true
+                                                              ? exploreController
                                                                   .likeValue(
-                                                                      index),
+                                                                      index)
+                                                              : CommonToast
+                                                                  .showToast(
+                                                                      'Login first'),
                                                           child: Icon(
                                                             exploreController
                                                                             .likedList[
@@ -422,8 +443,7 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                   );
                                 },
                               );
-                            }
-                            else {
+                            } else {
                               return Center(
                                 child: Text(
                                   'No data available',

@@ -16,10 +16,10 @@ class DashboardScreenController extends GetxController
 
   List<Widget> buildScreens() {
     return [
-       ExploreScreen(),
+      ExploreScreen(),
       const CreatePostScreen(),
 
-      const ProfileScreen(),
+      ProfileScreen(),
       //const ProfileScreen(),
     ];
   }
@@ -33,23 +33,23 @@ class DashboardScreenController extends GetxController
         inactiveColorPrimary: CupertinoColors.systemGrey,
         contentPadding: 7.0,
       ),
-
       PersistentBottomNavBarItem(
-        icon: Image.asset(AppAssets.createNav),
+        icon: Image.asset(
+          AppAssets.createNav,
+          width: 51,
+          height: 51,
+        ),
         title: ("Create"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
         contentPadding: 7.0,
       ),
-
       PersistentBottomNavBarItem(
         icon: Image.asset(AppAssets.profileNav),
         title: ("Profile"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
         contentPadding: 7.0,
-
-
       ),
     ];
   }
@@ -112,8 +112,6 @@ class DashboardScreenController extends GetxController
       print("Error occurred during request: $e");
     }
   }
-
-
 
   // Future<void> initServices() async {
   //   await GetStorage.init();

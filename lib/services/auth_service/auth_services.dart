@@ -1,7 +1,6 @@
-
 import '../../utils/libraries/app_libraries.dart';
 
-class AuthService extends GetxService with InitializeLocalStorage{
+class AuthService extends GetxService with InitializeLocalStorage {
   bool loggedInUser = false;
 
   Future<AuthService> init() async {

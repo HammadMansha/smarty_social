@@ -137,7 +137,8 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                             return Center(
                               child: Text('Error if ui: ${snapshot.error}'),
                             );
-                          } else {
+                          }
+                          else {
                             final List<FeedPostData>? feeds = snapshot.data;
                             if (feeds != null && feeds.isNotEmpty) {
                               return ListView.separated(
@@ -201,7 +202,7 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                               GestureDetector(
                                                 onTap: () async {
                                                   if (storage.hasData(
-                                                          "isAppOpen") ==
+                                                          "userId") ==
                                                       true) {
                                                     await exploreController
                                                         .followUser(
@@ -307,7 +308,9 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                                       .likeValue(index)
                                                   : CommonToast.showToast(
                                                       'Login first');
-                                              print('double tap done');
+                                              if (kDebugMode) {
+                                                print('double tap done');
+                                              }
                                             },
                                             child: SizedBox(
                                               width: Get.width,
@@ -320,10 +323,9 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                                         fit: BoxFit.scaleDown),
                                                 errorWidget: (c, e, r) =>
                                                     Image.asset(
-                                                        AppAssets
-                                                            .placeHolderNoImage,
+                                                        AppAssets.placeHolderNoImage,
                                                         fit: BoxFit.scaleDown),
-                                                fit: BoxFit.contain,
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),

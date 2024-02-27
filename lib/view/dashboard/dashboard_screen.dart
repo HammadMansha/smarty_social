@@ -123,6 +123,7 @@ class DashboardScreen extends StatelessWidget with InitializeLocalStorage {
 
   Widget bottomNavbar(DashboardScreenController _, BuildContext context) {
     return PersistentTabView(
+
       navBarHeight: 65,
       context,
       controller: _.controller,
@@ -143,6 +144,9 @@ class DashboardScreen extends StatelessWidget with InitializeLocalStorage {
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: const ItemAnimationProperties(
+
+
+
         // Navigation Bar's items animation properties.
         duration: Duration(milliseconds: 200),
         curve: Curves.ease,

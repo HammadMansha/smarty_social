@@ -16,8 +16,7 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   RxList following = [].obs;
   RxBool isFollowing = false.obs;
   RxBool isFollow = false.obs;
-  ProfileScreenController profileScreenController =
-      Get.put(ProfileScreenController());
+  ProfileScreenController profileScreenController = Get.put(ProfileScreenController());
 
   String formattedDate(String timestamp) {
     DateTime dateTime = DateTime.parse(timestamp);
@@ -90,7 +89,6 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   //follow user
   Future<void> followUser(String followerId) async {
     try {
-      isLoading.value = true;
 
       Uri url = Uri.parse(ApiData.followUser);
       if (kDebugMode) {
@@ -129,10 +127,11 @@ class ExploreController extends GetxController with InitializeLocalStorage {
         profileScreenController.following.value;
         profileScreenController.update();
         getUserFollowing(myUserId);
-        await pullRefresh();
+        // await pullRefresh();
+        isLoading.value = false;
+
         update();
 
-        isLoading.value = false;
 
         update();
       } else if (res.statusCode == 307) {
@@ -195,7 +194,6 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   //unfollow user
   Future<void> unFollowUser(String followerId) async {
     try {
-      isLoading.value = true;
 
       Uri url = Uri.parse(ApiData.unFollowUSer);
       if (kDebugMode) {
@@ -294,9 +292,9 @@ class ExploreController extends GetxController with InitializeLocalStorage {
     }
   }
 
+
   Future<void> getUserFollowing(String userId) async {
     try {
-      isLoading.value = true;
 
       Uri url = Uri.parse("${ApiData.userFollowingList}/$userId");
       var res = await http.get(url).timeout(const Duration(seconds: 30));

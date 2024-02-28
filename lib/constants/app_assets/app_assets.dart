@@ -129,4 +129,10 @@ class AppAssets {
 
   //  alert button
   static const String alertButton = "$imageDir/alert_button.png";
+  static const String emptyCircle = "$imageDir/empty_circle.png";
+  static const String drawerImg = "$imageDir/drawer_image.png";
+
+
+
+
 }

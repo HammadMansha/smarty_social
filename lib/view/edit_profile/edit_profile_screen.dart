@@ -45,96 +45,169 @@ class EditProfileScreen extends StatelessWidget {
   Widget bodyData(
     BuildContext context,
   ) {
-    EditProfileController _ = Get.put(EditProfileController());
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Center(
-            child: Stack(alignment: Alignment.bottomRight, children: [
-              CircleAvatar(
-                backgroundColor: Colors.grey,
-                radius: 55,
-                child: _.controller.image != null
-                    ? ClipOval(
-                        child: Image.file(
-                          _.controller.image as File,
-                          fit: BoxFit.scaleDown,
-                        ),
-                      )
-                    : const SizedBox(), // Placeholder or empty widget when image is null
-              ),
-              InkWell(
-                onTap: () {
-                  openGalleryDialog(_);
-                  Future.delayed(const Duration(seconds: 3), () {
-                    Get.back();
-                  });
-                },
-                child: Image.asset(
-                  AppAssets.cameraImage,
-                  height: 34,
-                ),
-              ),
-            ]),
-          ),
-          CommonSpaces.spaceVertical30,
-          Text(
-            'Name',
-            style: CommonTextStyle.EditProfileFont,
-          ).marginOnly(left: 22),
-          CommonTextField(
-            bordercolor: Colors.black,
-            controller: _.name,
-            disableBorderColor: const Color(0xffC1C1C1),
-          ).marginOnly(left: 20, right: 20),
-          CommonSpaces.spaceVertical30,
-          Text(
-            'Bio',
-            style: CommonTextStyle.EditProfileFont,
-          ).marginOnly(left: 22),
-          CommonTextField(
-            bordercolor: Colors.black,
-            disableBorderColor: const Color(0xffC1C1C1),
-            controller: _.bio,
-            maxLine: 4,
-          ).marginOnly(left: 20, right: 20),
-          CommonSpaces.spaceVertical30,
-          // Text(
-          //   'Gender',
-          //   style: CommonTextStyle.EditProfileFont,
-          // ).marginOnly(left: 22),
-          // CommonTextField(
-          //         bordercolor: Colors.black,
-          //         disableBorderColor: const Color(0xffC1C1C1),
-          //         controller: _.gender)
-          //     .marginOnly(left: 20, right: 20),
-          CommonSpaces.spaceVertical20,
-          Text(
-            'Date Of Birth',
-            style: CommonTextStyle.EditProfileFont,
-          ).marginOnly(left: 22),
-          CommonTextField(
-                  hintText: 'DD/MM/YYYY',
-                  hintTextColor: const Color(0xffC1C1C1),
-                  bordercolor: Colors.black,
-                  disableBorderColor: const Color(0xffC1C1C1),
-                  controller: _.dateOfBirth)
-              .marginOnly(left: 20, right: 20),
-        ],
-      ),
-    );
-  }
+      return GetBuilder<EditProfileController>(init:EditProfileController() ,builder: (_) {
+          return GestureDetector(
+            onTap: () {
+              if (_.showDialog.value == true) {
+                _.showDialog.value = false;
+                _.update();
+              }
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Center(
+                    child: Stack(alignment: Alignment.bottomRight, children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        radius: 55,
+                      backgroundImage: _.image != null
+                             ? FileImage(File(_.image!.path))
+                             :  const AssetImage(AppAssets.emptyCircle)  as ImageProvider<Object>,
 
+
+                   // Placeholder or empty widget when image is null
+                      ),
+                           InkWell(
+                            onTap: () {
+                             _.showDialog.value=true;
+                             _.update();
+                             Future.delayed(const Duration(seconds: 5), () {
+                               // if(_.showDialog.value==true){
+                               //   print("Box is open");
+                               //   Get.back();
+                               // }
+                               _.showDialog.value=false;
+                               _.update();
+
+                             });
+
+
+                            },
+                            child: Image.asset(
+                              AppAssets.cameraImage,
+                              height: 34,
+                            ),
+                          ),
+
+                    ]),
+                  ),
+
+
+                  Obx(
+                        () => _.showDialog.value==true
+                        ? Center(
+                          child: Container(
+                                                height: 150,
+                                                width: Get.width / 1.6,
+                                                decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey
+                                  .withOpacity(0.5), // Set shadow color
+                              spreadRadius: 5, // Set spread radius
+                              blurRadius: 7, // Set blur radius
+                              offset: const Offset(0, 3), // Set offset
+                            ),
+                          ],
+                                                ),
+                                                child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                _.openCamera();
+                              },
+                              child: SizedBox(
+                                width: 80,
+                                height: 80,
+                                child:
+                                Image.asset(AppAssets.selectCamera),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                await _.getImageFromGallery();
+                              },
+                              child: SizedBox(
+                                width: 80,
+                                height: 80,
+                                child: Image.asset(
+                                    AppAssets.selectGallery),
+                              ),
+                            )
+                          ],
+                                                ),
+                                              ),
+                        ).marginOnly(top: 20)
+                        : const SizedBox(),
+                  ),
+
+                  CommonSpaces.spaceVertical30,
+                  Text(
+                    'Username',
+                    style: CommonTextStyle.EditProfileFont,
+                  ).marginOnly(left: 22),
+                  CommonTextField(
+
+                    bordercolor: Colors.black,
+                    controller: _.name,
+                    disableBorderColor: const Color(0xffC1C1C1),
+                  ).marginOnly(left: 20, right: 20),
+                  CommonSpaces.spaceVertical30,
+                  Text(
+                    'Bio',
+                    style: CommonTextStyle.EditProfileFont,
+                  ).marginOnly(left: 22),
+                  CommonTextField(
+                    bordercolor: Colors.black,
+                    disableBorderColor: const Color(0xffC1C1C1),
+                    controller: _.bio,
+                    maxLine: 4,
+                  ).marginOnly(left: 20, right: 20),
+                  CommonSpaces.spaceVertical30,
+                  // Text(
+                  //   'Gender',
+                  //   style: CommonTextStyle.EditProfileFont,
+                  // ).marginOnly(left: 22),
+                  // CommonTextField(
+                  //         bordercolor: Colors.black,
+                  //         disableBorderColor: const Color(0xffC1C1C1),
+                  //         controller: _.gender)
+                  //     .marginOnly(left: 20, right: 20),
+                  CommonSpaces.spaceVertical20,
+                  Text(
+                    'Date Of Birth',
+                    style: CommonTextStyle.EditProfileFont,
+                  ).marginOnly(left: 22),
+                  CommonTextField(
+                    keyboardType: TextInputType.number,
+                          hintText: 'DD-MM-YYYY',
+                          hintTextColor: const Color(0xffC1C1C1),
+                          bordercolor: Colors.black,
+                          disableBorderColor: const Color(0xffC1C1C1),
+                          controller: _.dateOfBirth)
+                      .marginOnly(left: 20, right: 20),
+                ],
+              ),
+            ),
+          );
+        }
+      );
+  }
   void openGalleryDialog(EditProfileController _) {
     Get.dialog(
       AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius:
-                BorderRadius.circular(10), // Adjust the border radius as needed
+            BorderRadius.circular(10), // Adjust the border radius as needed
           ),
           contentPadding: EdgeInsets.zero,
           content: Container(
@@ -157,7 +230,7 @@ class EditProfileScreen extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    _.controller.openCamera();
+                    _.openCamera();
                   },
                   child: SizedBox(
                     width: 80,
@@ -167,7 +240,7 @@ class EditProfileScreen extends StatelessWidget {
                 ).marginOnly(left: 50),
                 InkWell(
                   onTap: () async {
-                    await _.controller.getImageFromGallery();
+                    await _.getImageFromGallery();
                   },
                   child: SizedBox(
                     width: 80,
@@ -180,4 +253,5 @@ class EditProfileScreen extends StatelessWidget {
           )),
     );
   }
+
 }

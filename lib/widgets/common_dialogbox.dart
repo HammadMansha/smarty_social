@@ -4,6 +4,8 @@ class DialogHelper {
   static Future<void> showCommonDialog(
     BuildContext context, {
     required VoidCallback,
+       required String ?textMessage,
+        required String ?buttonMessage,
   }) async {
     return showDialog<void>(
       context: context,
@@ -58,7 +60,7 @@ class DialogHelper {
                   ),
                   Center(
                     child: Text(
-                      'Please Sign Up to access the functionality',
+                      textMessage!,
                       style: CommonTextStyle.font14weightNormal342f,
                     ),
                   ),
@@ -66,11 +68,9 @@ class DialogHelper {
                   CommonButton(
                           height: 45,
                           width: Get.width,
-                          text: 'Signup',
+                          text: buttonMessage!,
                           textStyle: CommonTextStyle.signupColor,
-                          onPressed: () {
-                            Get.toNamed(Routes.signUpScreen);
-                          },
+                          onPressed: VoidCallback,
                           fillColor: Colors.red)
                       .marginOnly(left: 15, right: 15)
                 ],

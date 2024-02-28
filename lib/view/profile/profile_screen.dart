@@ -13,7 +13,7 @@ class ProfileScreen extends StatelessWidget with InitializeLocalStorage {
       init: ProfileScreenController(),
       builder: (_) {
         return SafeArea(
-            child: authService.loggedInUser == true
+            child: storage.hasData("userId")
                 ? Scaffold(
                     drawer: Drawer(
                       width: Get.width / 1.4,
@@ -21,6 +21,17 @@ class ProfileScreen extends StatelessWidget with InitializeLocalStorage {
                       child: ListView(
                         padding: EdgeInsets.zero,
                         children: <Widget>[
+                          Container(
+                            height: Get.height/4,
+                            width: Get.width,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(AppAssets.drawerImg,
+                                ),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
                           CommonSpaces.spaceVertical50,
                           Row(
                             children: [
@@ -197,7 +208,7 @@ class ProfileScreen extends StatelessWidget with InitializeLocalStorage {
                         ),
                       ],
                     ),
-                  ));
+                  ),);
       },
     );
   }

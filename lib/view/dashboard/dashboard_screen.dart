@@ -12,7 +12,8 @@ class DashboardScreen extends StatelessWidget with InitializeLocalStorage {
           onWillPop: () async {
             if (_.navigationQueue.isEmpty && storage.hasData("token")) {
               return showWillPopMessage(context, _);
-            } else {
+            }
+            else {
               SystemNavigator.pop();
             }
 
@@ -132,8 +133,7 @@ class DashboardScreen extends StatelessWidget with InitializeLocalStorage {
       confineInSafeArea: true,
       backgroundColor: Colors.white, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset:
-          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.
       hideNavigationBarWhenKeyboardShows:
           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.

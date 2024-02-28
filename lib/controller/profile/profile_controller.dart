@@ -21,13 +21,14 @@ class ProfileScreenController extends GetxController
     if (storage.hasData("userId")) {
       myUserId = storage.read("userId");
       username = storage.read("username");
+
+      await getUserFollowers(myUserId);
+      await getUserFollowing(myUserId);
+      await getMyPosts(myUserId);
     }
 
 
 
-    await getUserFollowers(myUserId);
-    await getUserFollowing(myUserId);
-    await getMyPosts(myUserId);
     super.onInit();
   }
 

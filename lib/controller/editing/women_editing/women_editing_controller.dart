@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import 'package:http/http.dart' as http;
 
@@ -189,4 +190,20 @@ class WomenEditingController extends GetxController
     aspectRatio = ratio;
     update(); // Update the UI to reflect the new aspect ratio
   }
+
+  //Save to gallery
+  Future<void> saveEditedImage(File editedImage) async {
+    try {
+      final result = await ImageGallerySaver.saveImage(editedImage.readAsBytesSync());
+      print(result); // Print the result of saving (success or failure)
+      CommonToast.showToast("Picture save successfully");
+      Get.offAll(() => DashboardScreen());
+
+    } catch (e) {
+      print(e.toString()); // Print any error that might occur during the process
+    }
+  }
+
+
+
 }

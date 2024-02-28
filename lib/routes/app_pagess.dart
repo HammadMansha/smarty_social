@@ -66,7 +66,7 @@ class AppPages {
     //create post screen
     GetPage(
       name: Routes.createPostScreen,
-      page: () => const CreatePostScreen(),
+      page: () =>  CreatePostScreen(),
     ),
 
     //profile page screen

@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:smarty_social/controller/editing/women_editing/women_editing_controller.dart';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 
+import '../../../widgets/common_dialogbox.dart';
+
 class WomenEditingPostScreen extends StatelessWidget {
   const WomenEditingPostScreen({super.key});
 
@@ -37,18 +39,21 @@ class WomenEditingPostScreen extends StatelessWidget {
               if (womenEditingController.tapCount == 0) {
                 womenEditingController.framingDone.value = true;
               } else if (womenEditingController.tapCount == 1) {
-
-                if(womenEditingController.storage.hasData("userId")==true) {
-                  womenEditingController.uploadImageToDb();
-                }else{
-                  CommonToast.showToast("Login first");
+                if (womenEditingController.storage.hasData("userId") == true) {
+                  saveImageDialog(womenEditingController);
+                } else {
+                  DialogHelper.showCommonDialog(context, VoidCallback: () {
+                    Get.offAll(() => const SplashScreen());
+                  },
+                      textMessage:
+                          'Please Sign Up to access the functionality ',
+                      buttonMessage: 'Signup');
                 }
-
               }
 
               womenEditingController.tapCount++;
               if (womenEditingController.tapCount > 1) {
-                womenEditingController.tapCount = 0;
+                womenEditingController.tapCount = 1;
               }
             },
             child: SizedBox(
@@ -643,5 +648,80 @@ class WomenEditingPostScreen extends StatelessWidget {
         ).marginOnly(top: 30),
       );
     }));
+  }
+
+  void saveImageDialog(WomenEditingController _) {
+    Get.dialog(
+      AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(10), // Adjust the border radius as needed
+        ),
+        contentPadding: EdgeInsets.zero,
+        content: Container(
+          height: 150,
+          width: Get.width / 1.6,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5), // Set shadow color
+                spreadRadius: 5, // Set spread radius
+                blurRadius: 7, // Set blur radius
+                offset: const Offset(0, 3), // Set offset
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () async {
+                      await _.saveEditedImage(_.createPostController.image!);
+                    },
+                    child: Column(
+                      children: [
+                        const Icon(
+                          Icons.save_alt_sharp,
+                          color: Colors.black,
+                          size: 50,
+                        ),
+                        Text(
+                          'Save',
+                          style: CommonTextStyle.font14weightNormal342f,
+                        ).marginOnly(left: 5),
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      await _.uploadImageToDb();
+                    },
+                    child: Column(
+                      children: [
+                        const Icon(
+                          Icons.upload,
+                          color: Colors.black,
+                          size: 50,
+                        ),
+                        Text(
+                          'Post',
+                          style: CommonTextStyle.font14weightNormal342f,
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ).marginOnly(left: 30, right: 30),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

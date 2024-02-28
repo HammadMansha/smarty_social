@@ -17,7 +17,7 @@ class DashboardScreenController extends GetxController
   List<Widget> buildScreens() {
     return [
       ExploreScreen(),
-      const CreatePostScreen(),
+       CreatePostScreen(),
 
       ProfileScreen(),
       //const ProfileScreen(),

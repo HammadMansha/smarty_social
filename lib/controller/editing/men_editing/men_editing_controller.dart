@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+
 class MenEditingController extends GetxController {
   double rotationAngle = 0.0;
   bool mirror = false;
@@ -179,4 +181,18 @@ class MenEditingController extends GetxController {
       update();
     }
   }
+
+  Future<void> saveEditedImage(File editedImage) async {
+    try {
+      final result = await ImageGallerySaver.saveImage(editedImage.readAsBytesSync());
+      print(result); // Print the result of saving (success or failure)
+      CommonToast.showToast("Picture save successfully");
+      Get.offAll(() => DashboardScreen());
+
+    } catch (e) {
+      print(e.toString()); // Print any error that might occur during the process
+    }
+  }
+
+
 }

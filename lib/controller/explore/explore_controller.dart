@@ -36,7 +36,6 @@ class ExploreController extends GetxController with InitializeLocalStorage {
     feedsFuture = getFeeds();
     if (storage.hasData("userId") == true) {
       myUserId = storage.read("userId");
-
       await getUserFollowing(myUserId);
       update();
     }
@@ -53,7 +52,7 @@ class ExploreController extends GetxController with InitializeLocalStorage {
       if (kDebugMode) {
         print("Get user request------------$url");
       }
-      var res = await http.get(url).timeout(const Duration(seconds: 30));
+      var res = await http.get(url).timeout(const Duration(seconds: 20));
 
       print("response of explore call==============${res.statusCode}");
       print("response of explore call==============${res.body}");
@@ -65,6 +64,7 @@ class ExploreController extends GetxController with InitializeLocalStorage {
 
         return body.map((e) => FeedPostData.fromJson(e)).toList();
       } else {
+        print("Skip else");
         CommonToast.showToast(AppStrings.somethingWentWrong);
         isLoading.value = false;
       }
@@ -303,9 +303,10 @@ class ExploreController extends GetxController with InitializeLocalStorage {
         var data = json.decode(res.body);
         following.assignAll(data);
         update(); // Populate the following list
-
         isLoading.value = false;
       } else {
+        print("Skip else");
+
         CommonToast.showToast(AppStrings.somethingWentWrong);
         isLoading.value = false;
       }

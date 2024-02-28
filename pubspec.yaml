@@ -51,7 +51,6 @@ dependencies:
   flutter_svg: ^2.0.5
   fluttertoast: ^8.2.4
   camera: ^0.10.5+9
-
   image_gallery_saver: ^2.0.3
   photofilters: any
   cached_network_image: ^3.3.1

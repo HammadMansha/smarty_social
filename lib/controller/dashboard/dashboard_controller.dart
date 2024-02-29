@@ -6,6 +6,7 @@ import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import 'package:http/http.dart' as http;
 
 import '../../services/auth_service/auth_services.dart';
+import '../../widgets/navbar_custom.dart';
 
 class DashboardScreenController extends GetxController
     with CommonVariables, InitializeLocalStorage {
@@ -13,14 +14,35 @@ class DashboardScreenController extends GetxController
   int currentIndex = 0;
   // late Map<Permission, PermissionStatus> statuses;
   late PersistentTabController controller;
+  bool selected = false;
+
+  int _selectedIndex = 0;
+
+  int get selectedIndex => _selectedIndex;
+
+  void updateIndex(int index) {
+    _selectedIndex = index;
+    update(); // Notify listeners of the change
+  }
 
   List<Widget> buildScreens() {
     return [
       ExploreScreen(),
-       CreatePostScreen(),
+      CreatePostScreen(),
 
       ProfileScreen(),
       //const ProfileScreen(),
+    ];
+  }
+
+  List<CustomBottomNavBarItem> navBarsItems1() {
+    return [
+      CustomBottomNavBarItem(
+          icon: Image.asset(AppAssets.exploreNav), title: "Explore"),
+      CustomBottomNavBarItem(
+          icon: Image.asset(AppAssets.createNav), title: "Create"),
+      CustomBottomNavBarItem(
+          icon: Image.asset(AppAssets.profileNav), title: "Profile"),
     ];
   }
 

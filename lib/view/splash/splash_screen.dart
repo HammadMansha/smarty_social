@@ -12,8 +12,12 @@ class SplashScreen extends StatelessWidget {
     return GetBuilder<SplashScreenController>(
       init: SplashScreenController(),
       builder: (_) {
-        return Scaffold(
-          body: bodyData(context, _),
+        return PopScope(
+          canPop: false,
+          // onWillPop: () async => false,
+          child: Scaffold(
+            body: bodyData(context, _),
+          ),
         );
       },
     );
@@ -173,4 +177,3 @@ class SplashScreen extends StatelessWidget {
     );
   }
 }
-

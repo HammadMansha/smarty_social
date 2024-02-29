@@ -12,8 +12,7 @@ class DashboardScreen extends StatelessWidget with InitializeLocalStorage {
           onWillPop: () async {
             if (_.navigationQueue.isEmpty && storage.hasData("token")) {
               return showWillPopMessage(context, _);
-            }
-            else {
+            } else {
               SystemNavigator.pop();
             }
 
@@ -124,7 +123,6 @@ class DashboardScreen extends StatelessWidget with InitializeLocalStorage {
 
   Widget bottomNavbar(DashboardScreenController _, BuildContext context) {
     return PersistentTabView(
-
       navBarHeight: 65,
       context,
       controller: _.controller,
@@ -133,7 +131,8 @@ class DashboardScreen extends StatelessWidget with InitializeLocalStorage {
       confineInSafeArea: true,
       backgroundColor: Colors.white, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      resizeToAvoidBottomInset:
+          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.
       hideNavigationBarWhenKeyboardShows:
           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
@@ -144,9 +143,6 @@ class DashboardScreen extends StatelessWidget with InitializeLocalStorage {
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: const ItemAnimationProperties(
-
-
-
         // Navigation Bar's items animation properties.
         duration: Duration(milliseconds: 200),
         curve: Curves.ease,
@@ -157,8 +153,8 @@ class DashboardScreen extends StatelessWidget with InitializeLocalStorage {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle:
-          NavBarStyle.style1, // Choose the nav bar style with this property.
+      navBarStyle: NavBarStyle.style1,
+      // Choose the nav bar style with this property.
     );
   }
 }

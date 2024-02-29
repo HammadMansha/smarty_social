@@ -132,7 +132,5 @@ class AppAssets {
   static const String emptyCircle = "$imageDir/empty_circle.png";
   static const String drawerImg = "$imageDir/drawer_image.png";
 
-
-
-
+  static const String profile_nav_full = "$imageDir/img_7.png";
 }

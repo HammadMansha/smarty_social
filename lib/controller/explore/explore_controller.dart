@@ -4,6 +4,7 @@ import 'package:intl/intl.dart'; // Import the intl package for date formatting
 import 'package:smarty_social/utils/libraries/app_libraries.dart';
 import 'package:http/http.dart' as http;
 
+import '../../mixin_classes/check_internet_connectivity.dart';
 import '../../models/posts_model/posts_model.dart';
 import '../profile/profile_controller.dart';
 
@@ -16,7 +17,30 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   RxList following = [].obs;
   RxBool isFollowing = false.obs;
   RxBool isFollow = false.obs;
-  ProfileScreenController profileScreenController = Get.put(ProfileScreenController());
+  ProfileScreenController profileScreenController =
+      Get.put(ProfileScreenController());
+  bool connected = true;
+  bool wifiConnected = true;
+  bool mobileConnected = true;
+
+  @override
+  void onInit() async {
+    // connected = await ConnectivityHelper.isConnected();
+    // wifiConnected = await ConnectivityHelper.isWifiConnected();
+    // mobileConnected = await ConnectivityHelper.isMobileConnected();
+    print('connet>>>>>> ${connected}');
+    if (connected || wifiConnected || mobileConnected == true) {
+      feedsFuture = getFeeds();
+    }
+
+    if (storage.hasData("userId") == true) {
+      myUserId = storage.read("userId");
+      await getUserFollowing(myUserId);
+      update();
+    }
+
+    super.onInit();
+  }
 
   String formattedDate(String timestamp) {
     DateTime dateTime = DateTime.parse(timestamp);
@@ -29,18 +53,6 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   void likeValue(int index) async {
     likedList[index] = !likedList[index];
     update();
-  }
-
-  @override
-  void onInit() async {
-    feedsFuture = getFeeds();
-    if (storage.hasData("userId") == true) {
-      myUserId = storage.read("userId");
-      await getUserFollowing(myUserId);
-      update();
-    }
-
-    super.onInit();
   }
 
   Future<List<FeedPostData>?> getFeeds() async {
@@ -89,7 +101,6 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   //follow user
   Future<void> followUser(String followerId) async {
     try {
-
       Uri url = Uri.parse(ApiData.followUser);
       if (kDebugMode) {
         print("Follow user request------------$url");
@@ -131,7 +142,6 @@ class ExploreController extends GetxController with InitializeLocalStorage {
         isLoading.value = false;
 
         update();
-
 
         update();
       } else if (res.statusCode == 307) {
@@ -194,7 +204,6 @@ class ExploreController extends GetxController with InitializeLocalStorage {
   //unfollow user
   Future<void> unFollowUser(String followerId) async {
     try {
-
       Uri url = Uri.parse(ApiData.unFollowUSer);
       if (kDebugMode) {
         print("unfollow user request------------$url");
@@ -292,10 +301,8 @@ class ExploreController extends GetxController with InitializeLocalStorage {
     }
   }
 
-
   Future<void> getUserFollowing(String userId) async {
     try {
-
       Uri url = Uri.parse("${ApiData.userFollowingList}/$userId");
       var res = await http.get(url).timeout(const Duration(seconds: 30));
 

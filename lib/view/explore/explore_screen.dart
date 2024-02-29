@@ -566,9 +566,17 @@ class ExploreScreen extends StatelessWidget with InitializeLocalStorage {
                                                               ? exploreController
                                                                   .likeValue(
                                                                       index)
-                                                              : CommonToast
-                                                                  .showToast(
-                                                                      'Login first'),
+                                                              : DialogHelper.showCommonDialog(
+                                                                  context,
+                                                                  VoidCallback:
+                                                                      () {
+                                                                  Get.offAll(() =>
+                                                                      const SplashScreen());
+                                                                },
+                                                                  textMessage:
+                                                                      'Please Sign Up to access the functionality ',
+                                                                  buttonMessage:
+                                                                      'Signup'),
                                                           child: Icon(
                                                             exploreController
                                                                             .likedList[

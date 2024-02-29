@@ -4,8 +4,8 @@ class DialogHelper {
   static Future<void> showCommonDialog(
     BuildContext context, {
     required VoidCallback,
-       required String ?textMessage,
-        required String ?buttonMessage,
+    required String? textMessage,
+    required String? buttonMessage,
   }) async {
     return showDialog<void>(
       context: context,
@@ -35,36 +35,41 @@ class DialogHelper {
                 children: [
                   CommonSpaces.spaceVertical10,
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      const SizedBox(),
                       SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: Image.asset(
-                          AppAssets.alertButton,
-                        ),
-                      ),
-                      // const Icon(
-                      //   Icons.cancel_outlined,
-                      //   size: 29,
-                      //   color: Colors.black,
-                      // )
+                          width: 50,
+                          height: 50,
+                          child: Image.asset(
+                            AppAssets.alertButton,
+                          )).marginOnly(left: 35),
+                      // Pushes the Icon to the end of the row
+                      InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: const Icon(
+                          Icons.cancel_outlined,
+                          size: 29,
+                          color: Colors.black,
+                        ).marginOnly(right: 10),
+                      )
                     ],
                   ),
                   Center(
                     child: Text(
                       'Alert',
                       style: CommonTextStyle.profileName,
-                    ),
+                    ).marginOnly(right: 5),
                   ),
                   Center(
                     child: Text(
                       textMessage!,
-                      style: CommonTextStyle.font14weightNormal342f,
+                      style: CommonTextStyle.dialogBoxText,
                     ),
                   ),
-                  CommonSpaces.spaceVertical10,
+                  CommonSpaces.spaceVertical20,
                   CommonButton(
                           height: 45,
                           width: Get.width,

@@ -121,4 +121,9 @@ class CommonTextStyle {
       fontSize: 12,
       fontWeight: FontWeight.bold,
       fontFamily: 'Nexa');
+  static TextStyle dialogBoxText = const TextStyle(
+      color: AppColors.color342F2F,
+      fontSize: 12,
+      fontWeight: FontWeight.normal,
+      fontFamily: 'Nexa');
 }
